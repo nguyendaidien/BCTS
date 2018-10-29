@@ -10,17 +10,28 @@
  */
 package com.etrade.bcts.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import javax.print.attribute.standard.DateTimeAtCompleted;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,19 +46,48 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.etrade.bcts.model.ChangePwdToken;
+import com.etrade.bcts.model.UploadFile;
 import com.etrade.bcts.model.User;
 import com.etrade.bcts.model.UserProfile;
 import com.etrade.bcts.service.UserProfileService;
 import com.etrade.bcts.service.UserService;
+import com.etrade.bcts.util.FileValidator;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.util.Streams;
+
+import com.etrade.bcts.model.UploadFileBucket;
+import com.etrade.bcts.model.UserDocument;
+import com.etrade.bcts.service.UserDocumentService;
 
 
 
 @Controller
 @RequestMapping("/")
 @SessionAttributes("roles")
+@PropertySource(value = { "classpath:messages.properties" })
 public class AppController {
 
 	@Autowired
@@ -55,6 +95,9 @@ public class AppController {
 	
 	@Autowired
 	UserProfileService userProfileService;
+	
+	@Autowired
+	UserDocumentService userDocumentService;
 	
 	@Autowired
 	MessageSource messageSource;
@@ -65,6 +108,8 @@ public class AppController {
 	@Autowired
 	AuthenticationTrustResolver authenticationTrustResolver;
 	
+	@Autowired
+	private Environment environment;	
 	
 	/* @RequestMapping(value = { "/"}, method = RequestMethod.GET)
 	    public String homePage(ModelMap model) {
@@ -322,6 +367,4 @@ public class AppController {
 		initializeProfiles();
 		return "rolesuccess";
 	}
-
-
 }

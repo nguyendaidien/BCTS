@@ -75,4 +75,14 @@
        <put-attribute name="body" value="/WEB-INF/views/pages/contactus.jsp" />  
    </definition>  
   
+  <!-- Document Mgt Page -->
+   <definition name="managedocuments" extends="base-definition_afterlogin">  
+       <put-attribute name="title" value="Document Management" />  
+       <put-attribute name="body" value="/WEB-INF/views/managedocuments.jsp" />  
+   </definition> 
+   <!-- Document Mgt Page -->
+   <definition name="uploadStatus" extends="base-definition_afterlogin">  
+       <put-attribute name="title" value="uploadStatus" />  
+       <put-attribute name="body" value="/WEB-INF/views/uploadStatus.jsp" />  
+   </definition> 
 </tiles-definitions>

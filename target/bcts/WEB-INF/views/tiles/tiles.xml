@@ -58,6 +58,10 @@
        <put-attribute name="body" value="/WEB-INF/views/registrationsuccess.jsp" />  
    </definition> 
    
+   <definition name="rolesuccess" extends="base-definition_afterlogin">  
+       <put-attribute name="title" value="list" />  
+       <put-attribute name="body" value="/WEB-INF/views/rolesuccess.jsp" />  
+   </definition> 
    
    <!-- Product Page -->
    <definition name="products" extends="base-definition">  
@@ -71,4 +75,14 @@
        <put-attribute name="body" value="/WEB-INF/views/pages/contactus.jsp" />  
    </definition>  
   
+  <!-- Document Mgt Page -->
+   <definition name="managedocuments" extends="base-definition_afterlogin">  
+       <put-attribute name="title" value="Document Management" />  
+       <put-attribute name="body" value="/WEB-INF/views/managedocuments.jsp" />  
+   </definition> 
+   <!-- Document Mgt Page -->
+   <definition name="uploadStatus" extends="base-definition_afterlogin">  
+       <put-attribute name="title" value="uploadStatus" />  
+       <put-attribute name="body" value="/WEB-INF/views/uploadStatus.jsp" />  
+   </definition> 
 </tiles-definitions>

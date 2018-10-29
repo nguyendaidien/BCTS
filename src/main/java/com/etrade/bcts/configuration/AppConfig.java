@@ -10,6 +10,8 @@
  */
 package com.etrade.bcts.configuration;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +19,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -26,6 +30,7 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import com.etrade.bcts.converter.RoleToUserProfileConverter;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 
 @Configuration
@@ -37,7 +42,8 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 	@Autowired
 	RoleToUserProfileConverter roleToUserProfileConverter;
 	
-
+//	@Autowired
+//	MappingJackson2HttpMessageConverter converter;
 	
 	 /**
      * Configure TilesConfigurer.
@@ -92,6 +98,10 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         registry.addConverter(roleToUserProfileConverter);
     }
 	
+    @Bean(name="multipartResolver")
+	public StandardServletMultipartResolver resolver(){
+		return new StandardServletMultipartResolver();
+	}
 
     /**
      * Configure MessageSource to lookup any validation/error message in internationalized property files
@@ -111,5 +121,18 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     public void configurePathMatch(PathMatchConfigurer matcher) {
         matcher.setUseRegisteredSuffixPatternMatch(true);
     }
+    
+//    @Override
+//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+//        converters.add(new MappingJackson2HttpMessageConverter());
+//        super.configureMessageConverters(converters);
+//    }
+//    
+//    @Bean
+//    MappingJackson2HttpMessageConverter converter() {
+//    	MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+//        //do your customizations here...
+//        return converter;
+//    }
 }
 

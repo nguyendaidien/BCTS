@@ -11,6 +11,7 @@
 	    <ul id="menu" >
        <li><a href="${pageContext.request.contextPath}/newuser">Add New User</a></li>
        <li><a href="${pageContext.request.contextPath}/newrole">Add New Role</a></li>
+       <li><a href="${pageContext.request.contextPath}/docs/add-document-${loggedinuser}">Documents</a></li>
 		</ul>
 	   </sec:authorize>
 </nav>

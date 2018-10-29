@@ -56,3 +56,25 @@ CREATE TABLE persistent_logins (
     last_used TIMESTAMP NOT NULL,
     PRIMARY KEY (series)
 );
+
+create table USER_DOCUMENT (
+   id NUMBER NOT NULL,
+   name VARCHAR(100) NOT NULL,
+   description VARCHAR(200),
+   type VARCHAR(100),
+   docSize VARCHAR(50) NOT NULL,
+   url  VARCHAR(250) NOT NULL,
+   permitNo VARCHAR(50) NOT NULL,
+   uploadedDate TIMESTAMP NOT NULL, 
+   uploadedBy NUMBER NOT NULL,
+   PRIMARY KEY (id),
+   CONSTRAINT FK1_APP_USER FOREIGN KEY (uploadedBy) REFERENCES APP_USER (id)
+);
+
+create table PERMIT (
+   id NUMBER NOT NULL,
+   permitNo VARCHAR(30) NOT NULL,  
+   PRIMARY KEY (id),
+   UNIQUE (permitNo)
+);
+INSERT INTO PERMIT(id, permitNo) VALUES (8, 'b3333456');
