@@ -13,7 +13,6 @@ package com.etrade.bcts.dao;
 import java.util.List;
 
 import com.etrade.bcts.model.User;
-import com.etrade.bcts.model.UserAttempts;
 
 
 public interface UserDao {
@@ -30,10 +29,7 @@ public interface UserDao {
 	
 	void updateUserPwd(User user,String chgpwd);
 	
-	//User Attempt
-	void updateFailAttempts(String username);
-	void resetFailAttempts(String username);
-	UserAttempts getUserAttempts(String username);
+	void updateUserAcct(User user);
 	
 }
 

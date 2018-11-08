@@ -26,20 +26,20 @@ import com.etrade.bcts.model.UserProfile;
 @Repository("userProfileDao")
 public class UserProfileDaoImpl extends AbstractDao<Integer, UserProfile>implements UserProfileDao{
 	static final Logger logger = LoggerFactory.getLogger(UserProfileDaoImpl.class);
-	public UserProfile findById(int id) {
-		return getByKey(id);
+	public UserProfile findById(int transId) {
+		return getByKey(transId);
 	}
 
-	public UserProfile findByType(String type) {
+	public UserProfile findByType(String roleType) {
 		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("type", type));
+		crit.add(Restrictions.eq("roleType", roleType));
 		return (UserProfile) crit.uniqueResult();
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<UserProfile> findAll(){
 		Criteria crit = createEntityCriteria();
-		crit.addOrder(Order.asc("type"));
+		crit.addOrder(Order.asc("roleType"));
 		return (List<UserProfile>)crit.list();
 	}
 	
@@ -47,10 +47,10 @@ public class UserProfileDaoImpl extends AbstractDao<Integer, UserProfile>impleme
 	/**
 	 * @author ajayasamanta
 	 */
-	public UserProfile findByRole(String type) {
-		logger.info("role : {}", type);
+	public UserProfile findByRole(String roleType) {
+		logger.info("role : {}", roleType);
 		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("type", type));
+		crit.add(Restrictions.eq("roleType", roleType));
 		UserProfile userProfile = (UserProfile)crit.uniqueResult();
 		return userProfile;
 	}

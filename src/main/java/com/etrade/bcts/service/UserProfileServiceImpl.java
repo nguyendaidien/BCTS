@@ -29,12 +29,12 @@ public class UserProfileServiceImpl implements UserProfileService{
 	@Autowired
 	UserProfileDao dao;
 	
-	public UserProfile findById(int id) {
-		return dao.findById(id);
+	public UserProfile findById(int transId) {
+		return dao.findById(transId);
 	}
 
-	public UserProfile findByType(String type){
-		return dao.findByType(type);
+	public UserProfile findByType(String roleType){
+		return dao.findByType(roleType);
 	}
 
 	public List<UserProfile> findAll() {
@@ -43,20 +43,19 @@ public class UserProfileServiceImpl implements UserProfileService{
 	
 	/**
 	 * @author ajayasamanta
-	 * @param type
+	 * @param roleType
 	 * @return
 	 */
-	public UserProfile isRoleUnique(String type) {
-		UserProfile userProfile = dao.findByRole(type);
-		return userProfile;
+	public UserProfile isRoleUnique(String roleType) {
+		return dao.findByRole(roleType);
 	}
 	/**
 	 * @author ajayasamanta
 	 */
-	public boolean isRoleUnique(Integer id, String type) {
-		UserProfile userProfile = isRoleUnique(type);
-		logger.info("UserServiceImpl isRoleUnique: {0} Role::{1} ",userProfile,type);
-		return ( userProfile == null || ((id != null) && (userProfile.getId() == id)));
+	public boolean isRoleUnique(Integer transId, String roleType) {
+		UserProfile userProfile = isRoleUnique(roleType);
+		logger.info("UserServiceImpl isRoleUnique: {0} Role::{1} ",userProfile,roleType);
+		return ( userProfile == null || ((transId != null) && (userProfile.getTransId() == transId)));
 	}
 	
 	/**
@@ -64,9 +63,8 @@ public class UserProfileServiceImpl implements UserProfileService{
 	 * @param role
 	 * @return
 	 */
-	public UserProfile findByRole(String role) {
-		UserProfile user = dao.findByRole(role);
-		return user;
+	public UserProfile findByRole(String roleType) {
+		return dao.findByRole(roleType);
 	}
 	/**
 	 * @author ajayasamanta

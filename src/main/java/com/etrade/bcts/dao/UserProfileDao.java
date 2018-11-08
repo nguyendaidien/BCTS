@@ -19,7 +19,7 @@ public interface UserProfileDao {
 
 	List<UserProfile> findAll();
 	
-	UserProfile findByType(String type);
+	UserProfile findByType(String roleType);
 	
 	UserProfile findById(int id);
 	

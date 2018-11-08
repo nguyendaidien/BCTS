@@ -121,18 +121,5 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     public void configurePathMatch(PathMatchConfigurer matcher) {
         matcher.setUseRegisteredSuffixPatternMatch(true);
     }
-    
-//    @Override
-//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-//        converters.add(new MappingJackson2HttpMessageConverter());
-//        super.configureMessageConverters(converters);
-//    }
-//    
-//    @Bean
-//    MappingJackson2HttpMessageConverter converter() {
-//    	MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-//        //do your customizations here...
-//        return converter;
-//    }
 }
 

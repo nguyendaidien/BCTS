@@ -21,7 +21,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="USER_PROFILE")
+@Table(name="BCTS_USER_PROFILE")
 public class UserProfile implements Serializable{
 	
 	private static final long serialVersionUID = -3465813074586302847L;
@@ -30,34 +30,48 @@ public class UserProfile implements Serializable{
 	//@GeneratedValue(strategy=GenerationType.AUTO)
 	@GenericGenerator(name="PROFILE_SEQ" , strategy="increment")
 	@GeneratedValue(generator="PROFILE_SEQ")
-	@Column(name="id")
-	private Integer id;	
+	@Column(name="TRANSACTION_ID")
+	private Integer transId;	
 
-	@Column(name="TYPE", length=15, unique=true, nullable=false)
-	private String type = UserProfileType.USER.getUserProfileType();
+	@Column(name="ROLE_TYPE", length=15, unique=true, nullable=false)
+	private String roleType = UserProfileType.USER.getUserProfileType();
 	
-	public Integer getId() {
-		return id;
+	
+
+	/**
+	 * @return the transId
+	 */
+	public Integer getTransId() {
+		return transId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	/**
+	 * @param transId the transId to set
+	 */
+	public void setTransId(Integer transId) {
+		this.transId = transId;
 	}
 
-	public String getType() {
-		return type;
+	/**
+	 * @return the roleType
+	 */
+	public String getRoleType() {
+		return roleType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	/**
+	 * @param roleType the roleType to set
+	 */
+	public void setRoleType(String roleType) {
+		this.roleType = roleType;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((transId == null) ? 0 : transId.hashCode());
+		result = prime * result + ((roleType == null) ? 0 : roleType.hashCode());
 		return result;
 	}
 
@@ -70,16 +84,16 @@ public class UserProfile implements Serializable{
 		if (!(obj instanceof UserProfile))
 			return false;
 		UserProfile other = (UserProfile) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (transId == null) {
+			if (other.transId != null)
 				return false;
-		} else if (!id.equals(other.id)) {
+		} else if (!transId.equals(other.transId)) {
 			return false;
 		}
-		if (type == null) {
-			if (other.type != null)
+		if (roleType == null) {
+			if (other.roleType != null)
 				return false;
-		} else if (!type.equals(other.type)) {
+		} else if (!roleType.equals(other.roleType)) {
 			return false;
 		}
 		return true;
@@ -87,7 +101,7 @@ public class UserProfile implements Serializable{
 
 	@Override
 	public String toString() {
-		return "UserProfile [id=" + id + ", type=" + type + "]";
+		return "UserProfile [transId=" + transId + ", roleType=" + roleType + "]";
 	}
 
 

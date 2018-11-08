@@ -28,15 +28,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.authentication.AccountExpiredException;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.CredentialsExpiredException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -61,7 +67,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
-
+import com.etrade.bcts.dao.UserAttemptDao;
+import org.springframework.web.servlet.ModelAndView;
 import com.etrade.bcts.model.ChangePwdToken;
 import com.etrade.bcts.model.UploadFile;
 import com.etrade.bcts.model.User;
@@ -89,7 +96,7 @@ import com.etrade.bcts.service.UserDocumentService;
 @SessionAttributes("roles")
 @PropertySource(value = { "classpath:messages.properties" })
 public class AppController {
-
+	static final Logger logger = LoggerFactory.getLogger(AppController.class);
 	@Autowired
 	UserService userService;
 	
@@ -102,20 +109,17 @@ public class AppController {
 	@Autowired
 	MessageSource messageSource;
 
-	@Autowired
-	PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
+	/*@Autowired
+	PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;*/
 	
+	/*@Autowired
+	AuthenticationTrustResolver authenticationTrustResolver;*/
 	@Autowired
-	AuthenticationTrustResolver authenticationTrustResolver;
+	UserAttemptDao userAttemptDao;
 	
 	@Autowired
 	private Environment environment;	
 	
-	/* @RequestMapping(value = { "/"}, method = RequestMethod.GET)
-	    public String homePage(ModelMap model) {
-	        return "home";
-	    }*/
-	 
 	    @RequestMapping(value = { "/products"}, method = RequestMethod.GET)
 	    public String productsPage(ModelMap model) {
 	        return "products";
@@ -274,12 +278,34 @@ public class AppController {
 	 * If users is already logged-in and tries to goto login page again, will be redirected to list page.
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginPage() {
-		if (isCurrentAuthenticationAnonymous()) {
-			return "login";
-	    } else {
-	    	return "redirect:/list";  
-	    }
+	public ModelAndView loginPage(@RequestParam(value = "error", required = false) String error,HttpServletRequest request) {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("login");
+		try {
+			logger.info("loginpage()");
+			if (error != null) {
+				model.addObject("error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION"));
+				logger.info("error:{}",getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION"));
+			}
+			
+			
+			if (isCurrentAuthenticationAnonymous()) {
+				model.setViewName("login");
+		    } else {
+		    	model.setViewName("redirect:/list");
+		    	return model;  
+		    }
+			
+		}catch(BadCredentialsException e) {
+			model.addObject("error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION"));
+			model.setViewName("login");
+			return model;
+		}catch(LockedException e) {
+			model.addObject("error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION"));
+			model.setViewName("login");
+			return model;
+		}
+		return model;
 	}
 
 	/**
@@ -290,7 +316,7 @@ public class AppController {
 	public String logoutPage (HttpServletRequest request, HttpServletResponse response){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null){    
-			persistentTokenBasedRememberMeServices.logout(request, response, auth);
+			//persistentTokenBasedRememberMeServices.logout(request, response, auth);
 			SecurityContextHolder.getContext().setAuthentication(null);
 		}
 		return "redirect:/login?logout";
@@ -316,7 +342,8 @@ public class AppController {
 	 */
 	private boolean isCurrentAuthenticationAnonymous() {
 	    final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	    return authenticationTrustResolver.isAnonymous(authentication);
+	    /*return authenticationTrustResolver.isAnonymous(authentication);*/
+	    return true;
 	}
 	
 	
@@ -326,7 +353,7 @@ public class AppController {
 	@RequestMapping(value = { "/newrole" }, method = RequestMethod.GET)
 	public String newRole(ModelMap model) {
 		UserProfile userprofile = new UserProfile();
-		userprofile.setType("");
+		userprofile.setRoleType("");
 		model.addAttribute("userprofile", userprofile);
 		model.addAttribute("edit", false);
 		model.addAttribute("loggedinuser", getPrincipal());
@@ -354,17 +381,114 @@ public class AppController {
 		 * framework as well while still using internationalized messages.
 		 * 
 		 */
-		if(!userProfileService.isRoleUnique(userprofile.getId(), userprofile.getType())){
-			FieldError ssoError =new FieldError("userprofile","type",messageSource.getMessage("non.unique.profId", new String[]{userprofile.getType()}, Locale.getDefault()));
+		if(!userProfileService.isRoleUnique(userprofile.getTransId(), userprofile.getRoleType())){
+			FieldError ssoError =new FieldError("userprofile","type",messageSource.getMessage("non.unique.profId", new String[]{userprofile.getRoleType()}, Locale.getDefault()));
 		    result.addError(ssoError);
 			return "role";
 		}
 		
 		userProfileService.persistRole(userprofile);
-		model.addAttribute("success", "UserProfile " + userprofile.getId() + " "+ userprofile.getType() + " registered successfully");
+		model.addAttribute("success", "UserProfile " + userprofile.getTransId() + " "+ userprofile.getRoleType() + " registered successfully");
 		model.addAttribute("loggedinuser", getPrincipal());
 		
 		initializeProfiles();
 		return "rolesuccess";
 	}
+	
+	
+	
+	
+	@RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
+	public ModelAndView accesssDenied() {
+
+		ModelAndView model = new ModelAndView();
+
+		// check if user is login
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			System.out.println(userDetail);
+			model.addObject("username", userDetail.getUsername());
+		}
+		model.setViewName("accessDenied");
+		return model;
+	}
+	
+	
+	private String getErrorMessage(HttpServletRequest request, String key){
+		
+		Exception exception = 
+                   (Exception) request.getSession().getAttribute(key);
+		
+		String error = "";
+		if (exception instanceof BadCredentialsException) {
+			error = "Invalid username and password!";
+		}else if(exception instanceof LockedException) {
+			error = exception.getMessage();
+		}else if(exception instanceof DisabledException) {
+			error = exception.getMessage();
+		}else if(exception instanceof AccountExpiredException) {
+			error = exception.getMessage();
+		}else if(exception instanceof CredentialsExpiredException) {
+			error = exception.getMessage();
+		}else{
+			error = "User Account has been locked!";
+		}
+		
+		return error;
+	}
+
+	
+	/*private void handleLogin(String ssoId) {
+		
+		User user = userService.findByUserId(ssoId);
+		UserAttempts usrAttmpt=new UserAttempts();
+		logger.info("User : {}", user);
+		try {
+		if(user==null){
+			logger.info("User not found");
+			throw new UsernameNotFoundException("Username not found");
+		}else {
+		   boolean flag=true;//authenticationTrustResolver.isAnonymous(SecurityContextHolder.getContext().getAuthentication());
+			
+		   if(!flag) {
+			   throw new BadCredentialsException("Password is incorrect");
+		   }
+			
+		}
+		logger.info("before resetFailAttempts : {}", user.getSsoId());
+		
+		usrAttmpt.setUsername(user.getSsoId());
+		userAttemptDao.resetFailAttempts(usrAttmpt.getUsername());
+		
+		}catch (BadCredentialsException e) {	
+			//invalid login, update to user_attempts
+			logger.warn("BadCredentialsException resetFailAttempts : {}", user.getSsoId());
+			  userAttemptDao.updateFailAttempts(user.getSsoId());
+			  logger.warn("BadCredentialsException inserted successfully : {}", user.getSsoId());
+			throw e;
+				
+		  } catch (LockedException e){
+			  logger.warn("LockedException resetFailAttempts : {}", user.getSsoId());
+			//this user is locked!
+			String error = "";
+			UserAttempts userAttempts = 
+					userAttemptDao.getUserAttempts(user.getSsoId());
+			
+	               if(userAttempts!=null){
+				Date lastAttempts = userAttempts.getLastModified();
+				error = "User account is locked! <br><br>Username : " 
+	                           + user.getSsoId() + "<br>Last Attempts : " + lastAttempts;
+			}else{
+				error = e.getMessage();
+			}
+		  throw new LockedException(error);
+		}
+		
+		
+	}
+	*/
+	
+	
+
 }

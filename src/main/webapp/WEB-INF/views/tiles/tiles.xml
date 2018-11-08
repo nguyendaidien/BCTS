@@ -4,24 +4,24 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>  
   
-   <!-- Base Definition -->
+   <!-- Base Definition before login -->
    <definition name="base-definition"  template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">  
        <put-attribute name="title" value="" />  
-       <!--<put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp" />-->  
-	   <put-attribute name="header" value="" />
-       <put-attribute name="menu" value="/WEB-INF/views/tiles/template/defaultMenu.jsp" />  
+	   <put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp" />
+       <!-- <put-attribute name="menu" value="" />   -->
        <put-attribute name="body" value="" />  
-       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />  
+       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/loginFooter.jsp" />  
    </definition>
 
 <!-- Base Definition -->
    <definition name="base-definition_afterlogin"  template="/WEB-INF/views/tiles/layouts/defaultLayoutAfterLogin.jsp">  
        <put-attribute name="title" value="" />  
-       <put-attribute name="header" value="" />
-	   <put-attribute name="userheader" value="/WEB-INF/views/authheader.jsp" />	   
+       <put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp" />
+	   <put-attribute name="userheader" value="" />	   
        <put-attribute name="menu" value="/WEB-INF/views/tiles/template/defaultMenu.jsp" />  
+     <!-- <put-attribute name="menu" value="" />   -->
        <put-attribute name="body" value="" />  
-       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />  
+       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/loginFooter.jsp" />  
    </definition>   
   
    <!-- Home Page -->
@@ -34,6 +34,7 @@
    <definition name="login" extends="base-definition">  
        <put-attribute name="title" value="login" />  
        <put-attribute name="body" value="/WEB-INF/views/login.jsp" />  
+       <!-- <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" /> -->
    </definition>  
    
     <!-- Users list Page -->
@@ -62,6 +63,13 @@
        <put-attribute name="title" value="list" />  
        <put-attribute name="body" value="/WEB-INF/views/rolesuccess.jsp" />  
    </definition> 
+   
+    
+   <!-- Product Page -->
+   <definition name="accessDenied" extends="base-definition">  
+       <put-attribute name="title" value="Products" />  
+       <put-attribute name="body" value="/WEB-INF/views/accessDenied.jsp" />  
+   </definition>  
    
    <!-- Product Page -->
    <definition name="products" extends="base-definition">  

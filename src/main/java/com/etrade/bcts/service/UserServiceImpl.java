@@ -10,6 +10,8 @@
  */
 package com.etrade.bcts.service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.etrade.bcts.dao.UserDao;
 import com.etrade.bcts.model.User;
+import com.etrade.bcts.util.BctsConstants;
 
 
 @Service("userService")
@@ -41,9 +44,23 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	
-	
+	/**
+	 * While creating new user it will set default value
+	 */
 	public void saveUser(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setAccountLocked(BctsConstants.ACCTNOTLOCKED);//not locked for initial insert i.e. 1
+		user.setAcctExpired(BctsConstants.CREDNOTEXPIRED);
+		user.setCrdExpired(BctsConstants.CREDNOTEXPIRED);
+		user.setUserEnabled(BctsConstants.USERENABLED);
+		user.setCreatedDate(new Date());
+		user.setPwdUpdatedDate(new Date());
+		//user.setCreatedDate(new Date());
+		//Date newDate = DateUtils.addMonths(new Date(), 1);
+		Calendar cal = Calendar.getInstance(); 
+		cal.add(Calendar.MONTH, 1);
+		Date expDt=cal.getTime();
+		user.setPwdExpiredDate(expDt);
 		dao.save(user);
 	}
 	
@@ -90,5 +107,13 @@ public class UserServiceImpl implements UserService{
 		return ( user == null || ((id != null) && (user.getId() == id)));
 	}
 
+	/* (non-Javadoc)
+	 * @see com.etrade.bcts.service.UserService#updateUserAcct(com.etrade.bcts.model.User)
+	 */
+	@Override
+	public void updateUserAcct(User user) {
+		dao.updateUserAcct(user);
+	}
+	
 	
 }

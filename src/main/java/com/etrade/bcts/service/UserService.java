@@ -32,5 +32,7 @@ public interface UserService {
 	
 	boolean isUserIdUnique(Integer id, String sso);
 	
+	void updateUserAcct(User user);
+	
 
 }

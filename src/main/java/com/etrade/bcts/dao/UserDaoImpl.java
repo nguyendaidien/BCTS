@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.etrade.bcts.model.User;
-import com.etrade.bcts.model.UserAttempts;
 
 
 
@@ -32,16 +31,8 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 	
 	
-	private static final String SQL_USERS_UPDATE_LOCKED = "UPDATE USERS SET accountNonLocked = ? WHERE username = ?";
-	private static final String SQL_USERS_COUNT = "SELECT count(*) FROM USERS WHERE username = ?";
-
-	private static final String SQL_USER_ATTEMPTS_GET = "SELECT * FROM USER_ATTEMPTS WHERE username = ?";
-	private static final String SQL_USER_ATTEMPTS_INSERT = "INSERT INTO USER_ATTEMPTS (USERNAME, ATTEMPTS, LASTMODIFIED) VALUES(?,?,?)";
-	private static final String SQL_USER_ATTEMPTS_UPDATE_ATTEMPTS = "UPDATE USER_ATTEMPTS SET attempts = attempts + 1, lastmodified = ? WHERE username = ?";
-	private static final String SQL_USER_ATTEMPTS_RESET_ATTEMPTS = "UPDATE USER_ATTEMPTS SET attempts = 0, lastmodified = null WHERE username = ?";
 
 	
-	private static final int MAX_ATTEMPTS = 3;
 	
 	public User findById(int id) {
 		User user = getByKey(id);
@@ -101,24 +92,12 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	
 	
 	@Override
-	public UserAttempts getUserAttempts(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateUserAcct(User user) {
+		Query q=getSession().createQuery("update User set accountLocked=:lockedStatus where ssoId=:ssoId");
+		q.setString("lockedStatus",user.getAccountLocked());
+		q.setString("ssoId",user.getSsoId());
+		q.executeUpdate();
 	}
-	
-	
-	@Override
-	public void resetFailAttempts(String username) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void updateFailAttempts(String username) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
+	 
 
 }

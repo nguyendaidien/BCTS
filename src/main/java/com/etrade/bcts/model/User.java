@@ -11,6 +11,7 @@
 package com.etrade.bcts.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="APP_USER")
+@Table(name="BCTS_APP_USER")
 public class User implements Serializable{
 	
 	private static final long serialVersionUID = -3465813074586302847L;
@@ -37,7 +38,7 @@ public class User implements Serializable{
 	@Id
 	@GenericGenerator(name="USER_SEQ" , strategy="increment")
 	@GeneratedValue(generator="USER_SEQ")
-	@Column(name="id")
+	@Column(name="TRANSACTION_ID")
 	private Integer id;
 
 	@NotEmpty
@@ -59,6 +60,35 @@ public class User implements Serializable{
 	@NotEmpty
 	@Column(name="EMAIL", nullable=false)
 	private String email;
+	
+	@Column(name="ACCT_LOCKED",nullable=false)
+	private String accountLocked;
+	
+	@Column(name="USER_ENABLED",nullable=false)
+	private String userEnabled;
+	
+	@Column(name="ACCT_EXPIRED",nullable=false)
+	private String acctExpired;
+	
+	@Column(name="CREDENTIAL_EXPIRED",nullable=false)
+	private String crdExpired;
+	
+	@Column(name="CREATED_DATE")
+	/*@Temporal(TemporalType.DATE)*/
+	 /*@Temporal(TemporalType.TIMESTAMP)*/
+	private Date   createdDate;
+	
+	@Column(name="PWD_UPDATED")
+	//@Temporal(TemporalType.DATE)
+	/* @Temporal(TemporalType.TIMESTAMP)*/
+	private Date pwdUpdatedDate;
+	
+	
+	@Column(name="PWD_EXPIRED_DATE")
+	/*@Temporal(TemporalType.DATE)*/
+	private Date pwdExpiredDate;
+	
+
 
 	@NotEmpty
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -157,6 +187,110 @@ public class User implements Serializable{
 		}
 		return true;
 	}
+	
+	
+
+	/**
+	 * @return the userEnabled
+	 */
+	public String getUserEnabled() {
+		return userEnabled;
+	}
+
+	/**
+	 * @param userEnabled the userEnabled to set
+	 */
+	public void setUserEnabled(String userEnabled) {
+		this.userEnabled = userEnabled;
+	}
+
+	/**
+	 * @return the acctExpired
+	 */
+	public String getAcctExpired() {
+		return acctExpired;
+	}
+
+	/**
+	 * @param acctExpired the acctExpired to set
+	 */
+	public void setAcctExpired(String acctExpired) {
+		this.acctExpired = acctExpired;
+	}
+
+	/**
+	 * @return the crdExpired
+	 */
+	public String getCrdExpired() {
+		return crdExpired;
+	}
+
+	/**
+	 * @param crdExpired the crdExpired to set
+	 */
+	public void setCrdExpired(String crdExpired) {
+		this.crdExpired = crdExpired;
+	}
+
+	
+
+	
+
+	/**
+	 * @return the createdDate
+	 */
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	/**
+	 * @param createdDate the createdDate to set
+	 */
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	/**
+	 * @return the pwdUpdatedDate
+	 */
+	public Date getPwdUpdatedDate() {
+		return pwdUpdatedDate;
+	}
+
+	/**
+	 * @param pwdUpdatedDate the pwdUpdatedDate to set
+	 */
+	public void setPwdUpdatedDate(Date pwdUpdatedDate) {
+		this.pwdUpdatedDate = pwdUpdatedDate;
+	}
+
+	/**
+	 * @return the pwdExpiredDate
+	 */
+	public Date getPwdExpiredDate() {
+		return pwdExpiredDate;
+	}
+
+	/**
+	 * @param pwdExpiredDate the pwdExpiredDate to set
+	 */
+	public void setPwdExpiredDate(Date pwdExpiredDate) {
+		this.pwdExpiredDate = pwdExpiredDate;
+	}
+
+	/**
+	 * @return the accountLocked
+	 */
+	public String getAccountLocked() {
+		return accountLocked;
+	}
+
+	/**
+	 * @param accountLocked the accountLocked to set
+	 */
+	public void setAccountLocked(String accountLocked) {
+		this.accountLocked = accountLocked;
+	}
 
 	/*
 	 * DO-NOT-INCLUDE passwords in toString function.
@@ -166,7 +300,7 @@ public class User implements Serializable{
 	public String toString() {
 		return "User [id=" + id + ", ssoId=" + ssoId + ", password=" + password
 				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + "]";
+				+ ", email=" + email + ", accountLocked=" + accountLocked +"]";
 	}
 
 
