@@ -1,0 +1,224 @@
+/*@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300);*/
+
+@import url(google.fonts.css);
+
+body {
+    background: #c8c8ca;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto Condensed', sans-serif!important;
+    font-size: 14px;
+	color:#333;
+	font-weight:400;
+	line-height:1.2;
+}
+
+input {
+    outline: none;
+}
+.asterisk { /* set color of asterisk class as red */
+	color: red;
+}
+.clearfix {
+    clear: both;
+}
+
+a {
+    text-decoration: none;
+}
+
+strong{ font-weight:600;}
+a img {
+    border: none;
+    outline: none;
+}
+.normal{ font-weight:400;}
+.center{ text-align:center;}
+h1{
+	font-size:38px;
+	color:#fff;
+	font-weight:300;
+	}
+h2{
+	font-size:24px;
+	color:#fff;
+	font-weight:300;
+	}
+	
+h3 {
+    color: #666;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+.margin-top-50{ margin:50px 0;}
+.bodywrapper {
+    margin:0 auto;
+    padding: 0;
+	/*max-width:1400px;*/ /* Test comment off */
+} 
+
+.bodywrapper.bg
+{  
+	background:url(../img/TradeWeb.jpg) no-repeat top center; 
+	background-size:cover; 
+	min-height:850px; 
+	/*min-width:1200px;*/ /* Test comment off */
+}
+
+.header{ background:#000000; padding:10px 0; }
+
+.wrapper{ width:auto; margin:0 auto;} /* change width from 1100 to auto*/
+
+.logo-heading{ color:#fff;}
+
+.login-box{ width:382px; padding:30px 30px 0 30px; background:rgba(0,0,0,0.6); min-height:200px; float:right; margin-top:100px; margin-right:100px;}
+/*Added margin-right: 100px;*/
+
+.login-box .form-group{ margin:10px 0;}
+.login-box .form-group input{ width:320px; height:45px; padding:0 10px; line-height:45px; border:none; border-radius:0;}
+.login-box .form-group input.username{ background:#fff url(../img/username.jpg) no-repeat left; padding-left:50px;}
+.login-box .form-group input.password{ background:#fff url(../img/password.jpg) no-repeat left; padding-left:50px;}
+
+.form-box {
+    margin-top: 20px;
+}
+
+.login-box .form-group .btn{ width:100%; margin:10px 0; text-align:center; color:#fff; font-size:17px; text-transform:capitalize;}
+.login-box .form-group .btn.black{ background:#131313; }
+.login-box .form-group .btn.black:hover{ background:#000000; }
+.login-box .form-group a{ text-transform:capitalize; color:#fff;}
+.login-box .form-group a.sign-up{ float:right;}
+.login-box .form-group a:hover{ text-decoration:underline}
+.login-box .login-box-footer{ text-align:right; padding:25px 0; border-top:1px solid #fff; color:#fff; margin-top:25px;}
+
+.form-recovery{ width:400px;}
+.form-recovery .form-group input {
+    border: 1px solid #ccc;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    width: 378px;
+}
+
+.help-block{ display:block; color:#666; margin:5px 0; font-size:13px;}
+
+.inline {
+    margin: 30px 0;
+}
+
+.form-recovery .form-group .inline > input[type="button"], .form-horizontal .form-group .inline > input[type="button"] {
+    float: left;
+    margin-right: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: auto;
+	background:#cccccc;
+	border:none;
+	color:#fff;
+	font-size:17px;
+	text-transform:uppercase;
+}
+
+.form-recovery .form-group .inline > input[type="button"].black, .form-horizontal  .form-group .inline > input[type="button"].black{ background:#1c1c1c;}
+
+.form-recovery .form-group .inline > input[type="button"]:hover,  .form-horizontal  .form-group .inline > input[type="button"]:hover{ background:#666;}
+
+.overlay{ display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); }
+.light-box{ display:none; position:absolute;  width:370px; height:230px; top:50%; left:50%; text-align:center; margin-top:-115px; margin-left:-185px; background:#fff;}
+.light-box-text {
+    display: table;
+    height: 180px;
+    padding: 0 35px;
+    width: 300px;
+}
+.light-box p {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.close-btn{ padding:15px 0; font-size:17px; background:#d7d7d7; color:#fff; }
+.close-btn:hover{ background:#666; cursor:pointer;}
+.form-horizontal{ margin-bottom:50px; float:left;}
+.form-horizontal .form-group{ margin:0 0 10px 0; width:740px; float:left;}
+.form-horizontal .form-group .control-label{ padding-top:8px; font-size:15px; float:left; width: 250px; margin-right:10px;}
+.form-horizontal .form-group .form-control{ float:left; width: 380px; }
+.form-horizontal .form-group .form-control input{ height:40px; line-height:40px; padding:0 10px; width:360px; border:1px solid #959595; background:#fafafa;}
+.form-horizontal .form-group .form-control select{ height:40px; line-height:40px; padding:0 10px; width:380px; border:1px solid #959595; background:#fafafa;}
+.mandatory{ margin-left:5px;}
+
+.inline-radio .radio {
+    display: block;
+    float: left;
+    margin-right: 20px;
+}
+
+.form-horizontal .form-group .inline-radio .radio > input {
+    float: left;
+    height: auto;
+    margin-right: 10px;
+    width: auto;
+}
+
+.form-horizontal .form-group .form-control .inline-check .checkbox {
+    display: block;
+    float: left;
+    margin-right: 20px;
+}
+
+.form-horizontal .form-group .inline-check .checkbox > input {
+    float: left;
+    height: auto ;
+    margin-right: 10px;
+    width: auto ;
+	margin-top:2px;
+}
+ 
+.form-horizontal .form-group.group-controls .control-label{ padding-top:0;}
+.form-horizontal .form-group .inline{ float:left; margin:0;}
+.form-horizontal .form-group .inline > input[type="button"]{ height:40px; line-height:40px;}
+
+.inline-check a{ color:inherit;}
+
+.inline-check a:hover{ text-decoration:underline;}
+
+/* Eric Added: Login Page Navbar White */
+.navbar.navbar-inverse {
+    background-color: white; /* Changed from #303136; to white */
+    border-radius: 0 ;
+    height: auto;
+    min-height: 56px; /* To match the Logo height */
+}
+.navbar-custom {
+	background-color: white;
+}
+/* Eric Added: Login Page Navbar left right padding */
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: 0px; /* Change from auto to 0px */
+}
+
+/* Eric Added: Change margin-bottom from 20px to 0px */
+.navbar {
+	margin-bottom: 0px;	
+}
+
+/* Eric Added: Footer related stylesheets */
+.footer { 
+background:white; /* Footer color according to GETS UI guidelines */
+padding: 8px 20px 20px 20px;
+}
+
+.footer .footer-inner {
+    margin-top: 12px;
+	color: #666; /* Set Footer Text Color to GETS UI guidelines */
+}
+
+.footer .footer-tools .go-top {
+    background: #d71635 none repeat scroll 0 0;
+    padding: 10px 16px;
+}
+
+.footer .footer-tools .go-top .fa{ color:#fff;}
+
