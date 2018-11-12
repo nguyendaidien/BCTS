@@ -1,0 +1,113 @@
+package com.etrade.bcts.model;
+
+import java.util.Date;
+
+public class BCTSAlert {
+	private String caseId;
+	private String caseType;
+	private String userId;
+	private String jobNo;
+	private String permitNo;
+	private String alertContent;
+	private String status;
+	private String reminderDate;
+	private Date openDate;
+	private String completedDate;
+	private String openBy;
+	private String completedBy;
+	private String licenceNo;
+	private Date licenceStartDate;
+	private Date licenceEndDate;
+	
+	public String getCaseId() {
+		return caseId;
+	}
+	public void setCaseId(String caseId) {
+		this.caseId = caseId;
+	}
+	public String getCaseType() {
+		return caseType;
+	}
+	public void setCaseType(String caseType) {
+		this.caseType = caseType;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getJobNo() {
+		return jobNo;
+	}
+	public void setJobNo(String jobNo) {
+		this.jobNo = jobNo;
+	}
+	public String getPermitNo() {
+		return permitNo;
+	}
+	public void setPermitNo(String permitNo) {
+		this.permitNo = permitNo;
+	}
+	public String getAlertContent() {
+		return alertContent;
+	}
+	public void setAlertContent(String alertContent) {
+		this.alertContent = alertContent;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getReminderDate() {
+		return reminderDate;
+	}
+	public void setReminderDate(String reminderDate) {
+		this.reminderDate = reminderDate;
+	}
+	public Date getOpenDate() {
+		return openDate;
+	}
+	public void setOpenDate(Date openDate) {
+		this.openDate = openDate;
+	}
+	public String getCompletedDate() {
+		return completedDate;
+	}
+	public void setCompletedDate(String completedDate) {
+		this.completedDate = completedDate;
+	}
+	public String getOpenBy() {
+		return openBy;
+	}
+	public void setOpenBy(String openBy) {
+		this.openBy = openBy;
+	}
+	public String getCompletedBy() {
+		return completedBy;
+	}
+	public void setCompletedBy(String completedBy) {
+		this.completedBy = completedBy;
+	}
+	public String getLicenceNo() {
+		return licenceNo;
+	}
+	public void setLicenceNo(String licenceNo) {
+		this.licenceNo = licenceNo;
+	}
+	public Date getLicenceStartDate() {
+		return licenceStartDate;
+	}
+	public void setLicenceStartDate(Date licenceStartDate) {
+		this.licenceStartDate = licenceStartDate;
+	}
+	public Date getLicenceEndDate() {
+		return licenceEndDate;
+	}
+	public void setLicenceEndDate(Date licenceEndDate) {
+		this.licenceEndDate = licenceEndDate;
+	}
+	
+}

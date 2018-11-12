@@ -14,5 +14,7 @@ public interface UserDocumentDao {
 	
 	List<UserDocument> findAllByUserId(String userId);
 	
+	List<UserDocument> findAllByPermitNo(String permitNo);
+	
 	void deleteById(int id);
 }

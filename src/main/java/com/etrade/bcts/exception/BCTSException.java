@@ -48,7 +48,7 @@ public class BCTSException{
         }
 //        ModelMap model = new ModelMap();
 //        model.addAttribute("message", message);
-        return "redirect:/add-document-err-code001";
+        return "redirect:/docs/add-document-err-code001";
 
     }
 	

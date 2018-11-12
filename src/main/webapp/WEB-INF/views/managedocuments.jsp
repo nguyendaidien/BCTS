@@ -11,75 +11,98 @@
 	<link href="${pageContext.request.contextPath}/static/css/bootstrap.css" rel="stylesheet"></link>
 	<link href="${pageContext.request.contextPath}/static/css/app.css" rel="stylesheet"></link>	
 	<link href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"></link>
-	<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script> -->
-	
-	
-	<script type="text/javascript">
-	var $ = jQuery;
-	$(document).ready(function() {		
-		$('#permitNoSearch').autocomplete({
-				minLength: 1,
-		        delay: 500,
-		        //define callback to format results
-		        source: function (request, response) {
-		            $.getJSON('${pageContext.request.contextPath}/permit/search', request, function(result) {
-		                response($.map(result, function(item) {
-		                    return {
-		                    	label: item.permitNo,		                    
-		                        // following property gets entered in the textbox
-		                        value: item.permitNo,
-		                    }
-		                }));
-		            });
-		        },
-		      	//define select handler
-		        select : function(event, ui) {
-		            if (ui.item) {
-		                event.preventDefault();
-		                $("#permitNo").val(ui.item.value);
-		                console.log("selected Permit No: " + ui.item.value);
-		                //$("#tagQuery").value = $("#tagQuery").defaultValue
-		                //var defValue = $("#permitNoSearch").prop('defaultValue');
-		                $("#permitNoSearch").val(ui.item.value);
-		                $("#permitNoSearch").blur();
-		                window.location.href = "${pageContext.request.contextPath}/docs/add-document-sam";
-		                return false;
-		            }
-		        }
-		});
-	});
-</script>
+	<script type="text/javascript" >
+	    	var getMAX_REQUEST_SIZE = ${propertiesConfig.getMAX_REQUEST_SIZE()};
+	    	//var getMAX_REQUEST_SIZE2 = ${applicationScope.propertiesConfig.getMAX_REQUEST_SIZE()};
+	    	//var multipartResolver = ${multipartResolver.toString()};
+	    </script>
 </head>
 
 <body>
 	<!-- <div class="generic-container"> -->
 		<div class="panel panel-default">
-		<div class="row">
-						<div class="ui-widget">
-							<label class="col-md-3 control-lable" for="permitNoSearch">Permit No.</label>
-							<input id="permitNoSearch" type="text" name="permitNoSearch" autocomplete="on"/>				
-						</div>
-					</div>
+		<input id="MAX_REQUEST_SIZE" value="${propertiesConfig.getMAX_REQUEST_SIZE()}" hidden="true"/>
+		<input id="MAX_FILE_SIZE" value="${propertiesConfig.getMAX_FILE_SIZE()}" hidden="true"/>
+		<div class="panel-heading"><span class="lead">Search Permit No.</span></div>
+		<div class="ui-widget">
+							<label class="control-lable" for="permitNoSearch">Permit No.</label>
+							<input id="permitNoSearch" type="text" name="permitNoSearch" value="${permitNo}" autocomplete="on"/>				
+		</div>
 			  <!-- Default panel contents -->
 		<div class="panel-heading"><span class="lead">Upload New Document</span></div>
 			<div class="uploadcontainer">
-				<form:form method="POST" action="${pageContext.request.contextPath}/docs/add-document-${user.ssoId}" modelAttribute="uploadFileBucket" enctype="multipart/form-data" class="form-horizontal">
+				<form:form id="formUpload" method="POST" action="${pageContext.request.contextPath}/docs/add-document-${user.ssoId}" 
+					modelAttribute="uploadFile" enctype="multipart/form-data" class="form-horizontal">
 					
-					<form:hidden id="permitNo" path="permitNo" name="permitNo" value=""/>
+					<form:hidden id="permitNo" path="permitNo" name="permitNo" value="${permitNo}"/>
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-3 control-lable" for="files">Upload a document</label>
 							<div class="col-md-7">
-								<form:input type="file" path="files" id="files" class="form-control input-sm"/>
-								<form:input type="file" path="files" id="files" class="form-control input-sm"/>
-								<div class="has-error">
-									<form:errors path="files" class="help-inline"/>
-									<c:if test="${not empty error}">
-										<h4 class=error>An error occurred: ${error}</h4>
-										<br>
-									</c:if>
-									
-								</div>
+							<table class="table">
+							  <thead>
+							    <tr>
+							      <th scope="col">#</th>
+							      <th scope="col">Document Type</th>
+							      <th scope="col">Document Name</th>
+							      <th scope="col">Size</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							  <c:forEach items="${uploadedFiles}" var="f" varStatus="count">
+							  <tr>
+								<th scope="row">${count.index + 1}</th>																
+								<td>${f.docType}</td>
+								<td>${f.getFile().getOriginalFilename()}</td>
+								<td>${f.getDocSize()} Kb</td>
+								</tr>
+							  </c:forEach>
+							  <tr>
+									<th scope="row"></th>
+									<td><input id="totalFilesSize" value="${totalFilesSize}" hidden="true"/></td>
+									<td>Total File Size</td>
+									<td>${totalFilesSize} Kb</td>
+								</tr>
+							    <tr>
+							      <th scope="row"></th>
+							      <%-- <td><form:input type="text" path="docType" id="docType" class="form-control input-sm"/></td> --%>
+							      <td>
+							      <div class="dropdown">
+							      	  <form:hidden path="docType" id="docType"/>
+									  <button class="btn btn-secondary dropdown-toggle" type="button" id="docType-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									    Select document type
+									  </button>
+									  <ul class="dropdown-menu" aria-labelledby="docType-dropdown">
+									    <li><a href="#" data-value="Invoice">Invoice</a></li>
+									    <li><a href="#" data-value="Permit">Permit</a></li>
+									    <li><a href="#" data-value="something else here">Something else</a></li>
+									  </ul>
+									</div>
+							      </td>
+							      <td><form:input type="file" path="file" id="file" name="file" class="form-control input-sm"/></td>
+							      <td>
+							      	<input type="submit" value="Upload" class="btn btn-primary btn-sm">
+								  </td>
+							      							      
+							    </tr>
+							    
+								<tr>
+									<th scope="row"></th>
+									<td></td>
+									<td></td>
+									<td>
+								      <div class="has-error">
+										<form:errors path="file" class="help-inline"/>
+										<c:if test="${not empty error}">
+											<h4 class=error>An error occurred: ${error}</h4>
+											<br>
+										</c:if>									
+									  </div>
+							      	</td>
+								</tr>
+								
+							  </tbody>
+							</table>
+								
 							</div>
 						</div>
 					</div>
@@ -93,15 +116,16 @@
 						</div>
 					</div> --%>
 			
-					<div class="row">
+					<!-- <div class="row">
 						<div class="form-actions floatRight">
 							<input type="submit" value="Upload" class="btn btn-primary btn-sm">
 						</div>
-					</div>
+					</div> -->
 	
 				</form:form>
 				</div>
-		<div class="panel-heading"><span class="lead">List of Documents </span></div>
+				<c:if test="${documents!=null}">
+			<div class="panel-heading"><span class="lead">List of Documents </span></div>
 		  	<div class="tablecontainer">
 				<table class="table table-hover">
 		    		<thead>
@@ -124,11 +148,7 @@
 		    		</tbody>
 		    	</table>
 		    </div>
-		</div>
-		<!-- <div class="panel panel-default"></div> -->
-	 	<div class="well">
-	 		Go to <a href="<c:url value='/list' />">Users List</a>
-	 	</div>
-   	<!-- </div> -->
+		    </c:if>
+		</div>		
 </body>
 </html>

@@ -62,7 +62,7 @@ create table USER_DOCUMENT (
    name VARCHAR(100) NOT NULL,
    description VARCHAR(200),
    type VARCHAR(100),
-   docSize VARCHAR(50) NOT NULL,
+   docSize NUMBER NOT NULL,
    url  VARCHAR(250) NOT NULL,
    permitNo VARCHAR(50) NOT NULL,
    uploadedDate TIMESTAMP NOT NULL, 

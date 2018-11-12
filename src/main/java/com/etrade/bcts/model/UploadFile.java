@@ -4,10 +4,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class UploadFile {
 
-	MultipartFile file;
+	private MultipartFile file;
 	
-	String description;
-
+	private String docType;
+	
+	private String permitNo;
+	
+	long docSize;
+	
 	public MultipartFile getFile() {
 		return file;
 	}
@@ -16,11 +20,28 @@ public class UploadFile {
 		this.file = file;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDocType() {
+		return docType;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDocType(String docType) {
+		this.docType = docType;
 	}
+
+	public String getPermitNo() {
+		return permitNo;
+	}
+
+	public void setPermitNo(String permitNo) {
+		this.permitNo = permitNo;
+	}
+
+	public long getDocSize() {
+		return docSize;
+	}
+
+	public void setDocSize(long docSize) {
+		this.docSize = docSize;
+	}
+	
 }

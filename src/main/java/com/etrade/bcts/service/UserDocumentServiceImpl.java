@@ -48,6 +48,10 @@ public class UserDocumentServiceImpl implements UserDocumentService{
 		return dao.findAllByUserId(userId);
 	}
 	
+	public List<UserDocument> findAllByPermitNo(String permitNo) {
+		return dao.findAllByPermitNo(permitNo);
+	}	
+	
 	public void saveDocument(UserDocument document){
 		dao.save(document);
 	}
@@ -56,27 +60,38 @@ public class UserDocumentServiceImpl implements UserDocumentService{
 		dao.deleteById(id);
 	}
 	
-	public void uploadFile(UploadFileBucket fileBucket, User user) throws IOException{
-		MultipartFile[] files = fileBucket.getFiles();
-		logger.info("upload files:" + files.length );
-		String permitNo = fileBucket.getPermitNo();
-		for(MultipartFile file : files) {
-	        byte[] bytes = file.getBytes();
-	        logger.info("bytes:" + bytes.length );
-	        Path path = Paths.get(environment.getRequiredProperty("upload.directory") + file.getOriginalFilename());
-	        Files.write(path, bytes);
-	        saveDocument(permitNo, file, user, path.toString());
-		}
+//	public void uploadFile(UploadFileBucket fileBucket, User user) throws IOException{
+//		MultipartFile[] files = fileBucket.getFiles();
+//		logger.info("upload files:" + files.length );
+//		String permitNo = fileBucket.getPermitNo();
+//		for(MultipartFile file : files) {
+//	        byte[] bytes = file.getBytes();
+//	        logger.info("bytes:" + bytes.length );
+//	        Path path = Paths.get(environment.getRequiredProperty("upload.directory") + file.getOriginalFilename());
+//	        Files.write(path, bytes);
+//	        saveDocument(permitNo,fileBucket.getDocType(), file, user, path.toString());
+//		}
+//	}	
+	
+	public void uploadFile(UploadFile uploadFile, User user) throws IOException{
+		MultipartFile file = uploadFile.getFile();
+		
+		String permitNo = uploadFile.getPermitNo();
+		byte[] bytes = file.getBytes();
+        logger.info("bytes:" + bytes.length + "; size:" + file.getSize());
+        Path path = Paths.get(environment.getRequiredProperty("upload.directory") + file.getOriginalFilename());
+        Files.write(path, bytes);
+        saveDocument(permitNo, uploadFile.getDocType(), file, user, path.toString());
 	}	
 	
-	private void saveDocument(String permitNo, MultipartFile file, User user, String path) {		
+	private void saveDocument(String permitNo, String docType, MultipartFile file, User user, String path) {
 		UserDocument document = new UserDocument();		
 		document.setName(file.getOriginalFilename());
 		document.setUser(user);
-		document.setType("1");
+		document.setType(docType);
 		document.setUrl(path);
 		document.setUser(user);
-		document.setDocSize("1");
+		document.setDocSize(file.getSize());
 		document.setPermitNo(permitNo);
 		document.setUploadedDate(new Date());
 		saveDocument(document);

@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+
 public class UploadFileBucket {
 
 	private MultipartFile[] files;
 	private String permitNo;
+	private String docType;
 	
 	public MultipartFile[] getFiles() {
 		return files;
@@ -23,5 +25,13 @@ public class UploadFileBucket {
 
 	public void setPermitNo(String permitNo) {
 		this.permitNo = permitNo;
-	}	
+	}
+
+	public String getDocType() {
+		return docType;
+	}
+
+	public void setDocType(String docType) {
+		this.docType = docType;
+	}		
 }

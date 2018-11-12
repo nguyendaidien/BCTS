@@ -89,8 +89,21 @@
        <put-attribute name="body" value="/WEB-INF/views/managedocuments.jsp" />  
    </definition> 
    <!-- Document Mgt Page -->
-   <definition name="uploadStatus" extends="base-definition_afterlogin">  
-       <put-attribute name="title" value="uploadStatus" />  
-       <put-attribute name="body" value="/WEB-INF/views/uploadStatus.jsp" />  
+   <definition name="emailForm" extends="base-definition_afterlogin">  
+       <put-attribute name="title" value="emailForm" />  
+       <put-attribute name="body" value="/WEB-INF/views/emailForm.jsp" />  
    </definition> 
+   <definition name="success" extends="base-definition_afterlogin">  
+       <put-attribute name="title" value="success" />  
+       <put-attribute name="body" value="/WEB-INF/views/success.jsp" />  
+   </definition>
+   <definition name="simple" extends="base-definition_afterlogin">  
+       <put-attribute name="title" value="simple" />  
+       <put-attribute name="body" value="/WEB-INF/views/email/simple.jsp" />  
+   </definition>
+    <definition name="sent.html" extends="base-definition_afterlogin">  
+       <put-attribute name="title" value="simple" />  
+       <put-attribute name="body" value="/WEB-INF/views/email/sent.html" />  
+   </definition>
+   
 </tiles-definitions>

@@ -38,7 +38,7 @@ public class UserDocument {
 	private String url;
 
 	@Column(name="docSize", nullable=false)
-	private String docSize;
+	private long docSize;
 	
 	@Column(name="uploadedDate", nullable=false)
 	private Date uploadedDate;
@@ -99,11 +99,11 @@ public class UserDocument {
 		this.user = user;
 	}
 
-	public String getDocSize() {
+	public long getDocSize() {
 		return docSize;
 	}
 
-	public void setDocSize(String docSize) {
+	public void setDocSize(long docSize) {
 		this.docSize = docSize;
 	}
 

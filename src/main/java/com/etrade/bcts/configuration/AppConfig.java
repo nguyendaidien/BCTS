@@ -10,8 +10,10 @@
  */
 package com.etrade.bcts.configuration;
 
-import java.util.List;
-
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -19,8 +21,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -30,11 +33,11 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import com.etrade.bcts.converter.RoleToUserProfileConverter;
-import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 
 @Configuration
 @EnableWebMvc
+@EnableScheduling
 @ComponentScan(basePackages = "com.etrade.bcts")
 public class AppConfig extends WebMvcConfigurerAdapter{
 	
@@ -42,6 +45,11 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 	@Autowired
 	RoleToUserProfileConverter roleToUserProfileConverter;
 	
+	@Autowired
+	private JobLauncher jobLaucher;
+	
+	@Autowired
+	private Job job;
 //	@Autowired
 //	MappingJackson2HttpMessageConverter converter;
 	
@@ -120,6 +128,16 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     @Override
     public void configurePathMatch(PathMatchConfigurer matcher) {
         matcher.setUseRegisteredSuffixPatternMatch(true);
+    }
+    
+    @Scheduled(fixedDelay=5000)
+    public void perform() throws Exception
+    {
+    	System.out.println("Alert Job ----");
+        JobParameters params = new JobParametersBuilder()
+                .addString("JobID", String.valueOf(System.currentTimeMillis()))
+                .toJobParameters();
+        jobLaucher.run(job, params);
     }
 }
 

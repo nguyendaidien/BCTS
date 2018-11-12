@@ -34,7 +34,13 @@ public class UserDocumentDaoImpl extends AbstractDao<Integer, UserDocument> impl
 		return (List<UserDocument>)crit.list();
 	}
 
-	
+	@SuppressWarnings("unchecked")
+	public List<UserDocument> findAllByPermitNo(String permitNo){
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("permitNo", permitNo));
+		return (List<UserDocument>)crit.list();
+	}
+
 	public void deleteById(int id) {
 		UserDocument document =  getByKey(id);
 		delete(document);
