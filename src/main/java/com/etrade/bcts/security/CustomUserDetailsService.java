@@ -109,7 +109,7 @@ public class CustomUserDetailsService extends JdbcDaoImpl implements UserDetails
 	}
 	
 	@Override
-	@Value("select U.sso_id, P.TYPE from APP_USER_USER_PROFILE E,APP_USER U, USER_PROFILE P where U.sso_id =? and U.ID=E.USER_ID and E.user_profile_id=P.ID")
+	@Value("select U.sso_id, P.TYPE from BCTS_APP_USER_PROFILE E,APP_USER U, USER_PROFILE P where U.sso_id =? and U.ID=E.USER_ID and E.user_profile_id=P.TRANSACTION_ID")
 	public void setAuthoritiesByUsernameQuery(String queryString) {
 		logger.info("setAuthoritiesByUsernameQuery() queryString: {}", queryString);
 		super.setAuthoritiesByUsernameQuery(queryString);

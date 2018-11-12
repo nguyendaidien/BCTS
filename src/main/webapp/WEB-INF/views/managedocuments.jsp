@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+ 
 
 		<script type="text/javascript" >
 	    	var getMAX_REQUEST_SIZE = ${propertiesConfig.getMAX_REQUEST_SIZE()};

@@ -815,7 +815,7 @@ create table BCTS_USER_PROFILE(
 );
 
 /* JOIN TABLE for MANY-TO-MANY relationship*/  
-CREATE TABLE APP_USER_USER_PROFILE (
+CREATE TABLE BCTS_APP_USER_PROFILE (
     user_id NUMBER NOT NULL,
     user_profile_id NUMBER NOT NULL,
     PRIMARY KEY (user_id, user_profile_id),

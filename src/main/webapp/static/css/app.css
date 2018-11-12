@@ -400,7 +400,7 @@ padding: 8px 20px 20px 20px;
 
 .bg-home{
 background-color:#3d8e0f!important;
-background-image: url("${pageContext.request.contextPath}/static/vendor/bootstrap/css/BctsWeb.jpg");
+background-image: url("../img/BctsWeb.jpg");
 background-repeat: no-repeat;
 background-size:cover;
 height:-webkit-fill-available
