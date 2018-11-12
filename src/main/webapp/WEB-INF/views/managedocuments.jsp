@@ -2,28 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
- 
-<html>
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Upload/Download/Delete Documents</title>
-	<link href="${pageContext.request.contextPath}/static/css/bootstrap.css" rel="stylesheet"></link>
-	<link href="${pageContext.request.contextPath}/static/css/app.css" rel="stylesheet"></link>	
-	<link href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"></link>
-	<script type="text/javascript" >
+		<script type="text/javascript" >
 	    	var getMAX_REQUEST_SIZE = ${propertiesConfig.getMAX_REQUEST_SIZE()};
-	    	//var getMAX_REQUEST_SIZE2 = ${applicationScope.propertiesConfig.getMAX_REQUEST_SIZE()};
-	    	//var multipartResolver = ${multipartResolver.toString()};
 	    </script>
-</head>
-
-<body>
-	<!-- <div class="generic-container"> -->
+	    
+	<div class="card mb-3">
 		<div class="panel panel-default">
 		<input id="MAX_REQUEST_SIZE" value="${propertiesConfig.getMAX_REQUEST_SIZE()}" hidden="true"/>
 		<input id="MAX_FILE_SIZE" value="${propertiesConfig.getMAX_FILE_SIZE()}" hidden="true"/>
-		<div class="panel-heading"><span class="lead">Search Permit No.</span></div>
+		<div class="panel-heading"> <span class="lead">Search Permit No.</span></div>
 		<div class="ui-widget">
 							<label class="control-lable" for="permitNoSearch">Permit No.</label>
 							<input id="permitNoSearch" type="text" name="permitNoSearch" value="${permitNo}" autocomplete="on"/>				
@@ -149,6 +137,5 @@
 		    	</table>
 		    </div>
 		    </c:if>
-		</div>		
-</body>
-</html>
+		</div>	
+	</div>		

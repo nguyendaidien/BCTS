@@ -36,5 +36,9 @@
             <i class="fas fa-fw fa-bell"></i>
             <span>Create Case</span></a>
         </li>
-        
+        <li class="nav-item active">
+          <a class="nav-link" href="${pageContext.request.contextPath}/docs/managedocuments-sam">
+            <i class="fas fa-fw"></i>
+            <span>Document Pouch</span></a>
+        </li>
 	   </sec:authorize>

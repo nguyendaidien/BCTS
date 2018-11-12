@@ -79,7 +79,7 @@ public class DocumentController {
 	   binder.setValidator(fileValidator);
 	}
 	
-	@RequestMapping(value = { "/managedocuments/{userId}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/managedocuments-{userId}" }, method = RequestMethod.GET)
 	public String addDocuments(@PathVariable String userId , ModelMap model) {
 		User user = userService.findByUserId(userId);
 		model.addAttribute("user", user);		
