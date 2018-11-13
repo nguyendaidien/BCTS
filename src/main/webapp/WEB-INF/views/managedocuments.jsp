@@ -8,36 +8,42 @@
 	    	var getMAX_REQUEST_SIZE = ${propertiesConfig.getMAX_REQUEST_SIZE()};
 	    </script>
 	    
-	<div class="card mb-3">
-		<div class="panel panel-default">
-		<input id="MAX_REQUEST_SIZE" value="${propertiesConfig.getMAX_REQUEST_SIZE()}" hidden="true"/>
-		<input id="MAX_FILE_SIZE" value="${propertiesConfig.getMAX_FILE_SIZE()}" hidden="true"/>
-		<div class="panel-heading"> <span class="lead">Search Permit No.</span></div>
-		<div class="ui-widget">
-							<label class="control-lable" for="permitNoSearch">Permit No.</label>
-							<input id="permitNoSearch" type="text" name="permitNoSearch" value="${permitNo}" autocomplete="on"/>				
-		</div>
-			  <!-- Default panel contents -->
-		<div class="panel-heading"><span class="lead">Upload New Document</span></div>
-			<div class="uploadcontainer">
-				<form:form id="formUpload" method="POST" action="${pageContext.request.contextPath}/docs/add-document-${user.ssoId}" 
+	    <div class="card mb-3">
+<div class="card-header">Search Permit No</div>
+<div class="card-body">
+
+<div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                <input id="MAX_REQUEST_SIZE" value="${propertiesConfig.getMAX_REQUEST_SIZE()}" hidden="true"/>
+				<input id="MAX_FILE_SIZE" value="${propertiesConfig.getMAX_FILE_SIZE()}" hidden="true"/>
+                  <div class="form-label-group">
+                    <input type="text" path="permitNoSearch" id="permitNoSearch" value="${permitNo}" class="form-control" placeholder="Permit No" required="required" autofocus="autofocus"/>
+					<div class="has-error"><form:errors path="permitNoSearch" class="help-inline"/></div>
+					<label for="permitNoSearch">Permit No</label>
+                  </div>
+                </div>
+              </div>
+</div>
+<form:form id="formUpload" method="POST" action="${pageContext.request.contextPath}/docs/add-document-${user.ssoId}" 
 					modelAttribute="uploadFile" enctype="multipart/form-data" class="form-horizontal">
 					
 					<form:hidden id="permitNo" path="permitNo" name="permitNo" value="${permitNo}"/>
-					<div class="row">
-						<div class="form-group col-md-12">
-							<div class="col-md-7">
-							<table class="table">
-							  <thead>
-							    <tr>
-							      <th scope="col">#</th>
-							      <th scope="col">Document Type</th>
-							      <th scope="col">Document Name</th>
-							      <th scope="col">Size</th>
-							    </tr>
-							  </thead>
-							  <tbody>
-							  <c:forEach items="${uploadedFiles}" var="f" varStatus="count">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table "  width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Document Type</th>
+                      <th>Document Name</th>
+                      <th>Size</th>
+					  
+                    </tr>
+                  </thead>
+                  
+                  <tbody>
+                  <c:forEach items="${uploadedFiles}" var="f" varStatus="count">
 							  <tr>
 								<th scope="row">${count.index + 1}</th>																
 								<td>${f.docType}</td>
@@ -45,14 +51,16 @@
 								<td>${f.getDocSize()} Kb</td>
 								</tr>
 							  </c:forEach>
+							  
 							  <tr>
-									<th scope="row"></th>
+									<th ></th>
 									<td><input id="totalFilesSize" value="${totalFilesSize}" hidden="true"/></td>
 									<td>Total File Size</td>
 									<td>${totalFilesSize} Kb</td>
 								</tr>
-							    <tr>
-							      <th scope="row"></th>
+								
+								<tr>
+							      <th ></th>
 							      <%-- <td><form:input type="text" path="docType" id="docType" class="form-control input-sm"/></td> --%>
 							      <td>
 							      <div class="dropdown">
@@ -67,13 +75,11 @@
 									  </ul>
 									</div>
 							      </td>
-							      <td><form:input type="file" path="file" id="file" name="file" class="form-control input-sm"/></td>
+							      <td><form:input type="file" path="file" id="file" name="file" required="required" class="form-control input-sm"/></td>
 							      <td>
 							      	<input type="submit" value="Upload" class="btn btn-primary btn-sm">
 								  </td>
-							      							      
 							    </tr>
-							    
 								<tr>
 									<th scope="row"></th>
 									<td></td>
@@ -88,32 +94,14 @@
 									  </div>
 							      	</td>
 								</tr>
-								
-							  </tbody>
-							</table>
-								
-							</div>
-						</div>
-					</div>
-					<%-- <div class="row">
-						<div class="form-group col-md-12">
-							<label class="col-md-3 control-lable" for="file">Description</label>
-							<div class="col-md-7">
-								<form:input type="text" path="description" id="description" class="form-control input-sm"/>
-							</div>
-							
-						</div>
-					</div> --%>
-			
-					<!-- <div class="row">
-						<div class="form-actions floatRight">
-							<input type="submit" value="Upload" class="btn btn-primary btn-sm">
-						</div>
-					</div> -->
-	
-				</form:form>
-				</div>
-				<c:if test="${documents!=null}">
+				  
+                    </tbody>
+                </table>
+              </div>
+            </div>
+            
+            </form:form>
+<c:if test="${documents!=null}">
 			<div class="panel-heading"><span class="lead">List of Documents </span></div>
 		  	<div class="tablecontainer">
 				<table class="table table-hover">
@@ -138,5 +126,11 @@
 		    	</table>
 		    </div>
 		    </c:if>
-		</div>	
-	</div>		
+
+</div>
+</div>
+
+
+
+	    
+	    

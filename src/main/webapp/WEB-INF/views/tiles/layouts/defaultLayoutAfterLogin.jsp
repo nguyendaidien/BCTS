@@ -12,37 +12,37 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>BCTS</title>
-	<link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
-    <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <!-- Page level plugin CSS-->
-    <link href="static/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 	<link href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"></link>
     <!-- Custom styles for this template-->
-    <link href="static/css/sb-admin.css" rel="stylesheet">
-     <link href="static/css/app.css" rel="stylesheet">
-    <script src="static/vendor/jquery/jquery.min.js"></script>
-    <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <link href="${pageContext.request.contextPath}/static/css/sb-admin.css" rel="stylesheet">
+     <link href="${pageContext.request.contextPath}/static/css/app.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/static/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
-    <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Page level plugin JavaScript-->
-    <script src="static/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="static/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="${pageContext.request.contextPath}/static/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="${pageContext.request.contextPath}/static/vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
-    <script src="static/js/sb-admin.min.js"></script>
-    <script src="static/js/jquery-ui-1.12.0.js"></script>
-    <script src="static/js/jquery.validate.min.js"></script>
-	<script src="static/js/additional-methods.min.js"></script>
-	<script src="static/js/bcts.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/sb-admin.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/jquery-ui-1.12.0.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/jquery.validate.min.js"></script>
+	<script src="${pageContext.request.contextPath}/static/js/additional-methods.min.js"></script>
+	<script src="${pageContext.request.contextPath}/static/js/bcts.js"></script>
     <!-- Demo scripts for this page-->
-    <script src="static/js/demo/datatables-demo.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/demo/datatables-demo.js"></script>
     <script>
     	var contextPath = "${pageContext.request.contextPath}";
     </script>
 </head>
 <body>
 	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-		<img src="static/vendor/bootstrap/css/etrade_logo_small.jpg"
+		<img src="${pageContext.request.contextPath}/static/vendor/bootstrap/css/etrade_logo_small.jpg"
 			id="logoimg" alt="" class="">
 		<tiles:insertAttribute name="header" />
 	</nav>
