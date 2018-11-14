@@ -771,7 +771,7 @@ CREATE TABLE BCTS_COMPANY
   ENABLE VALIDATE
 );
 
-
+DROP TABLE BCTS_ALERT;
 CREATE TABLE BCTS_ALERT
 (
 	CASE_ID 			NUMBER NOT NULL,
@@ -781,6 +781,8 @@ CREATE TABLE BCTS_ALERT
 	PERMIT_NO           VARCHAR2(11 BYTE),
 	ALERT_CONTENT		VARCHAR2(2560 BYTE), -- JSON format for PC type, Text for others
 	STATUS				VARCHAR2(1 BYTE), -- O|C
+  ALERT_EMAILS		  VARCHAR2(300 BYTE),
+  TO_ALERT_COMPANY  NUMBER(1)       DEFAULT '1',
 	REMINDER_DATE		DATE,
 	OPEN_DATE			DATE,
 	COMPLETED_DATE		DATE,
@@ -788,13 +790,14 @@ CREATE TABLE BCTS_ALERT
 	COMPLETED_BY		VARCHAR2(17 BYTE),		
 	LICENCE_NO			VARCHAR2(35 BYTE),
 	LICENCE_START_DATE  DATE,
-  	LICENCE_END_DATE    DATE,
-  	CONSTRAINT BCTS_ALERT_PK
+  LICENCE_END_DATE    DATE,
+  CONSTRAINT BCTS_ALERT_PK
 	PRIMARY KEY (CASE_ID)
 	ENABLE VALIDATE
 );
 Commit;
 
+DROP TABLE BCTS_CASE_COMMENT;
 CREATE TABLE BCTS_CASE_COMMENT
 (
 	COMMENT_ID 		NUMBER NOT NULL,
@@ -975,9 +978,9 @@ Insert into BCTS_USER_PROFILE (TRANSACTION_ID,ROLE_TYPE) values (6,'jjiji');
 Insert into BCTS_USER_PROFILE (TRANSACTION_ID,ROLE_TYPE) values (7,'NEWROLE');
 COMMIT;
 
-Insert into BCTS_ALERT values (1, 'PC', 'UEN1', '1234', 'P123456', 'Test Alert Content', 'O', null, null, null, null, null, null, null, null);
-Insert into BCTS_ALERT values (2, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 1', 'O', to_date('14/11/18','DD/MM/RR'), null, null, null, null, 'LC001', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
-Insert into BCTS_ALERT values (3, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 2', 'O', to_date('14/11/18','DD/MM/RR'), null, null, null, null, 'LC002', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
-Insert into BCTS_ALERT values (4, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 3', 'O', to_date('14/11/18','DD/MM/RR'), null, null, null, null, 'LC003', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
-Insert into BCTS_ALERT values (5, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 4', 'O', to_date('14/11/18','DD/MM/RR'), null, null, null, null, 'LC004', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
+Insert into BCTS_ALERT values (1, 'PC', 'UEN1', '1234', 'P123456', 'Test Alert Content', 'O',null,1, null, null, null, null, null, null, null, null);
+Insert into BCTS_ALERT values (2, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 1', 'O',null,1, to_date('14/11/18','DD/MM/RR'), null, null, null, null, 'LC001', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
+Insert into BCTS_ALERT values (3, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 2', 'O',null,1, to_date('14/11/18','DD/MM/RR'), null, null, null, null, 'LC002', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
+Insert into BCTS_ALERT values (4, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 3', 'O',null,1, to_date('14/11/18','DD/MM/RR'), null, null, null, null, 'LC003', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
+Insert into BCTS_ALERT values (5, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 4', 'O',null,null, to_date('14/11/18','DD/MM/RR'), null, null, null, null, 'LC004', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
 Commit;
