@@ -62,7 +62,7 @@ public class CustomUserDetailsService extends JdbcDaoImpl implements UserDetails
 		boolean accountEpiredflag=false;
 		boolean credExpiredFlag=false;
 		boolean accountLockedFalg=false;
-		User user = userService.findByUserId(ssoId);
+		User user = userService.findByUserId(ssoId, true);
 		logger.info("User : {}", user);
 		if(user==null){
 			logger.info("User not found");

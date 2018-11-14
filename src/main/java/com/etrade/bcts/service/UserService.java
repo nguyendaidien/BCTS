@@ -19,7 +19,7 @@ public interface UserService {
 	
 	User findById(int id);
 	
-	User findByUserId(String sso);
+	User findByUserId(String sso, boolean withProfiles);
 	
 	void saveUser(User user);
 	

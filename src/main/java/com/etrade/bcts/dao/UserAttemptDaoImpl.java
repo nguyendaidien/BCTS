@@ -68,7 +68,7 @@ public class UserAttemptDaoImpl extends AbstractDao<Integer, UserAttempts>implem
 	@Override
 	public void updateFailAttempts(String userName) throws LockedException{
 		UserAttempts userAttempts = getUserAttempts(userName);
-		User user = userDao.findByUserId(userName);
+		User user = userDao.findByUserId(userName, false);
 		if (null == userAttempts) {
 			if (null != user) {
 				userAttempts = new UserAttempts();

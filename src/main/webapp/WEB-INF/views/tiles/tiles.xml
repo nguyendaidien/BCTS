@@ -42,6 +42,12 @@
        <put-attribute name="title" value="list" />  
        <put-attribute name="body" value="/WEB-INF/views/userslist.jsp" />  
    </definition> 
+   
+   <!-- licence Validity List Page -->
+   <definition name="licenceValidityList" extends="base-definition_afterlogin">  
+       <put-attribute name="title" value="Licence Validity List" />  
+       <put-attribute name="body" value="/WEB-INF/views/licenceValidityList.jsp" />  
+   </definition> 
 
  <!-- User Registration Page -->
    <definition name="registration" extends="base-definition_afterlogin">  
@@ -82,7 +88,10 @@
        <put-attribute name="title" value="Contact Us" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/contactus.jsp" />  
    </definition>  
-  
+  <definition name="casedetail" extends="base-definition_afterlogin">  
+       <put-attribute name="title" value="Case detail" />  
+       <put-attribute name="body" value="/WEB-INF/views/casedetail.jsp" />  
+   </definition> 
   <!-- Document Mgt Page -->
    <definition name="managedocuments" extends="base-definition_afterlogin">  
        <put-attribute name="title" value="Document Management" />  

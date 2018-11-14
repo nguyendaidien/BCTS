@@ -27,7 +27,7 @@
 
 	   <sec:authorize access="hasRole('USER')">
 	   <li class="nav-item active">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="${pageContext.request.contextPath}/cases/lvList">
             <i class="fas fa-fw fa-credit-card"></i>
             <span>License validity</span></a>
         </li>

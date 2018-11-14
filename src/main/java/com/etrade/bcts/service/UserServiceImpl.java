@@ -38,8 +38,8 @@ public class UserServiceImpl implements UserService{
 		return dao.findById(id);
 	}
 
-	public User findByUserId(String sso) {
-		User user = dao.findByUserId(sso);
+	public User findByUserId(String sso, boolean withProfiles) {
+		User user = dao.findByUserId(sso, withProfiles);
 		return user;
 	}
 	
@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public boolean isUserIdUnique(Integer id, String sso) {
-		User user = findByUserId(sso);
+		User user = findByUserId(sso, false);
 		return ( user == null || ((id != null) && (user.getId() == id)));
 	}
 

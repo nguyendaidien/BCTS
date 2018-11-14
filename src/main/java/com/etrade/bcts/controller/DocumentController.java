@@ -81,7 +81,7 @@ public class DocumentController {
 	
 	@RequestMapping(value = { "/managedocuments-{userId}" }, method = RequestMethod.GET)
 	public String addDocuments(@PathVariable String userId , ModelMap model) {
-		User user = userService.findByUserId(userId);
+		User user = userService.findByUserId(userId, false);
 		model.addAttribute("user", user);		
 		UploadFile fileModel = new UploadFile();
 		model.addAttribute("uploadFile", fileModel);
@@ -90,7 +90,7 @@ public class DocumentController {
 	}
 	@RequestMapping(value = { "/managedocuments/{userId}/{permitNo}" }, method = RequestMethod.GET)
 	public String addDocuments(@PathVariable String userId, @PathVariable String permitNo , ModelMap model) {
-		User user = userService.findByUserId(userId);
+		User user = userService.findByUserId(userId, false);
 		model.addAttribute("user", user);
 
 		UploadFile fileModel = new UploadFile();		
@@ -128,7 +128,7 @@ public class DocumentController {
 		
 		if (result.hasErrors()) {
 			System.out.println("validation errors");
-			User user = userService.findByUserId(userId);
+			User user = userService.findByUserId(userId, false);
 			model.addAttribute("user", user);
 
 			List<UserDocument> documents = userDocumentService.findAllByUserId(userId);
@@ -137,7 +137,7 @@ public class DocumentController {
 			return "managedocuments";
 		} else {
 			System.out.println("Fetching file");
-			User user = userService.findByUserId(userId);
+			User user = userService.findByUserId(userId, false);
 			model.addAttribute("user", user);
 			model.addAttribute("propertiesConfig", propertiesConfig);
 			userDocumentService.uploadFile(uploadFile, user);
@@ -150,7 +150,7 @@ public class DocumentController {
 	
 	@RequestMapping(value = { "/add-document-err-{errCode}" }, method = RequestMethod.GET)
 	public String addDocumentsError(@PathVariable String errCode, ModelMap model) {
-		User user = userService.findByUserId("sam");
+		User user = userService.findByUserId("sam", false);
 		model.addAttribute("user", user);
 
 		UploadFile fileModel = new UploadFile();

@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -136,7 +137,6 @@ public class AppController {
 	 */
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public String listUsers(ModelMap model) {
-
 		List<User> users = userService.findAllUsers();
 		model.addAttribute("users", users);
 		model.addAttribute("loggedinuser", getPrincipal());//we can create any method in side Controlloer and can call using model object
@@ -174,7 +174,7 @@ public class AppController {
 			return "changePassword";
 		}
 		
-		User user=userService.findByUserId(ssoid);
+		User user=userService.findByUserId(ssoid, false);
 		String newPwd=cpw.getPasswordConf();
 		userService.updateUserPwd(user,newPwd);
 		
@@ -220,7 +220,7 @@ public class AppController {
 	 */
 	@RequestMapping(value = { "/edit-user-{ssoId}" }, method = RequestMethod.GET)
 	public String editUser(@PathVariable String ssoId, ModelMap model) {
-		User user = userService.findByUserId(ssoId);
+		User user = userService.findByUserId(ssoId, true);
 		model.addAttribute("user", user);
 		model.addAttribute("edit", true);
 		model.addAttribute("loggedinuser", getPrincipal());
