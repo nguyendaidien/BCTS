@@ -130,7 +130,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         matcher.setUseRegisteredSuffixPatternMatch(true);
     }
     
-    @Scheduled(fixedDelay=5000)
+    @Scheduled(fixedDelay=50000)
     public void perform() throws Exception
     {
     	System.out.println("Alert Job ----");
