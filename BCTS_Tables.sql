@@ -776,7 +776,7 @@ CREATE TABLE BCTS_ALERT
 (
 	CASE_ID 			NUMBER NOT NULL,
 	CASE_TYPE 			VARCHAR2(30 BYTE) NOT NULL, -- PERMIT CONDITIONS|LICENCE VALIDITY|CASE MANAGEMENT
-	USER_ID				VARCHAR2(17 BYTE), --UEN of declarant
+	UEN				VARCHAR2(17 BYTE), --UEN of declarant
 	JOB_NO				VARCHAR2(12 BYTE),
 	PERMIT_NO           VARCHAR2(11 BYTE),
 	ALERT_CONTENT		VARCHAR2(2560 BYTE), -- JSON format for PC type, Text for others
@@ -786,8 +786,8 @@ CREATE TABLE BCTS_ALERT
 	REMINDER_DATE		DATE,
 	OPEN_DATE			DATE,
 	COMPLETED_DATE		DATE,
-	OPEN_BY				VARCHAR2(17 BYTE),
-	COMPLETED_BY		VARCHAR2(17 BYTE),		
+	OPEN_BY				NUMBER,
+	COMPLETED_BY		NUMBER,		
 	LICENCE_NO			VARCHAR2(35 BYTE),
 	LICENCE_START_DATE  DATE,
   LICENCE_END_DATE    DATE,
@@ -877,7 +877,34 @@ CREATE TABLE persistent_logins (
     last_used TIMESTAMP NOT NULL,
     PRIMARY KEY (series)
 );
-
+DROP TABLE BCTS_DOCUMENT; 
+CREATE TABLE BCTS_DOCUMENT 
+   (	
+   "DOC_ID" NUMBER, 
+	"NAME" VARCHAR2(100 BYTE), 
+	"DESCRIPTION" VARCHAR2(200 BYTE), 
+	"TYPE" VARCHAR2(100 BYTE), 
+	"DOC_SIZE" NUMBER, 
+	"URL" VARCHAR2(250 BYTE),
+  USER_ID        VARCHAR2(17 BYTE),
+  JOB_NO         VARCHAR2(12 BYTE),
+	"PERMIT_NO" VARCHAR2(50 BYTE), 
+  "CASE_ID" NUMBER,
+  LICENCE_NO			VARCHAR2(35 BYTE),
+	"UPLOADED_DATE" TIMESTAMP (6), 
+	"UPLOADED_BY" NUMBER,
+  PRIMARY KEY (DOC_ID),
+    CONSTRAINT FK_BCTS_ALERT_DOCUMENT 
+    FOREIGN KEY (CASE_ID) 
+    REFERENCES BCTS_ALERT (CASE_ID)
+    ON DELETE CASCADE
+    ENABLE VALIDATE,
+    CONSTRAINT FK_BCTS_PERMIT_DOCUMENT 
+    FOREIGN KEY (USER_ID,JOB_NO) 
+    REFERENCES BCTS_PERMIT (USER_ID,JOB_NO)
+    ON DELETE CASCADE
+    ENABLE VALIDATE
+  );
 --SYNONYMS for All tables
 --
 CREATE PUBLIC SYNONYM BCTS_AME_INFO for BCTS_AME_INFO;
@@ -943,8 +970,11 @@ GRANT DELETE, INSERT, SELECT, UPDATE ON BCTS_USER_ATTEMPTS TO bctowner;
 GRANT DELETE, INSERT, SELECT, UPDATE ON persistent_logins TO bctowner;
 
 INSERT into BCTS_COMPANY VALUES ('UEN1','nguyendaidien@gmail.com;josephngd@gmail.com', 'Test PTE LTD', null, null, null,null, null, null,null, null, null,null, null, null,null, null, null);
+INSERT into BCTS_COMPANY VALUES ('UEN2','nguyendaidien@gmail.com;josephngd@gmail.com', 'UEN2 Test PTE LTD', null, null, null,null, null, null,null, null, null,null, null, null,null, null, null);
 COMMIT;
 --INSERT 
+
+
 Insert into BCTS_APP_USER (TRANSACTION_ID,SSO_ID,PASSWORD,FIRST_NAME,LAST_NAME,EMAIL,CR_UEI_NO,ACCT_LOCKED,USER_ENABLED,ACCT_EXPIRED,CREDENTIAL_EXPIRED,CREATED_DATE,PWD_UPDATED,PWD_EXPIRED_DATE) values (1,'sam','$2a$10$4eqIF5s/ewJwHK1p8lqlFOEm2QIA0S8g6./Lok.pQxqcxaBZYChRm','Ajay','Samanta','ajaykumar99009@gmail.com','UEN1',1,1,1,1,null,null,null);
 Insert into BCTS_APP_USER (TRANSACTION_ID,SSO_ID,PASSWORD,FIRST_NAME,LAST_NAME,EMAIL,CR_UEI_NO,ACCT_LOCKED,USER_ENABLED,ACCT_EXPIRED,CREDENTIAL_EXPIRED,CREATED_DATE,PWD_UPDATED,PWD_EXPIRED_DATE) values (9,'tstsa05','$2a$10$tg/Un0zvFOOgUY3ykhapy.gEzlTp8JW3wfy2XPNWTOR9b8asgo.Wm','tstsa05','OK','tstsa05@gmail.com','UEN1',1,1,1,1,null,null,null);
 Insert into BCTS_APP_USER (TRANSACTION_ID,SSO_ID,PASSWORD,FIRST_NAME,LAST_NAME,EMAIL,CR_UEI_NO, ACCT_LOCKED,USER_ENABLED,ACCT_EXPIRED,CREDENTIAL_EXPIRED,CREATED_DATE,PWD_UPDATED,PWD_EXPIRED_DATE) values (3,'dbadm01','$2a$10$hIYQJlRx7A/OSGsPlVWy.u0Ft781TEN9I3je4nmJp6e0ZZ.QzSOFy','DB','Admin','dbadm@gmail.com','UEN1',1,1,1,1,null,null,null);
@@ -955,6 +985,8 @@ Insert into BCTS_APP_USER (TRANSACTION_ID,SSO_ID,PASSWORD,FIRST_NAME,LAST_NAME,E
 Insert into BCTS_APP_USER (TRANSACTION_ID,SSO_ID,PASSWORD,FIRST_NAME,LAST_NAME,EMAIL,CR_UEI_NO,ACCT_LOCKED,USER_ENABLED,ACCT_EXPIRED,CREDENTIAL_EXPIRED,CREATED_DATE,PWD_UPDATED,PWD_EXPIRED_DATE) values (10,'sdf','$2a$10$liqIjrb3ZNVMAKP2WNmvNeqivRgng.y75TNrXbygbOm6narBYjSBq','yest','sdfds','ajaykumar99009@gmail.com','UEN1',1,1,1,1,null,null,null);
 Insert into BCTS_APP_USER (TRANSACTION_ID,SSO_ID,PASSWORD,FIRST_NAME,LAST_NAME,EMAIL,CR_UEI_NO,ACCT_LOCKED,USER_ENABLED,ACCT_EXPIRED,CREDENTIAL_EXPIRED,CREATED_DATE,PWD_UPDATED,PWD_EXPIRED_DATE) values (11,'test11','$2a$10$32dCQx5v6bmTyL1H4t7Eq.2rRwb7OluSY1Lu337XbJcqbrhDdbZrq','test11','test11','test11@mail.com','UEN1',1,1,1,1,to_date('07/11/18','DD/MM/RR'),null,null);
 COMMIT;
+
+Update BCTS_APP_USER set CR_UEI_NO='UEN2' where SSO_ID='tstsa01';
 
 Insert into BCTS_APP_USER_PROFILE (USER_ID,USER_PROFILE_ID) values (1,2);
 Insert into BCTS_APP_USER_PROFILE (USER_ID,USER_PROFILE_ID) values (3,3);
@@ -978,9 +1010,36 @@ Insert into BCTS_USER_PROFILE (TRANSACTION_ID,ROLE_TYPE) values (6,'jjiji');
 Insert into BCTS_USER_PROFILE (TRANSACTION_ID,ROLE_TYPE) values (7,'NEWROLE');
 COMMIT;
 
+
 Insert into BCTS_ALERT values (1, 'PC', 'UEN1', '1234', 'P123456', 'Test Alert Content', 'O',null,1, null, null, null, null, null, null, null, null);
-Insert into BCTS_ALERT values (2, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 1', 'O',null,1, to_date('14/11/18','DD/MM/RR'), null, null, null, null, 'LC001', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
-Insert into BCTS_ALERT values (3, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 2', 'O',null,1, to_date('14/11/18','DD/MM/RR'), null, null, null, null, 'LC002', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
-Insert into BCTS_ALERT values (4, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 3', 'O',null,1, to_date('14/11/18','DD/MM/RR'), null, null, null, null, 'LC003', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
-Insert into BCTS_ALERT values (5, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 4', 'O',null,null, to_date('14/11/18','DD/MM/RR'), null, null, null, null, 'LC004', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
+Insert into BCTS_ALERT values (2, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 1', 'O',null,1, to_date('20181114','yyyyMMdd'), null, null, null, null, 'LC001', to_date('20181114','yyyyMMdd'), to_date('20181114','yyyyMMdd'));
+Insert into BCTS_ALERT values (3, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 2', 'O',null,1, to_date('20181114','yyyyMMdd'), null, null, null, null, 'LC002', to_date('20181114','yyyyMMdd'), to_date('20181114','yyyyMMdd'));
+Insert into BCTS_ALERT values (4, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 3', 'O',null,1, to_date('20181114','yyyyMMdd'), null, null, null, null, 'LC003', to_date('20181114','yyyyMMdd'), to_date('20181114','yyyyMMdd'));
+Insert into BCTS_ALERT values (5, 'LV', 'UEN1', '1235', 'P123456', 'Test Alert Content - Licence Validity 4', 'O',null,null, to_date('20181114','yyyyMMdd'), null, null, null, null, 'LC004', to_date('20181114','yyyyMMdd'), to_date('20181114','yyyyMMdd'));
+Insert into BCTS_ALERT values (6, 'LV', 'UEN2', '1235', 'P123456', 'Test Alert Content - Licence Validity 5', 'O',null,1, to_date('20181114','yyyyMMdd'), null, null, null, null, 'LC003', to_date('20181114','yyyyMMdd'), to_date('20181114','yyyyMMdd'));
+Insert into BCTS_ALERT values (7, 'LV', 'UEN2', '1235', 'P123456', 'Test Alert Content - Licence Validity 6', 'O',null,null, to_date('20181114','yyyyMMdd'), null, null, null, null, 'LC004', to_date('20181114','yyyyMMdd'), to_date('20181114','yyyyMMdd'));
+
+Insert into BCTS_ALERT values (8, 'LV', 'UEN2', '1235', 'P123456', 'Test Alert Content - Licence Validity 8', 'C',null,1, to_date('20181114','yyyyMMdd'), null, null, null, null, 'LC008', to_date('2018/11/14','yyyy/MM/dd'), to_date('30/11/18','DD/MM/RR'));
+Insert into BCTS_ALERT values (9, 'PC', 'UEN2', '1235', 'P123456', 'Test Alert Content - Licence Validity 9', 'O',null,null, to_date('20181114','yyyyMMdd'), null, null, null, null, 'LC009', to_date('2018/11/14','yyyy/MM/dd'), to_date('30/11/18','DD/MM/RR'));
+
+Insert into BCTS_ALERT values (10, 'LV', 'UEN2', '1235', 'P123456', 'Test Alert Content - Licence Validity 10', 'O','bbb@test.com',0, to_date('18/11/18','DD/MM/RR'), null, null, null, null, 'LC0010', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
+Insert into BCTS_ALERT values (11, 'CM', 'UEN2', '1235', 'P123456', 'Test Alert Content - Licence Validity 11', 'O','aaa@test.com',1, to_date('15/11/18','DD/MM/RR'), null, null, null, null, 'LC0011', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
+Insert into BCTS_ALERT values (12, 'CM', 'UEN2', '1235', 'P123456', 'Test Alert Content - CM 12', 'C','aaa@test.com',1, to_date('15/11/18','DD/MM/RR'), null, null, null, null, 'LC0011', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
+
+Insert into BCTS_ALERT values (10, 'LV', 'UEN2', '1235', 'P123456', 'Test Alert Content - Licence Validity 10', 'O','bbb@test.com',0, to_date('18/11/18','DD/MM/RR'), null, null, null, null, 'LC0010', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
+Insert into BCTS_ALERT values (11, 'CM', 'UEN2', '1235', 'P123456', 'Test Alert Content - Licence Validity 11', 'O','aaa@test.com',1, to_date('15/11/18','DD/MM/RR'), null, null, null, null, 'LC0011', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
+Insert into BCTS_ALERT values (12, 'CM', 'UEN2', '1235', 'P123456', 'Test Alert Content - CM 12', 'C','aaa@test.com',1, to_date('15/11/18','DD/MM/RR'), null, null, null, null, 'LC0011', to_date('01/12/17','DD/MM/RR'), to_date('30/11/18','DD/MM/RR'));
+
+Insert into BCTS_ALERT values (50, 'PC', 'UEN2', '1235', 'P123456', '{"AgencyCode":"SC","ConditionCode":"P1","ConditionDescription":"THE CONTAINER(S) MUST BE PRODUCED AT CUSTOMS CHECKPOINT(S) FOR CLEARANCE UNLESS DIRECTED TO ''GREEN'' LANE. FOR CONTAINER(S) TO BE SCANNED, PLEASE PRODUCE FOR SCANNING BY ICA AT SCANNING STATION AS DIRECTED."}', 'O',null,1,null, to_date('18/11/18','DD/MM/RR'), null, null, null, null, null, null);
+Insert into BCTS_ALERT values (51, 'PC', 'UEN2', '1235', 'P123456', '{"AgencyCode":"SC","ConditionCode":"GX","ConditionDescription":"YOU ARE REQUIRED TO MAKE GOOD THE DUTY/GST SHOULD THE GIRO DEDUCTION     FAIL. CUSTOMS MAY INVOKE YOUR BG FOR RECOVERY OF THE DUTY/GST. A PENALTY CHARGE MAY BE IMPOSED BY CUSTOMS FOR AN UNSUCCESSFUL GIRO DEDUCTION."}', 'O',null,1,null, to_date('15/11/18','DD/MM/RR'), null, null, null, null, null, null);
+
+Insert into BCTS_JOB_HEADER values('200105123R','201110055504' , 20111005, 5504, '200105123R', 'OUTPMT',null, null,null, null, null, null,null, null, null, null,null, null, null, null,null, null, null, null,null, null, null, null,null, null, null, null,null, null, null, null,null, null, null, null,null, null, null, '0','0', null, '4.0', null);
+Insert into BCTS_JOB_HEADER values('200105123R','201110055503' , 20111005, 5503, '200105123R', 'INPPMT',null, null,null, null, null, null,null, null, null, null,null, null, null, null,null, null, null, null,null, null, null, null,null, null, null, null,null, null, null, null,null, null, null, null,null, null, null, '0','0', null, '4.0', null);
+
+Commit;
+Insert into BCTS_PERMIT values('200105123R','201110055504', 'P123456', 'C123',null,null,null,null,null,null,null);
+Insert into BCTS_PERMIT values('200105123R','201110055503', 'P222456', 'C223',null,null,null,null,null,null,null);
+Commit;
+
+Insert into BCTS_DOCUMENT values(1, 'ABC.docx', 'ABC doc name', 'Permit', null, null, null, null, null, null,null, null, null);
 Commit;

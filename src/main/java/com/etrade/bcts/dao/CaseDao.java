@@ -4,13 +4,21 @@ import java.util.List;
 
 import com.etrade.bcts.model.BCTSAlert;
 import com.etrade.bcts.model.CaseComment;
+import com.etrade.bcts.model.Company;
 
 public interface CaseDao {
-	BCTSAlert getCaseDetailById(int caseId);
 	
-	List<BCTSAlert> getCasesByType(String type, String uen);
+//	BCTSAlert getCaseDetailById(int caseId, Company uen, boolean getComments);
 	
-	void updateStatus(int caseId);
+	BCTSAlert getCaseDetailById(int caseId, Object uen, boolean getComments);
+	
+	List<BCTSAlert> getCasesByType(String type, Company uen);
+	
+	void updateStatus(CaseComment comment);
 	
 	void addComment(CaseComment comment);
+	
+	void save(BCTSAlert bctsAlert);
+	
+	void update(BCTSAlert bctsAlert);
 }

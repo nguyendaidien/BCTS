@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadBase.SizeLimitExceededException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,35 +18,33 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.etrade.bcts.controller.AppController;
+
 @EnableWebMvc
 @ControllerAdvice
 public class BCTSException{
-//	@ExceptionHandler(MultipartException.class)
-//	public String handleException(MultipartException e, RedirectAttributes redirectAttributes) {
-//		 System.out.println("-----------------MultipartException");
-//		 redirectAttributes.addFlashAttribute("message", e.getCause().getMessage());
-//	     return "redirect:/uploadStatus";
-//
-//	}
+	static final Logger LOG = LoggerFactory.getLogger(AppController.class);
+	
 	@ExceptionHandler(value = MultipartException.class)
     public String handleMultipartException(Exception ex) {
 		String message = null;
         if (ex instanceof MultipartException) {
             final MultipartException mEx = (MultipartException) ex;
-            System.out.println("-----------------MultipartException");
+            message = ex.getMessage();
+//            System.out.println("-----------------MultipartException");
             if (ex.getCause() instanceof FileUploadBase.FileSizeLimitExceededException) {
                 final FileUploadBase.FileSizeLimitExceededException flEx = (FileUploadBase.FileSizeLimitExceededException) mEx.getCause();
-                System.out.println("-----------------MultipartException1");
+                System.out.println("-----------------MultipartException1: " + message);
             } else if (ex.getCause() instanceof FileUploadBase.SizeLimitExceededException) {
                 final FileUploadBase.SizeLimitExceededException flEx = (FileUploadBase.SizeLimitExceededException) mEx.getCause();
                 
-                System.out.println("-----------------MultipartException2");
+                LOG.error("-----------------MultipartException2: " +  message);
             } else {
-            	message = ex.getMessage();
-                System.out.println("-----------------MultipartException3");
+            	
+            	LOG.error("-----------------MultipartException3: " + message);
             }
         } else {
-            System.out.println("-----------------MultipartException4");
+        	LOG.error("-----------------MultipartException4");
         }
 //        ModelMap model = new ModelMap();
 //        model.addAttribute("message", message);

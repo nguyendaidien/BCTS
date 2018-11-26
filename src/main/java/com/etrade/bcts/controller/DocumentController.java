@@ -13,6 +13,7 @@ package com.etrade.bcts.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ import com.etrade.bcts.model.User;
 import com.etrade.bcts.model.UserDocument;
 import com.etrade.bcts.service.UserDocumentService;
 import com.etrade.bcts.service.UserService;
+import com.etrade.bcts.util.BctsConstants;
 import com.etrade.bcts.util.FileValidator;
 import com.etrade.bcts.util.PropertiesConfig;
 
@@ -79,19 +81,19 @@ public class DocumentController {
 	   binder.setValidator(fileValidator);
 	}
 	
-	@RequestMapping(value = { "/managedocuments-{userId}" }, method = RequestMethod.GET)
-	public String addDocuments(@PathVariable String userId , ModelMap model) {
-		User user = userService.findByUserId(userId, false);
-		model.addAttribute("user", user);		
+	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
+	public String addDocuments(ModelMap model) {
+//		User user = userService.findByUserId(userId, false);
+//		model.addAttribute("user", user);		
 		UploadFile fileModel = new UploadFile();
 		model.addAttribute("uploadFile", fileModel);
 		model.addAttribute("propertiesConfig", propertiesConfig);
 		return "managedocuments";
 	}
-	@RequestMapping(value = { "/managedocuments/{userId}/{permitNo}" }, method = RequestMethod.GET)
-	public String addDocuments(@PathVariable String userId, @PathVariable String permitNo , ModelMap model) {
-		User user = userService.findByUserId(userId, false);
-		model.addAttribute("user", user);
+	@RequestMapping(value = { "/manage/{permitNo}" }, method = RequestMethod.GET)
+	public String addDocuments(@PathVariable String permitNo , ModelMap model) {
+//		User user = userService.findByUserId(userId, false);
+//		model.addAttribute("user", user);
 
 		UploadFile fileModel = new UploadFile();		
 		model.addAttribute("uploadFile", fileModel);
@@ -106,45 +108,63 @@ public class DocumentController {
 		return "managedocuments";
 	}
 
-	@RequestMapping(value = { "/download-document-{userId}-{docId}" }, method = RequestMethod.GET)
-	public String downloadDocument(@PathVariable int userId, @PathVariable int docId, HttpServletResponse response) throws IOException {
+	@RequestMapping(value = { "/manage/{category}/{id}" }, method = RequestMethod.GET)
+	public String addDocuments2(@PathVariable String id, @PathVariable String category , ModelMap model) {
+//		User user = userService.findByUserId(userId, false);
+//		model.addAttribute("user", user);
+		List<UserDocument> documents = null;
+		UploadFile fileModel = new UploadFile();		
+		model.addAttribute("uploadFile", fileModel);
+		if(category.equals(BctsConstants.DOC_CATEGORY_LICENCE)) {
+			documents = userDocumentService.findAllByCaseId(id);
+		}
+		model.addAttribute("documents", documents);
+//		model.addAttribute("permitNo", permitNo);
+//		model.addAttribute("uploadedFiles", uploadedFiles.getFilesByPermits(permitNo));
+//		model.addAttribute("totalFilesSize", uploadedFiles.getTotalFilesSize(permitNo));
+//		model.addAttribute("propertiesConfig", propertiesConfig);
+		
+		return "managedocuments";
+	}
+	@RequestMapping(value = { "/download/{docId}" }, method = RequestMethod.GET)
+	public String downloadDocument(@PathVariable int docId, HttpServletResponse response) throws IOException {
 		UserDocument document = userDocumentService.findById(docId);
 		File file = new File(document.getUrl());
 //		response.setContentType(document.getType());
 //        response.setContentLength(file.get);
         response.setHeader("Content-Disposition","attachment; filename=\"" + document.getName() +"\"");
         FileCopyUtils.copy(new FileInputStream(file), response.getOutputStream());
-        return "redirect:/add-document-"+userId;
+        return "redirect:/docs/upload";
 	}
 
-	@RequestMapping(value = { "/delete-document-{userId}-{docId}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/delete/{docId}" }, method = RequestMethod.GET)
 	public String deleteDocument(@PathVariable int userId, @PathVariable int docId) {
 		userDocumentService.deleteById(docId);
 		return "redirect:/add-document-"+userId;
 	}
 
-	@RequestMapping(value = { "/add-document-{userId}" }, method = RequestMethod.POST)
-	public String uploadDocument(@Valid UploadFile uploadFile, BindingResult result, ModelMap model, @PathVariable String userId) throws IOException{
+	@RequestMapping(value = { "/upload" }, method = RequestMethod.POST)
+	public String uploadDocument(@Valid UploadFile uploadFile, BindingResult result, ModelMap model, Principal principal) throws IOException{
 		
 		if (result.hasErrors()) {
 			System.out.println("validation errors");
-			User user = userService.findByUserId(userId, false);
+			User user = userService.findByUserId(principal.getName(), false);
 			model.addAttribute("user", user);
 
-			List<UserDocument> documents = userDocumentService.findAllByUserId(userId);
+			List<UserDocument> documents = userDocumentService.findAllByUserId(principal.getName());
 			model.addAttribute("documents", documents);
 			model.addAttribute("propertiesConfig", propertiesConfig);
 			return "managedocuments";
 		} else {
 			System.out.println("Fetching file");
-			User user = userService.findByUserId(userId, false);
-			model.addAttribute("user", user);
+			User user = userService.findByUserId(principal.getName(), false);
+//			model.addAttribute("user", user);
 			model.addAttribute("propertiesConfig", propertiesConfig);
 			userDocumentService.uploadFile(uploadFile, user);
 			uploadFile.setDocSize(uploadFile.getFile().getSize()/1024);
 			uploadedFiles.putFiles(uploadFile.getPermitNo(), uploadFile);
 			System.out.println("uploadFile size 1 -- " + uploadFile.getDocSize());
-			return "redirect:/docs/managedocuments/" + userId+"/"+ uploadFile.getPermitNo();
+			return "redirect:/docs/manage/"+ uploadFile.getPermitNo();
 		}
 	}
 	
@@ -160,6 +180,6 @@ public class DocumentController {
 		List<UserDocument> documents = userDocumentService.findAllByUserId("sam");
 		model.addAttribute("documents", documents);
 		
-		return "redirect:/docs/managedocuments/sam";
+		return "redirect:/docs/manage";
 	}
 }

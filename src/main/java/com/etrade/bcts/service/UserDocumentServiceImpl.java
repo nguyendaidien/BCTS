@@ -1,9 +1,13 @@
 package com.etrade.bcts.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +26,7 @@ import com.etrade.bcts.model.UploadFile;
 import com.etrade.bcts.model.UploadFileBucket;
 import com.etrade.bcts.model.User;
 import com.etrade.bcts.model.UserDocument;
+import com.etrade.bcts.util.TrwDate;
 
 @Service("userDocumentService")
 @Transactional
@@ -78,9 +83,19 @@ public class UserDocumentServiceImpl implements UserDocumentService{
 		
 		String permitNo = uploadFile.getPermitNo();
 		byte[] bytes = file.getBytes();
+		TrwDate date = new TrwDate();
         logger.info("bytes:" + bytes.length + "; size:" + file.getSize());
-        Path path = Paths.get(environment.getRequiredProperty("upload.directory") + file.getOriginalFilename());
-        Files.write(path, bytes);
+
+		Path directory = Paths.get(environment.getRequiredProperty("upload.directory"), 
+        						user.getCompany().getUeiNo(), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)),
+        						date.getXMLDateString());
+        
+        boolean pathExist = Files.exists(directory);
+        if(!pathExist) {
+        	Files.createDirectories(directory);
+        }
+        Path path = Paths.get(directory.toString(), file.getOriginalFilename());
+        Files.write (path, bytes, StandardOpenOption.CREATE);
         saveDocument(permitNo, uploadFile.getDocType(), file, user, path.toString());
 	}	
 	
@@ -95,5 +110,10 @@ public class UserDocumentServiceImpl implements UserDocumentService{
 		document.setPermitNo(permitNo);
 		document.setUploadedDate(new Date());
 		saveDocument(document);
+	}
+
+	@Override
+	public List<UserDocument> findAllByCaseId(String caseId) {
+		return dao.findAllByCaseId(caseId);
 	}
 }

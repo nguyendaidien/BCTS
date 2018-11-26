@@ -18,6 +18,8 @@ public interface UserDocumentService {
 	
 	List<UserDocument> findAllByPermitNo(String permitNo);
 	
+	List<UserDocument> findAllByCaseId(String caseId);
+	
 	void saveDocument(UserDocument document);
 	
 	void deleteById(int id);

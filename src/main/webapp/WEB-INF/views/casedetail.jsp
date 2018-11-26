@@ -2,33 +2,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  
 <div class="card mb-3">
 <div class="card-header"><b>Case Detail</b></div>
 <div class="card-body">
-
-<div class="form-group">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <span>Alert content: ${caseDetail.alertContent}</span>
-                  </div>
-                </div>
-              </div>
-</div>
-<%-- <form:form method="POST" action="${pageContext.request.contextPath}/cases/update" 
-					modelAttribute="caseComment" class="form-horizontal">
-					
-			
-            <div class="card-body">
-            	<form:hidden path="caseId" id="caseId" name="caseId" value="${caseDetail.caseId}"/>
-            	<form:input type="text" path="content" id="content" name="content"/>
-            	<input type="submit" name="addComment" value="Add Comment" class="btn btn-primary btn-sm">
-            	<input type="submit" name="complete" value="Complete" class="btn btn-primary btn-sm">
-            </div>
-            
-</form:form> --%>
-</div>
+		<c:if test="${caseDetail.caseType eq 'LV'}">
+			<c:import url="./../../casedetail_lv.jsp"></c:import>
+		</c:if>
+		<c:if test="${caseDetail.caseType eq 'PC'}">
+			<c:import url="./../../casedetail_pc.jsp"></c:import>
+		</c:if>
+		<c:if test="${caseDetail.caseType eq 'CM'}">
+			<c:import url="./../../casedetail_cm.jsp"></c:import>
+		</c:if>
+</div> 
 <div class="card-header"><b>Comments</b></div>
 <div class="card-body">
 <!-- <div class="container"> -->
@@ -45,7 +33,7 @@
 	                            <a href="#"><b>${comment.user.firstName} ${comment.user.lastName}</b></a>
 	                            made a post.
 	                        </div>
-	                        <h6 class="text-muted time">1 minute ago</h6>
+	                        <h6 class="text-muted time">at <fmt:formatDate value="${comment.updateTime}" pattern="dd/MM/yyyy HH:mm"/></h6>
 	                    </div>
 	                </div> 
 	                <div class="post-description"> 

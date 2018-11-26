@@ -45,11 +45,11 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 	@Autowired
 	RoleToUserProfileConverter roleToUserProfileConverter;
 	
-	@Autowired
-	private JobLauncher jobLaucher;
-	
-	@Autowired
-	private Job job;
+//	@Autowired
+//	private JobLauncher jobLaucher;
+//	
+//	@Autowired
+//	private Job job;
 //	@Autowired
 //	MappingJackson2HttpMessageConverter converter;
 	
@@ -130,14 +130,14 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         matcher.setUseRegisteredSuffixPatternMatch(true);
     }
     
-    @Scheduled(fixedDelay=50000)
-    public void perform() throws Exception
-    {
-    	System.out.println("Alert Job ----");
-        JobParameters params = new JobParametersBuilder()
-                .addString("JobID", String.valueOf(System.currentTimeMillis()))
-                .toJobParameters();
-        jobLaucher.run(job, params);
-    }
+//    @Scheduled(fixedDelay=50000)
+//    public void perform() throws Exception
+//    {
+//    	System.out.println("Alert Job ----");
+//        JobParameters params = new JobParametersBuilder()
+//                .addString("JobID", String.valueOf(System.currentTimeMillis()))
+//                .toJobParameters();
+//        jobLaucher.run(job, params);
+//    }
 }
 

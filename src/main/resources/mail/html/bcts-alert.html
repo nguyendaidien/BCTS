@@ -17,15 +17,50 @@
                         </div>
                     </div>
                     <div style="padding: 15px 15px 30px 15px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size:1em; background-color: #fff; color:#333;">
-                        <p>Hello <b data-th-text="${name}">Peter</b>!</p>
+                        <p>Dear <b data-th-text="${name}">Peter</b>!</p>
                         <p>
-                            Please access Brokerage Control Tower System and take necessary actions asap for following cases!
+                            Please access Brokerage Control Tower System and take necessary actions asap for following case!
                         </p>
-                        <ul data-th-remove="all-but-first">
-                            <li data-th-each="case : ${cases}">
+                        <span th:if="${case.caseType != 'PC'}">
+                        	<a href="home.html" th:href="@{http://localhost:8082/bcts/cases/{caseId}(caseId=${case.caseId})}" data-th-text="${case.alertContent}"></a><br/>
+                        </span>
+                        	<!-- <a href="home.html" th:href="@{{domain}(domain=${domainName})/bcts/cases/{caseId}(caseId=${case.caseId})}" data-th-text="${case.alertContent}"></a><br/>
+                        	<a href="home.html" th:href="@{${domainName}/bcts/cases/{caseId}(caseId=${case.caseId})}" data-th-text="${case.alertContent}"></a><br/>
+                        	<a href="home.html" th:href="@{{domain}(domain=${domainName2})/bcts/cases/{caseId}(caseId=${case.caseId})}" data-th-text="${case.alertContent}"></a><br/>
+                        	<a href="home.html" th:href="@{${domainName2}/bcts/cases/{caseId}(caseId=${case.caseId})}" data-th-text="${case.alertContent}"></a>	 -->
+                        <div th:if="${case.caseType == 'PC'}" class="table-responsive-sm">
+							<table class="table">  
+							  <tbody>
+							    <tr>      
+							      <th>Job No</th>
+							      <td><span data-th-text="${pc.jobNo}"></span></td>
+							    </tr>
+							    <tr>
+							      <th>Permit No</th>
+							      <td><span data-th-text="${pc.permitNo}"></span></td>
+							    </tr>
+							    <tr>      
+							      <th>Agency Code</th>
+							      <td><span data-th-text="${pc.agencyCode}"></span></td>
+							    </tr>
+							    <tr>      
+							      <th>Condition Code</th>
+							      <td><span data-th-text="${pc.conditionCode}"></span></td>
+							    </tr>
+							    <tr>      
+							      <th>Condition Description</th>
+							      <td><span data-th-text="${pc.conditionDescription}"></span></td>
+							    </tr>
+							  </tbody>
+							</table>
+							
+							<a href="home.html" th:href="@{http://localhost:8082/bcts/cases/{caseId}(caseId=${case.caseId})}">Click here to go</a><br/>
+						</div>
+                        <!-- <ul data-th-remove="all-but-first">
+                           <li data-th-each="case : ${cases}">
                             	<a href="home.html" th:href="@{http://localhost:8080/bcts/cases/{caseId}(caseId=${case.caseId})}" data-th-text="${case.alertContent}"></a>
-                            </li>                            
-                        </ul>
+                            </li>                       
+                        </ul> -->
                         <p>
                             Regards, <br />
                             &emsp; <em>GeTS BCTS Admin</em>
@@ -35,7 +70,7 @@
                         <div style="background-image: url(images/logo-background.png);"
                              data-th-style="|background-image: url(cid:logo-background)|">
                             <img style="border: solid 1px #555; border-radius: 6px;"
-                                 src="images/thymeleaf-logo.png" data-th-src="|cid:logo|" />
+                                 src="images/gets-logo.jpg" data-th-src="|cid:logo|" />
                         </div>
                     </div>
                 </div>

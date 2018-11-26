@@ -23,6 +23,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -60,6 +61,10 @@ public class User implements Serializable{
 	@NotEmpty
 	@Column(name="EMAIL", nullable=false)
 	private String email;
+	
+	@ManyToOne
+	@JoinColumn(name="CR_UEI_NO", nullable=false)
+	private Company company;
 	
 	@Column(name="ACCT_LOCKED",nullable=false)
 	private String accountLocked;
@@ -153,7 +158,7 @@ public class User implements Serializable{
 		this.userProfiles = userProfiles;
 	}
 
-	@Override
+	/*@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -186,9 +191,17 @@ public class User implements Serializable{
 			return false;
 		}
 		return true;
+	}*/
+	
+	
+
+	public Company getCompany() {
+		return company;
 	}
-	
-	
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
 
 	/**
 	 * @return the userEnabled
@@ -296,12 +309,12 @@ public class User implements Serializable{
 	 * DO-NOT-INCLUDE passwords in toString function.
 	 * It is done here just for convenience purpose.
 	 */
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", ssoId=" + ssoId + ", password=" + password
-				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", accountLocked=" + accountLocked +"]";
-	}
+//	@Override
+//	public String toString() {
+//		return "User [id=" + id + ", ssoId=" + ssoId + ", password=" + password
+//				+ ", firstName=" + firstName + ", lastName=" + lastName
+//				+ ", email=" + email + ", accountLocked=" + accountLocked +"]";
+//	}
 
 
 	

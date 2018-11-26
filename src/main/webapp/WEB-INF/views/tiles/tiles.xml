@@ -49,6 +49,12 @@
        <put-attribute name="body" value="/WEB-INF/views/licenceValidityList.jsp" />  
    </definition> 
 
+	<!-- licence Validity List Page -->
+   <definition name="licenceValidityCreate" extends="base-definition_afterlogin">  
+       <put-attribute name="title" value="Licence Validity Create" />  
+       <put-attribute name="body" value="/WEB-INF/views/licenceValidityCreate.jsp" />  
+   </definition> 
+ 
  <!-- User Registration Page -->
    <definition name="registration" extends="base-definition_afterlogin">  
        <put-attribute name="title" value="list" />  

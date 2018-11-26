@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  
 
 		<script type="text/javascript" >
@@ -14,7 +15,7 @@
 
 <div class="form-group">
               <div class="form-row">
-                <div class="col-md-6">
+                <div class="col-md-2">
                 <input id="MAX_REQUEST_SIZE" value="${propertiesConfig.getMAX_REQUEST_SIZE()}" hidden="true"/>
 				<input id="MAX_FILE_SIZE" value="${propertiesConfig.getMAX_FILE_SIZE()}" hidden="true"/>
                   <div class="form-label-group">
@@ -25,10 +26,10 @@
                 </div>
               </div>
 </div>
-<form:form id="formUpload" method="POST" action="${pageContext.request.contextPath}/docs/add-document-${user.ssoId}" 
+<form:form id="formUpload" method="POST" action="${pageContext.request.contextPath}/docs/upload"
 					modelAttribute="uploadFile" enctype="multipart/form-data" class="form-horizontal">
 					
-					<form:hidden id="permitNo" path="permitNo" name="permitNo" value="${permitNo}"/>
+			<form:hidden id="permitNo" path="permitNo" name="permitNo" value="${permitNo}"/>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table "  width="100%" cellspacing="0">
@@ -102,9 +103,18 @@
             
             </form:form>
 <c:if test="${documents!=null}">
-			<div class="panel-heading"><span class="lead">List of Documents </span></div>
+  <!-- DataTables Example -->
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-table"></i>
+              List of Documents</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                
+			<!-- <div class="panel-heading"><span class="lead">List of Documents </span></div>
 		  	<div class="tablecontainer">
-				<table class="table table-hover">
+				<table class="table table-hover"> -->
 		    		<thead>
 			      		<tr>
 					        <th>No.</th>
@@ -118,14 +128,17 @@
 						<tr>
 							<td>${counter.index + 1}</td>
 							<td>${doc.name}</td>
-							<td>${doc.uploadedDate}</td>
-							<td><a href="<c:url value='/docs/download-document-${user.id}-${doc.id}' />" class="btn btn-success custom-width">download</a></td>
+							<td><fmt:formatDate value="${doc.uploadedDate}" pattern="dd/MM/yyyy HH:mm"/></td>
+							<td><a href="<c:url value='/docs/download/${doc.id}' />" class="btn btn-success custom-width">download</a></td>
 						</tr>
 					</c:forEach>
 		    		</tbody>
 		    	</table>
 		    </div>
-		    </c:if>
+		 </div>
+	</div>
+
+</c:if>
 
 </div>
 </div>

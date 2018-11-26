@@ -32,7 +32,7 @@ $(document).ready(function() {
 		                //var defValue = $("#permitNoSearch").prop('defaultValue');
 		                $("#permitNoSearch").val(ui.item.value);
 		                $("#permitNoSearch").blur();
-		                window.location.href = contextPath+"/docs/managedocuments/sam/" + ui.item.value;
+		                window.location.href = contextPath+"/docs/manage/" + ui.item.value;
 		                //return false;
 		            }
 		        }

@@ -10,12 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="BCTS_CASE_COMMENT")
-public class CaseComment implements Serializable{
+public class CaseComment implements Serializable, Comparable<CaseComment>{
 	/**
 	 * 
 	 */
@@ -30,6 +31,7 @@ public class CaseComment implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="CASE_ID", nullable=false)
 	private BCTSAlert bctsAlert;
+	
 //	@Column(name="CASE_ID")
 //	private Integer caseId;
 	
@@ -59,6 +61,14 @@ public class CaseComment implements Serializable{
 		this.bctsAlert = bctsAlert;
 	}
 
+//	public Integer getCaseId() {
+//		return caseId;
+//	}
+//
+//	public void setCaseId(Integer caseId) {
+//		this.caseId = caseId;
+//	}
+
 	public User getUser() {
 		return user;
 	}
@@ -81,5 +91,10 @@ public class CaseComment implements Serializable{
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	@Override
+	public int compareTo(CaseComment o) {
+		return this.updateTime.compareTo(o.getUpdateTime());
 	}
 }

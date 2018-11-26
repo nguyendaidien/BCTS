@@ -16,5 +16,7 @@ public interface UserDocumentDao {
 	
 	List<UserDocument> findAllByPermitNo(String permitNo);
 	
+	List<UserDocument> findAllByCaseId(String caseId);	
+	
 	void deleteById(int id);
 }

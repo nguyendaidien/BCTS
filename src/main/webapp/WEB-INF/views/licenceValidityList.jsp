@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
           <!-- DataTables Example -->
@@ -25,16 +26,15 @@
 				  <c:forEach items="${lvList}" var="lv">
 				  <tr>
 						<td>${lv.licenceNo}</td>
-						<td>${lv.licenceEndDate}</td>
+						<td><fmt:formatDate value="${lv.licenceEndDate}" pattern="dd/MM/yyyy"/></td>
 						<td></td>
-						<td>${lv.reminderDate}</td>
+						
+						<td><fmt:formatDate value="${lv.reminderDate}" pattern="dd/MM/yyyy"/></td>
+						<%-- <td>${lv.reminderDate}</td> --%>
 						<td align="center">
-					    <sec:authorize access="hasRole('ADMIN') or hasRole('DBA')">
-						<a class="btn btn-primary" href="${pageContext.request.contextPath}/edit-user">Edit</a>
-				        </sec:authorize>
-				        <sec:authorize access="hasRole('ADMIN')">
-						<a class="btn btn-primary" href="${pageContext.request.contextPath}/delete-user">Delete</a>
-        				</sec:authorize>
+						<a class="btn btn-primary" href="${pageContext.request.contextPath}/cases/lv/update/${lv.caseId}">Edit</a>
+						<a class="btn btn-primary" href="${pageContext.request.contextPath}/cases/lv/delete/${lv.caseId}">Delete</a>
+						<a class="btn btn-primary" href="${pageContext.request.contextPath}/docs/upload/${lv.caseId}">Upload</a>
 						</td>
 					</tr>
 				</c:forEach>

@@ -16,7 +16,7 @@ public class PermitDaoImpl extends AbstractDao<Integer, Permit> implements Permi
 	@Override
 	public List<Permit> search(String term) {
 		Criteria criteria = createEntityCriteria();
-		criteria.add(Restrictions.like("permitNo", term, MatchMode.START));
+		criteria.add(Restrictions.like("permitNo", term.toUpperCase(), MatchMode.START));
 		List<Permit> permits = (List<Permit>) criteria.list();
 		return permits;
 	}

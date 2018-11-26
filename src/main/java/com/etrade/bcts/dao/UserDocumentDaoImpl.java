@@ -46,4 +46,12 @@ public class UserDocumentDaoImpl extends AbstractDao<Integer, UserDocument> impl
 		delete(document);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserDocument> findAllByCaseId(String caseId) {
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("caseId", caseId));
+		return (List<UserDocument>)crit.list();
+	}
+
 }
