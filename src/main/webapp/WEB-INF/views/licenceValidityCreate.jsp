@@ -29,8 +29,8 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <form:input type="text" path="licenceNo" id="licenceNo" disabled="${editMode}" class="form-control" placeholder="licence No" required="required" autofocus="autofocus"/>
-					<div class="has-error"><form:errors path="licenceNo" class="help-inline"/></div>
+                    <form:input type="text" path="licence.licenceNo" id="licenceNo" disabled="${editMode}" class="form-control" placeholder="licence No" required="required" autofocus="autofocus"/>
+					<div class="has-error"><form:errors path="licence.licenceNo" class="help-inline"/></div>
 					<label for="licenceNo">Licence No</label>
                   </div>
                 </div>                
@@ -40,16 +40,16 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-				  <form:input type="text" path="jobNo" id="jobNo" class="form-control" placeholder="Job No" required="required" />
-				  <div class="has-error"><form:errors path="jobNo" class="help-inline"/></div>
-                    <label for="jobNo">Job No</label>
+				  <form:input type="text" path="licence.licenceOwner" id="licenceOwner" class="form-control" placeholder="licence Owner" required="required" />
+				  <div class="has-error"><form:errors path="licence.licenceOwner" class="help-inline"/></div>
+                    <label for="licenceOwner">licence Owner</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-				  <form:input type="text" path="permitNo" id="permitNo" class="form-control" placeholder="permitNo" required="required" />
-				  <div class="has-error"><form:errors path="permitNo" class="help-inline"/></div>
-                    <label for="permitNo">Permit No</label>
+				  <form:input type="text" path="licence.controlAgency" id="controlAgency" class="form-control" placeholder="controlAgency" required="required" />
+				  <div class="has-error"><form:errors path="licence.controlAgency" class="help-inline"/></div>
+                    <label for="controlAgency">Control Agency</label>
                   </div>
                 </div>
               </div>
