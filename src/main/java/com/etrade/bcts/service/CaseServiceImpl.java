@@ -10,8 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.etrade.bcts.dao.CaseDao;
 import com.etrade.bcts.model.BCTSAlert;
 import com.etrade.bcts.model.CaseComment;
+import com.etrade.bcts.model.CaseDetail;
 import com.etrade.bcts.model.Company;
+import com.etrade.bcts.model.LicenceValidity;
 import com.etrade.bcts.model.User;
+import com.etrade.bcts.util.BctsConstants;
 
 @Service(value="caseService")
 @Transactional
@@ -41,8 +44,19 @@ public class CaseServiceImpl implements CaseService {
 	}
 
 	@Override
-	public void save(BCTSAlert bctsAlert) {
-		caseDao.save(bctsAlert);		
+	public void save(BCTSAlert b) {
+		BCTSAlert bctsAlert = new BCTSAlert(b);
+		caseDao.save(bctsAlert);
+		
+		if(b.getCategory().equals(BctsConstants.CASETYPE_LICENCE_VALIDITY)) {
+			LicenceValidity lv = b.getLicence();
+			lv.setCaseId(bctsAlert.getCaseId());
+			bctsAlert.setLicence(lv);
+		} else {
+			CaseDetail caseDetail = b.getCaseDetail();
+			caseDetail.setCaseId(bctsAlert.getCaseId());
+			bctsAlert.setCaseDetail(caseDetail);
+		}
 	}
 
 	@Override
@@ -50,8 +64,7 @@ public class CaseServiceImpl implements CaseService {
 		BCTSAlert b =caseDao.getCaseDetailById(bctsAlert.getCaseId() , null , false);
 		b.setAlertContent(bctsAlert.getAlertContent());
 		b.setAlertEmails(bctsAlert.getAlertEmails());
-		b.setLicenceStartDate(bctsAlert.getLicenceStartDate());
-		b.setLicenceEndDate(bctsAlert.getLicenceEndDate());
+		b.setLicence(bctsAlert.getLicence());
 		b.setReminderDate(bctsAlert.getReminderDate());
 		b.setJobNo(bctsAlert.getJobNo());
 		b.setPermitNo(bctsAlert.getPermitNo());

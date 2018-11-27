@@ -25,8 +25,8 @@
                   <tbody>
 				  <c:forEach items="${lvList}" var="lv">
 				  <tr>
-						<td>${lv.licenceNo}</td>
-						<td><fmt:formatDate value="${lv.licenceEndDate}" pattern="dd/MM/yyyy"/></td>
+						<td>${lv.licence.licenceNo}</td>
+						<td><fmt:formatDate value="${lv.licence.licenceEndDate}" pattern="dd/MM/yyyy"/></td>
 						<td></td>
 						
 						<td><fmt:formatDate value="${lv.reminderDate}" pattern="dd/MM/yyyy"/></td>

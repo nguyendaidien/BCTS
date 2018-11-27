@@ -52,7 +52,7 @@ public class CaseDaoImpl extends AbstractDao<Integer, BCTSAlert> implements Case
 	@Override
 	public List<BCTSAlert> getCasesByType(String type, Company uen) {
 		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("caseType", type));
+		crit.add(Restrictions.eq("category", type));
 		if(uen != null) {
 			crit.add(Restrictions.eq("uen", uen));
 		}

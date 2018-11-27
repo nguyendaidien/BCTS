@@ -17,15 +17,15 @@
     </tr>
     <tr>      
       <th>Licence No</th>
-      <td>${caseDetail.licenceNo}</td>
+      <td>${caseDetail.licence.licenceNo}</td>
     </tr>
     <tr>      
       <th>Licence Start Date</th>
-      <td><fmt:formatDate value="${caseDetail.licenceStartDate}" pattern="dd/MM/yyyy"/></td>
+      <td><fmt:formatDate value="${caseDetail.licence.licenceStartDate}" pattern="dd/MM/yyyy"/></td>
     </tr>
     <tr>      
       <th>Licence End Date</th>
-      <td><fmt:formatDate value="${caseDetail.licenceEndDate}" pattern="dd/MM/yyyy"/></td>
+      <td><fmt:formatDate value="${caseDetail.licence.licenceEndDate}" pattern="dd/MM/yyyy"/></td>
     </tr>
     <tr>      
       <th>Remarks</th>

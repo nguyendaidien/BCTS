@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.etrade.bcts.model.BCTSAlert;
 import com.etrade.bcts.model.CaseComment;
+import com.etrade.bcts.model.CaseDetail;
+import com.etrade.bcts.model.LicenceValidity;
 import com.etrade.bcts.model.PermitCondition;
 import com.etrade.bcts.model.User;
 import com.etrade.bcts.service.CaseService;
@@ -56,7 +58,7 @@ public class CaseController {
 		}
 		model.put("caseComment", new CaseComment());
 		model.put("caseDetail", caseDetail);
-		if(caseDetail.getCaseType().equals(BctsConstants.CASETYPE_PERMIT_CONDITION)) {
+		if(caseDetail.getCategory().equals(BctsConstants.CASETYPE_PERMIT_CONDITION)) {
 			model.put("pc", new PermitCondition(caseDetail));
 		}
 		List<CaseComment> comments= caseDetail.getComments();
@@ -85,8 +87,10 @@ public class CaseController {
 		BCTSAlert lv = caseService.getCaseDetailById(caseId, user.getCompany(), false);
 		model.put("licenceValidity", lv);
 //		model.put("alertEmails", lv.getAlertEmails().split(","));		
-		model.put("licenceStartDate", TrwDate.getDateString(lv.getLicenceStartDate(), TrwDate.UI_DATEFORMAT) );
-		model.put("licenceEndDate", TrwDate.getDateString(lv.getLicenceEndDate(), TrwDate.UI_DATEFORMAT) );
+//		model.put("licenceStartDate", TrwDate.getDateString(lv.getLicenceStartDate(), TrwDate.UI_DATEFORMAT) );
+//		model.put("licenceEndDate", TrwDate.getDateString(lv.getLicenceEndDate(), TrwDate.UI_DATEFORMAT) );
+		model.put("licenceStartDate", TrwDate.getDateString(lv.getLicence().getLicenceStartDate(), TrwDate.UI_DATEFORMAT) );
+		model.put("licenceEndDate", TrwDate.getDateString(lv.getLicence().getLicenceEndDate(), TrwDate.UI_DATEFORMAT) );
 		model.put("reminderDate", TrwDate.getDateString(lv.getReminderDate(), TrwDate.UI_DATEFORMAT) );
 		JSONArray emails = BCTSUtil.convertStringToJsonArr(lv.getAlertEmails(), ",");
 		model.put("alertEmails", emails.toString());
@@ -106,8 +110,8 @@ public class CaseController {
 		}
 		licenceValidity.setAlertEmails(BCTSUtil.convertJsonArrToString(alertEmails,','));
 		try {
-			licenceValidity.setLicenceStartDate(TrwDate.parse(licenceStartDate));
-			licenceValidity.setLicenceEndDate(TrwDate.parse(licenceEndDate));
+			licenceValidity.getLicence().setLicenceStartDate(TrwDate.parse(licenceStartDate));
+			licenceValidity.getLicence().setLicenceEndDate(TrwDate.parse(licenceEndDate));
 			licenceValidity.setReminderDate(TrwDate.parse(reminderDate));
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -118,7 +122,7 @@ public class CaseController {
 	}
 	
 	@RequestMapping(value="/lv/create", method=RequestMethod.POST)
-	public String getLicenceValidityCreate(@ModelAttribute("licenceValidity") BCTSAlert licenceValidity, BindingResult result, ModelMap model, Principal principal,
+	public String getLicenceValidityCreate(@ModelAttribute("licenceValidity") BCTSAlert bctsAlert, BindingResult result, ModelMap model, Principal principal,
 			@RequestParam(name="licenceStartDate") String licenceStartDate,
 			@RequestParam(name="licenceEndDate") String licenceEndDate,
 			@RequestParam(name="reminderDate") String reminderDate,
@@ -127,22 +131,26 @@ public class CaseController {
 			LOG.error("Binding error");
 		}
 		User user = userService.findByUserId(principal.getName(), false);
-		licenceValidity.setAlertEmails(BCTSUtil.convertJsonArrToString(alertEmails,','));
-		licenceValidity.setCaseType(BctsConstants.CASETYPE_LICENCE_VALIDITY);
-		licenceValidity.setOpenBy(user);
-		licenceValidity.setOpenDate(new Date());
-		licenceValidity.setStatus(BctsConstants.CASE_STATUS_OPEN);
-		licenceValidity.setUen(user.getCompany());
-		licenceValidity.setToAlertCompany(true);		
+		bctsAlert.setAlertEmails(BCTSUtil.convertJsonArrToString(alertEmails,','));
+		bctsAlert.setCategory(BctsConstants.CASETYPE_LICENCE_VALIDITY);
+		bctsAlert.setOpenBy(user);
+		bctsAlert.setOpenDate(new Date());
+		bctsAlert.setStatus(BctsConstants.CASE_STATUS_OPEN);
+		bctsAlert.setUen(user.getCompany());
+		bctsAlert.setToAlertCompany(true);		
 		try {
-			licenceValidity.setLicenceStartDate(TrwDate.parse(licenceStartDate));
-			licenceValidity.setLicenceEndDate(TrwDate.parse(licenceEndDate));
-			licenceValidity.setReminderDate(TrwDate.parse(reminderDate));
+			LicenceValidity lc = bctsAlert.getLicence();
+			if(lc == null) {
+				lc = new LicenceValidity();
+				bctsAlert.setLicence(lc);
+			}
+			lc.setLicenceStartDate(TrwDate.parse(licenceStartDate));
+			lc.setLicenceEndDate(TrwDate.parse(licenceEndDate));
+			bctsAlert.setReminderDate(TrwDate.parse(reminderDate));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		caseService.save(licenceValidity);
+		caseService.save(bctsAlert);
 		
 		return "redirect:/cases/lvList";
 	}
@@ -166,19 +174,5 @@ public class CaseController {
 		caseService.update(comment, true);
 		return "redirect:/cases/" + caseId;
 	}
-	
-//	private void preparePCModel(ModelMap model, BCTSAlert caseDetail) {
-//		try {
-//			JSONObject pcJson = new JSONObject(caseDetail.getAlertContent());
-//			PermitCondition pc = new PermitCondition();
-//			pc.setPermitNo(caseDetail.getPermitNo());
-//			pc.setJobNo(caseDetail.getJobNo());
-//			pc.setAgencyCode(pcJson.getString("AgencyCode"));
-//			pc.setConditionCode(pcJson.getString("ConditionCode"));
-//			pc.setConditionDescription(pcJson.getString("ConditionDescription"));
-//			model.put("pc", pc);
-//		} catch (JSONException e) {
-//			e.printStackTrace();
-//		}
-//	}
+
 }

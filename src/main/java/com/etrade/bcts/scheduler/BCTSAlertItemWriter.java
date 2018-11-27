@@ -22,7 +22,7 @@ public class BCTSAlertItemWriter implements ItemWriter<BCTSAlert> {
 			
 			for (BCTSAlert bctsAlert : list) {		
 				emailService.sendBCTSAlertMail(bctsAlert, null);
-				LOGGER.info("Alert Message Sent Successfully....caseId {0} ; type {1}", bctsAlert.getCaseId(), bctsAlert.getCaseType());
+				LOGGER.info("Alert Message Sent Successfully....caseId {0} ; type {1}", bctsAlert.getCaseId(), bctsAlert.getCategory());
 			}
 	}
 }

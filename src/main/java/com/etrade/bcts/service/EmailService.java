@@ -60,7 +60,7 @@ public class EmailService {
         ctx.setVariable("domainName", BCTS_DOMAIN);
         ctx.setVariable("name", RECIPIENT_NAME);
         ctx.setVariable("case", bctsAlert);
-        if(bctsAlert.getCaseType().equals(BctsConstants.CASETYPE_PERMIT_CONDITION)) {
+        if(bctsAlert.getCategory().equals(BctsConstants.CASETYPE_PERMIT_CONDITION)) {
         	ctx.setVariable("pc", new PermitCondition(bctsAlert));
         }
         ctx.setVariable("domainName2", BCTS_DOMAIN2);
