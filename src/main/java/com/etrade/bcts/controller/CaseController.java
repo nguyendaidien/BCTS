@@ -92,8 +92,10 @@ public class CaseController {
 		model.put("licenceStartDate", TrwDate.getDateString(lv.getLicence().getLicenceStartDate(), TrwDate.UI_DATEFORMAT) );
 		model.put("licenceEndDate", TrwDate.getDateString(lv.getLicence().getLicenceEndDate(), TrwDate.UI_DATEFORMAT) );
 		model.put("reminderDate", TrwDate.getDateString(lv.getReminderDate(), TrwDate.UI_DATEFORMAT) );
-		JSONArray emails = BCTSUtil.convertStringToJsonArr(lv.getAlertEmails(), ",");
-		model.put("alertEmails", emails.toString());
+		if(StringUtils.isNotEmpty(lv.getAlertEmails())) {
+			JSONArray emails = BCTSUtil.convertStringToJsonArr(lv.getAlertEmails(), ",");
+			model.put("alertEmails", emails.toString());
+		}
 		model.put("editMode", true);
 		return "licenceValidityCreate";
 	}

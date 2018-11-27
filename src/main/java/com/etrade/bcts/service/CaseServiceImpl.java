@@ -61,13 +61,19 @@ public class CaseServiceImpl implements CaseService {
 
 	@Override
 	public void update(BCTSAlert bctsAlert) {
-		BCTSAlert b =caseDao.getCaseDetailById(bctsAlert.getCaseId() , null , false);
+		BCTSAlert b = caseDao.getCaseDetailById(bctsAlert.getCaseId() , null , false);
 		b.setAlertContent(bctsAlert.getAlertContent());
 		b.setAlertEmails(bctsAlert.getAlertEmails());
-		b.setLicence(bctsAlert.getLicence());
 		b.setReminderDate(bctsAlert.getReminderDate());
 		b.setJobNo(bctsAlert.getJobNo());
 		b.setPermitNo(bctsAlert.getPermitNo());
 		b.setToAlertCompany(bctsAlert.getToAlertCompany());
+		if(b.getCategory().equals(BctsConstants.CASETYPE_LICENCE_VALIDITY)) {
+			LicenceValidity lv = b.getLicence();
+			lv.setLicenceStartDate(bctsAlert.getLicence().getLicenceStartDate());
+			lv.setLicenceEndDate(bctsAlert.getLicence().getLicenceEndDate());
+			lv.setLicenceOwner(bctsAlert.getLicence().getLicenceOwner());
+			lv.setControlAgency(bctsAlert.getLicence().getControlAgency());
+		}
 	}
 }
