@@ -6,18 +6,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang.StringUtils;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +37,8 @@ public class BCTSAlert {
 	private Integer caseId;
 	
 	@Column(name="CATEGORY")
-	private String caseType;
+	private String category;
+
 	
 	@ManyToOne(optional=true)
 	@JoinColumn(name="UEN")
@@ -75,33 +79,54 @@ public class BCTSAlert {
 	@JoinColumn(name="COMPLETED_BY")
 	private User completedBy;
 	
-	@Column(name="LICENCE_NO")
-	private String licenceNo;
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	private LicenceValidity licence;
 	
-	@Column(name="LICENCE_START_DATE")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date licenceStartDate;
-	
-	@Column(name="LICENCE_END_DATE")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date licenceEndDate;
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	private CaseDetail caseDetail;
 	
 	@OneToMany(mappedBy="bctsAlert")	
 	private List<CaseComment> comments;	
 	
+	public BCTSAlert() {}
+	
+	/*
+	 * constructor without setting licence and caseDetail object
+	 */
+	public BCTSAlert(BCTSAlert b) {
+		super();
+		this.caseId = b.caseId;
+		this.category = b.category;
+		this.uen = b.uen;
+		this.jobNo = b.jobNo;
+		this.permitNo = b.permitNo;
+		this.alertContent = b.alertContent;
+		this.status = b.status;
+		this.alertEmails = b.alertEmails;
+		this.toAlertCompany = b.toAlertCompany;
+		this.reminderDate = b.reminderDate;
+		this.openDate = b.openDate;
+		this.completedDate = b.completedDate;
+		this.openBy = b.openBy;
+		this.completedBy = b.completedBy;
+		this.comments = b.comments;
+	}
+
 	public Integer getCaseId() {
 		return caseId;
 	}
 	public void setCaseId(Integer caseId) {
 		this.caseId = caseId;
 	}
-	public String getCaseType() {
-		return caseType;
+
+	public String getCategory() {
+		return category;
 	}
-	public void setCaseType(String caseType) {
-		this.caseType = caseType;
+	public void setCategory(String category) {
+		this.category = category;
 	}
-	
 	public Company getUen() {
 		return uen;
 	}
@@ -179,25 +204,18 @@ public class BCTSAlert {
 	public void setCompletedBy(User completedBy) {
 		this.completedBy = completedBy;
 	}
-	public String getLicenceNo() {
-		return licenceNo;
+
+	public LicenceValidity getLicence() {
+		return licence;
 	}
-	public void setLicenceNo(String licenceNo) {
-		this.licenceNo = licenceNo;
+	public void setLicence(LicenceValidity licence) {
+		this.licence = licence;
 	}
-	
-	
-	public Date getLicenceStartDate() {
-		return licenceStartDate;
+	public CaseDetail getCaseDetail() {
+		return caseDetail;
 	}
-	public void setLicenceStartDate(Date licenceStartDate) {
-		this.licenceStartDate = licenceStartDate;
-	}
-	public Date getLicenceEndDate() {
-		return licenceEndDate;
-	}
-	public void setLicenceEndDate(Date licenceEndDate) {
-		this.licenceEndDate = licenceEndDate;
+	public void setCaseDetail(CaseDetail caseDetail) {
+		this.caseDetail = caseDetail;
 	}
 	public List<CaseComment> getComments() {
 		return comments;
