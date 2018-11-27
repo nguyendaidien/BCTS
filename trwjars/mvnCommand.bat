@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=jaxb_tn41.jar -DgroupId=crimson.custom -DartifactId=jaxb_tn41 -Dversion=1.0 -Dpackaging=jar 
