@@ -33,7 +33,7 @@ public class BCTSAlert {
 	@Column(name="CASE_ID")
 	private Integer caseId;
 	
-	@Column(name="CASE_TYPE")
+	@Column(name="CATEGORY")
 	private String caseType;
 	
 	@ManyToOne(optional=true)

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Carmen (Crimsonlogic) -->
+<xsd:schema xmlns="urn:crimsonlogic:tn:schema:xsd:RejectionMessage" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cbc="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" xmlns:cac="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" targetNamespace="urn:crimsonlogic:tn:schema:xsd:RejectionMessage" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" schemaLocation="CommonBasicComponents-2.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" schemaLocation="CommonAggregateComponents-2.xsd"/>
+	<xsd:element name="RejectionMessage" type="RejectionMessageType"/>
+	<xsd:complexType name="RejectionMessageType">
+		<xsd:sequence>
+			<xsd:group ref="cac:StatusHeaderGroup"/>
+			<xsd:element ref="cac:RejectionDetail" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -10,6 +10,8 @@
  */
 package com.etrade.bcts.configuration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
@@ -41,18 +43,21 @@ import com.etrade.bcts.converter.RoleToUserProfileConverter;
 @ComponentScan(basePackages = "com.etrade.bcts")
 public class AppConfig extends WebMvcConfigurerAdapter{
 	
-	
+	private static final Logger LOG = LoggerFactory.getLogger(AppConfig.class);
 	@Autowired
 	RoleToUserProfileConverter roleToUserProfileConverter;
 	
-//	@Autowired
-//	private JobLauncher jobLaucher;
-//	
-//	@Autowired
-//	private Job job;
-//	@Autowired
-//	MappingJackson2HttpMessageConverter converter;
+	@Autowired
+	private JobLauncher jobLaucher;
 	
+	@Autowired
+	private Job job;
+
+	
+	
+	
+	/*@Autowired
+	private BatchService batchService;*/
 	 /**
      * Configure TilesConfigurer.
      */
@@ -130,14 +135,67 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         matcher.setUseRegisteredSuffixPatternMatch(true);
     }
     
-//    @Scheduled(fixedDelay=50000)
-//    public void perform() throws Exception
-//    {
-//    	System.out.println("Alert Job ----");
-//        JobParameters params = new JobParametersBuilder()
-//                .addString("JobID", String.valueOf(System.currentTimeMillis()))
-//                .toJobParameters();
-//        jobLaucher.run(job, params);
-//    }
+	private boolean disregardStatus=false;
+    
+    
+    @Scheduled(fixedRateString = "6000", initialDelayString = "3000")
+   // @Scheduled(fixedDelay=5000)
+    public void perform() throws Exception{
+    	LOG.info("perform() start");
+    	/*private AtomicBoolean enabled = new AtomicBoolean(true);
+        
+        private AtomicInteger batchRunCounter = new AtomicInteger(0);*/
+    	if(this.disregardStatus) {
+    		System.out.println("Alert Job ----:"+disregardStatus);
+    	}else {
+    		System.out.println("Alert Job ---- else");
+    		/*List<BctsRoute> routeList=batchService.findActiveJobs();*/
+    		
+    		/*for(BctsRoute r:routeList) {
+    			System.out.println("AJAY MAP ID:"+r.getRouteId());
+    			if(r.getStatus()=='A') {*/
+    				JobParameters params = new JobParametersBuilder()
+        	                .addString("JobID".toString(), String.valueOf(System.currentTimeMillis()))
+        	                .toJobParameters();
+        	        jobLaucher.run(job, params);
+    			/*}else {
+    				System.out.println("else bolck");
+    			}*/
+    		/*}*/
+    		
+    		 /*JobParameters params = new JobParametersBuilder()
+    	                .addString("JobID", String.valueOf(System.currentTimeMillis()))
+    	                .toJobParameters();
+    	        jobLaucher.run(job, params);*/
+    	}
+    	
+    	
+    	
+    	
+       
+    }
+    
+    
+    /*private AtomicBoolean enabled = new AtomicBoolean(true);
+    
+    private AtomicInteger batchRunCounter = new AtomicInteger(0);
+     
+    @Scheduled(fixedRate = 5000)
+    public void launchJob() throws Exception {
+    	
+    	System.out.println("Ajay batch ############################");
+        if (enabled.get()) {
+            Date date = new Date();
+            org.springframework.batch.core.JobExecution jobExecution = jobLaucher
+              .run(job, new JobParametersBuilder()
+                .addDate("launchDate", date)
+                .toJobParameters());
+            batchRunCounter.incrementAndGet();
+        }
+    }*/
+    
+    
+    
+    
 }
 

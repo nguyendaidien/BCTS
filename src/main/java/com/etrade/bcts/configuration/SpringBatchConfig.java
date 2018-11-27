@@ -2,6 +2,8 @@ package com.etrade.bcts.configuration;
 
 import java.net.MalformedURLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.launch.support.SimpleJobLauncher;
@@ -21,7 +23,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 @EnableBatchProcessing
 public class SpringBatchConfig {
- 
+	static final Logger logger = LoggerFactory.getLogger(SpringBatchConfig.class);
     @Value("classpath:/org/springframework/batch/core/schema-drop-oracle10g.sql")
     private Resource dropReopsitoryTables;
  
@@ -42,7 +44,7 @@ public class SpringBatchConfig {
       throws MalformedURLException {
         ResourceDatabasePopulator databasePopulator = 
           new ResourceDatabasePopulator();
- 
+        logger.info("dataSourceInitializer() start");
         databasePopulator.addScript(dropReopsitoryTables);
         databasePopulator.addScript(dataReopsitorySchema);
         databasePopulator.setIgnoreFailedDrops(true);
@@ -50,26 +52,31 @@ public class SpringBatchConfig {
         DataSourceInitializer initializer = new DataSourceInitializer();
         initializer.setDataSource(configuration.dataSource());
         initializer.setDatabasePopulator(databasePopulator);
- 
+        logger.info("dataSourceInitializer() end: {}",initializer);
         return initializer;
     }
  
     private JobRepository getJobRepository() throws Exception {
+    	 logger.info("getJobRepository() start");
         JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
         factory.setDataSource(configuration.dataSource());
         factory.setTransactionManager(getTransactionManager());
         factory.afterPropertiesSet();
-        return (JobRepository) factory.getObject();
+        logger.info("getJobRepository() end");
+        return  factory.getObject();
     }
  
     private PlatformTransactionManager getTransactionManager() {
+    	 logger.info("getTransactionManager() start");
         return new ResourcelessTransactionManager();
     }
  
     public JobLauncher getJobLauncher() throws Exception {
+    	 logger.info("getJobLauncher() start");
         SimpleJobLauncher jobLauncher = new SimpleJobLauncher();
         jobLauncher.setJobRepository(getJobRepository());
         jobLauncher.afterPropertiesSet();
+        logger.info("getJobLauncher() end:{}",jobLauncher);
         return jobLauncher;
     }
 }

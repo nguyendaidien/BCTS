@@ -31,7 +31,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan({ "com.etrade.bcts.configuration" })
 @PropertySource(value = { "classpath:application.properties" })
 public class HibernateConfiguration {
-
+ 
     @Autowired
     private Environment environment;
 

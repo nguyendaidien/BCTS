@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Eric (Crimsonlogic) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="AccessPermit" type="AccessPermitType">
+		<xs:annotation>
+			<xs:documentation>Access Permit</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="AccessPermitType">
+		<xs:sequence>
+			<xs:element name="Header">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MessageType">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="20"/>
+									<xs:enumeration value="NEW"/>
+									<xs:enumeration value="AME"/>
+									<xs:enumeration value="CNL"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="MessageID">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:length value="21"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="SendDate" type="xs:date"/>
+						<xs:element name="PurposeIndicator">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:length value="1"/>
+									<xs:enumeration value="E"/>
+									<xs:enumeration value="I"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="AccessPermitNumber">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="13"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="UpdateRequestNumber" minOccurs="0">
+							<xs:simpleType>
+								<xs:restriction base="xs:decimal">
+									<xs:totalDigits value="3"/>
+									<xs:fractionDigits value="0"/>
+									<xs:maxInclusive value="999"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="SubmissionDate">
+							<xs:simpleType>
+								<xs:restriction base="xs:date"/>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="DeclaringAgentParty">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="20"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Detail">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TraderInfo">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="TraderUEN">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="20"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="WholeCancellation" minOccurs="0">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:length value="1"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="MAWBHAWBInfo" maxOccurs="100">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="SequenceNumber" minOccurs="0">
+													<xs:simpleType>
+														<xs:restriction base="xs:decimal">
+															<xs:totalDigits value="5"/>
+															<xs:fractionDigits value="0"/>
+															<xs:maxInclusive value="99999"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="MAWBNumber">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:minLength value="1"/>
+															<xs:maxLength value="35"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="ConveyanceReferenceNumber">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:minLength value="1"/>
+															<xs:maxLength value="10"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="FlightDate" type="xs:date"/>
+												<xs:element name="HAWBNumber">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:minLength value="1"/>
+															<xs:maxLength value="35"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="TraderUEN">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:minLength value="1"/>
+															<xs:maxLength value="20"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="TraderName">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:minLength value="1"/>
+															<xs:maxLength value="70"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="HAWBCIFFOBValue">
+													<xs:simpleType>
+														<xs:restriction base="xs:decimal">
+															<xs:totalDigits value="16"/>
+															<xs:fractionDigits value="2"/>
+															<xs:maxInclusive value="9999999999999.99"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="OverseasShipperConsigneeName">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:minLength value="1"/>
+															<xs:maxLength value="70"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="LoadingDischargePort">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:minLength value="1"/>
+															<xs:maxLength value="5"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="TotalGrossWeight">
+													<xs:simpleType>
+														<xs:restriction base="xs:decimal">
+															<xs:totalDigits value="16"/>
+															<xs:fractionDigits value="4"/>
+															<xs:maxInclusive value="99999999999.9999"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="TotalOuterPack">
+													<xs:simpleType>
+														<xs:restriction base="xs:decimal">
+															<xs:totalDigits value="16"/>
+															<xs:fractionDigits value="4"/>
+															<xs:maxInclusive value="99999999999.9999"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="LineDetails">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="LineItem" maxOccurs="50">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="ItemSequenceNumeric">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:decimal">
+																					<xs:totalDigits value="5"/>
+																					<xs:fractionDigits value="0"/>
+																					<xs:maxInclusive value="99999"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="ItemHarmonizedSystemCode" minOccurs="0">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="1"/>
+																					<xs:maxLength value="12"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="GoodsDescription">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="1"/>
+																					<xs:maxLength value="70"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="OriginCountry">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="1"/>
+																					<xs:maxLength value="2"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="PermitNumber" minOccurs="0">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="0"/>
+																					<xs:maxLength value="11"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="OriginFinalDestinationCountry">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="1"/>
+																					<xs:maxLength value="2"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="HarmonizedSystemQuantity">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:decimal">
+																					<xs:totalDigits value="16"/>
+																					<xs:fractionDigits value="4"/>
+																					<xs:maxInclusive value="99999999999.9999"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="LineUnitCode">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="1"/>
+																					<xs:maxLength value="3"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="NoShow" minOccurs="0">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:length value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

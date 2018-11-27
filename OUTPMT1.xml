@@ -1,0 +1,279 @@
+<TradenetResponse xmlns:inp="urn:crimsonlogic:tn:schema:xsd:InNonPayment" xmlns:app="urn:crimsonlogic:tn:schema:xsd:ApprovalMessage" dateTime="201110051707" xmlns:ipt="urn:crimsonlogic:tn:schema:xsd:InPayment" xmlns:rej="urn:crimsonlogic:tn:schema:xsd:RejectionMessage" xmlns:fee="urn:crimsonlogic:tn:schema:xsd:FeeMessage" xmlns="urn:crimsonlogic:tn:schema:xsd:TradenetResponse" xmlns:err="urn:crimsonlogic:tn:schema:xsd:ErrorMessage" xmlns:cac="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" xmlns:com="urn:crimsonlogic:tn:schema:xsd:CustomsCommonCode" xmlns:cbc="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" xmlns:tnp="urn:crimsonlogic:tn:schema:xsd:TranshipmentMovement" xmlns:cux="urn:crimsonlogic:tn:schema:xsd:CustomsExchangeRate" xmlns:coo="urn:crimsonlogic:tn:schema:xsd:CertificateOfOrigin" xmlns:out="urn:crimsonlogic:tn:schema:xsd:OutwardDeclaration" instanceIdentifier="91432142">
+	<cbc:MessageVersion>041</cbc:MessageVersion>
+	<cbc:SenderID>DCST.DCST401</cbc:SenderID>
+	<cbc:RecipientID>VP4T.VP4T003</cbc:RecipientID>
+	<cbc:TotalNumberOfResponse>1</cbc:TotalNumberOfResponse>
+	<OutboundMessage>
+		<out:OutwardPermit>
+			<out:Declaration>
+				<out:Header>
+					<cbc:MessageReference>ETRADE1</cbc:MessageReference>
+					<cac:UniqueReferenceNumber>
+						<cbc:ID>211105123R</cbc:ID>
+						<cbc:Date>20111005</cbc:Date>
+						<cbc:SequenceNumeric>5504</cbc:SequenceNumeric>
+					</cac:UniqueReferenceNumber>
+					<cbc:IssuingAuthorityID>12</cbc:IssuingAuthorityID>
+					<cbc:CommonAccessReference>OUTPMT</cbc:CommonAccessReference>
+					<cbc:DeclarationType>DRT</cbc:DeclarationType>
+					<cbc:DeclarationIndicator>true</cbc:DeclarationIndicator>
+					<cac:Remarks>
+						<cbc:FreeText>TN_OUTDEC_DRT_19 IS FILED WITH CO TYPE 19. DECLARATION IS TO BE~ APPROVED.</cbc:FreeText>
+					</cac:Remarks>
+					<cbc:SubmissionDatetime>20111005170712SST</cbc:SubmissionDatetime>
+				</out:Header>
+				<out:Certificate>
+					<cbc:ApplicationProductType>NH</cbc:ApplicationProductType>
+					<cac:CertificateDetail>
+						<cbc:SequenceNumeric>1</cbc:SequenceNumeric>
+						<cbc:CertificateType>19</cbc:CertificateType>
+						<cbc:CopiesNumeric>2</cbc:CopiesNumeric>
+					</cac:CertificateDetail>
+					<cbc:CurrencyCode>SGD</cbc:CurrencyCode>
+					<cbc:AdditionalCertificateDetails>1 CERTIFICATE TYPE 19 IS SELECTED E</cbc:AdditionalCertificateDetails>
+					<cbc:TransportDetails>TRANSPORT DETAILS FIELD IS ENTEREDE</cbc:TransportDetails>
+				</out:Certificate>
+				<out:Cargo>
+					<cbc:CargoPackingType>5</cbc:CargoPackingType>
+					<cac:ReleaseLocation>
+						<cbc:LocationCode>KZ</cbc:LocationCode>
+						<cbc:LocationName>KEPPEL FTZ</cbc:LocationName>
+					</cac:ReleaseLocation>
+					<cac:ReceiptLocation>
+						<cbc:LocationCode>LHQ</cbc:LocationCode>
+						<cbc:LocationName>WOODLANDS CHECKPOINT</cbc:LocationName>
+					</cac:ReceiptLocation>
+				</out:Cargo>
+				<out:Transport>
+					<cac:InwardTransport>
+						<cac:TransportMeans>
+							<cac:TransportMode>
+								<cbc:ModeCode>4</cbc:ModeCode>
+								<cbc:ConveyanceReferenceNumber>VOY123456</cbc:ConveyanceReferenceNumber>
+								<cbc:TransportIdentifier>AWLDRT15A</cbc:TransportIdentifier>
+							</cac:TransportMode>
+							<cbc:MAWBOUCROBLNumber>SQ1234</cbc:MAWBOUCROBLNumber>
+						</cac:TransportMeans>
+						<cbc:ArrivalDate>20111015</cbc:ArrivalDate>
+						<cbc:LoadingPort>SGSIN</cbc:LoadingPort>
+					</cac:InwardTransport>
+					<cac:OutwardTransport>
+						<cac:TransportMeans>
+							<cac:TransportMode>
+								<cbc:ModeCode>2</cbc:ModeCode>
+							</cac:TransportMode>
+						</cac:TransportMeans>
+						<cbc:DepartureDate>20111020</cbc:DepartureDate>
+						<cbc:DischargePort>THRAN</cbc:DischargePort>
+						<cbc:FinalDestinationCountry>TH</cbc:FinalDestinationCountry>
+					</cac:OutwardTransport>
+				</out:Transport>
+				<out:Party>
+					<cac:DeclarantParty>
+						<cac:PersonInformation>
+							<cbc:CodeValue>P00333333</cbc:CodeValue>
+							<cbc:Name>TEST THREE</cbc:Name>
+						</cac:PersonInformation>
+						<cbc:Telephone>68877333</cbc:Telephone>
+					</cac:DeclarantParty>
+					<cac:DeclaringAgentParty>
+						<cac:PartyIdentification>
+							<cbc:ID>211105123R</cbc:ID>
+						</cac:PartyIdentification>
+						<cac:PartyName>
+							<cbc:Name>CRIMSONLOGIC PTE LTD</cbc:Name>
+						</cac:PartyName>
+					</cac:DeclaringAgentParty>
+					<cac:InwardCarrierAgentParty>
+						<cac:PartyIdentification>
+							<cbc:ID>196400287H</cbc:ID>
+						</cac:PartyIdentification>
+						<cac:PartyName>
+							<cbc:Name>CARRIER SINGAPORE (PTE) LIMITED</cbc:Name>
+						</cac:PartyName>
+					</cac:InwardCarrierAgentParty>
+					<cac:ImporterParty>
+						<cac:PartyIdentification>
+							<cbc:ID>197903839G</cbc:ID>
+						</cac:PartyIdentification>
+						<cac:PartyName>
+							<cbc:Name>REX PLASTICS PTE. LTD.</cbc:Name>
+						</cac:PartyName>
+					</cac:ImporterParty>
+					<cac:ExporterParty>
+						<cac:PartyDetail>
+							<cac:PartyIdentification>
+								<cbc:ID>195000044R</cbc:ID>
+							</cac:PartyIdentification>
+							<cac:PartyName>
+								<cbc:Name>TAI HUA FOOD INDUSTRIES PRIVATE</cbc:Name>
+								<cbc:Name>LIMITED</cbc:Name>
+							</cac:PartyName>
+						</cac:PartyDetail>
+						<cac:Address>
+							<cac:AddressLine>
+								<cbc:Line>12 JALAN BESUT</cbc:Line>
+							</cac:AddressLine>
+							<cbc:CountryCode>SG</cbc:CountryCode>
+						</cac:Address>
+					</cac:ExporterParty>
+					<cac:ConsigneeParty>
+						<cac:PartyName>
+							<cbc:Name>CHINA SILK PTE LTD</cbc:Name>
+						</cac:PartyName>
+						<cac:Address>
+							<cac:AddressLine>
+								<cbc:Line>THAILAND PLACE</cbc:Line>
+								<cbc:Line>HBF</cbc:Line>
+							</cac:AddressLine>
+							<cbc:CityName>BANGKOK</cbc:CityName>
+							<cbc:CountrySubentityCode>99</cbc:CountrySubentityCode>
+							<cbc:CountrySubentity>BKK</cbc:CountrySubentity>
+							<cbc:PostalZone>123456</cbc:PostalZone>
+							<cbc:CountryCode>TH</cbc:CountryCode>
+						</cac:Address>
+					</cac:ConsigneeParty>
+					<cac:ManufacturerParty>
+						<cac:PartyDetail>
+							<cac:PartyIdentification>
+								<cbc:ID>198104553R</cbc:ID>
+							</cac:PartyIdentification>
+							<cac:PartyName>
+								<cbc:Name>EXPEDITORS SINGAPORE PTE LTD</cbc:Name>
+							</cac:PartyName>
+						</cac:PartyDetail>
+						<cac:Address>
+							<cac:AddressLine>
+								<cbc:Line>61 ALPS AVENUE</cbc:Line>
+								<cbc:Line>NA</cbc:Line>
+							</cac:AddressLine>
+							<cbc:CityName>SINGAPORE</cbc:CityName>
+							<cbc:CountrySubentityCode>NA</cbc:CountrySubentityCode>
+							<cbc:CountrySubentity>NA</cbc:CountrySubentity>
+							<cbc:PostalZone>498798</cbc:PostalZone>
+							<cbc:CountryCode>SG</cbc:CountryCode>
+						</cac:Address>
+					</cac:ManufacturerParty>
+				</out:Party>
+				<cac:Licence>
+					<cbc:ReferenceID>IM06A0010</cbc:ReferenceID>
+				</cac:Licence>
+				<out:Item>
+					<cbc:ItemSequenceNumeric>1</cbc:ItemSequenceNumeric>
+					<cbc:ItemHarmonizedSystemCode>02032200</cbc:ItemHarmonizedSystemCode>
+					<cbc:GoodsDescription>HAMS SHOULDERS &amp; CUTS THEREOF OF SWINE WITH BONE IN FROZEN (TNE)</cbc:GoodsDescription>
+					<cac:ItemQuantity>
+						<cbc:HarmonizedSystemQuantity unitCode="TNE">30.0000</cbc:HarmonizedSystemQuantity>
+					</cac:ItemQuantity>
+					<cbc:OriginCountry>SG</cbc:OriginCountry>
+					<cac:TransactionValue>
+						<cbc:ItemCIFFOBValue>9300.00</cbc:ItemCIFFOBValue>
+					</cac:TransactionValue>
+					<cac:CASCProduct>
+						<cbc:CASCProductCode>MPF003</cbc:CASCProductCode>
+						<cbc:CASCProductQuantity unitCode="TNE">30.0000</cbc:CASCProductQuantity>
+					</cac:CASCProduct>
+					<cac:ItemCertificate>
+						<cbc:ItemValue>9300.00</cbc:ItemValue>
+						<cac:ItemCertificateDescription>
+							<cbc:Line>DRT_15 IS TO BE APPROVED           </cbc:Line>
+						</cac:ItemCertificateDescription>
+						<cbc:ManufacturingCostDate>20110725</cbc:ManufacturingCostDate>
+						<cbc:ItemInvoiceNumber>NA</cbc:ItemInvoiceNumber>
+						<cbc:ItemInvoiceDate>20111004</cbc:ItemInvoiceDate>
+						<cbc:OriginCriterion>ACFTA</cbc:OriginCriterion>
+						<cbc:OriginCriterion>CUMULATIVE</cbc:OriginCriterion>
+						<cbc:OriginCriterion>CONTENT</cbc:OriginCriterion>
+						<cbc:ContentPercent>50</cbc:ContentPercent>
+					</cac:ItemCertificate>
+				</out:Item>
+				<out:Summary>
+					<cbc:NumberOfItems>1</cbc:NumberOfItems>
+					<cbc:TotalCIFFOBValue>9300.00</cbc:TotalCIFFOBValue>
+					<cbc:TotalOuterPack unitCode="CRT">1000</cbc:TotalOuterPack>
+					<cbc:TotalGrossWeight unitCode="KGM">30000.000</cbc:TotalGrossWeight>
+				</out:Summary>
+			</out:Declaration>
+			<cac:Permit>
+				<cbc:PermitNumber>OT1J000812X</cbc:PermitNumber>
+				<cbc:CertificateNumber>800191</cbc:CertificateNumber>
+				<cac:PermitValidityPeriod>
+					<cbc:StartDate>20111005</cbc:StartDate>
+					<cbc:EndDate>20111018</cbc:EndDate>
+				</cac:PermitValidityPeriod>
+				<cbc:CAApprovalDatetime>20111005170714SST</cbc:CAApprovalDatetime>
+				<cbc:PermitApprovalDatetime>20111005170714SST</cbc:PermitApprovalDatetime>
+				<cac:CAApprovalCondition>
+					<cbc:AgencyCode>CA</cbc:AgencyCode>
+					<cbc:ConditionCode>Y96</cbc:ConditionCode>
+					<cbc:ConditionDescription>APPLICATION IS APPROVED ON CONDITION THAT DECLARANT/ EXPORTER HAS               EXERCISED DUE DILIGENCE TO DETERMINE THAT THE GOODS ARE NOT CONTROLLED UNDER    STRATEGIC GOODS (CONTROL) ACT &amp; A STRATEGIC GOODS PERMIT IS NOT REQUIRED.       FOR ALL ITEMS.</cbc:ConditionDescription>
+				</cac:CAApprovalCondition>
+				<cac:CAApprovalCondition>
+					<cbc:AgencyCode>CA</cbc:AgencyCode>
+					<cbc:ConditionCode>A51</cbc:ConditionCode>
+					<cbc:ConditionDescription>APPROVED BY SINGAPORE CUSTOMS.                                                  FOR ALL ITEMS.</cbc:ConditionDescription>
+				</cac:CAApprovalCondition>
+				<cac:CAApprovalCondition>
+					<cbc:AgencyCode>CA</cbc:AgencyCode>
+					<cbc:ConditionCode>M12</cbc:ConditionCode>
+					<cbc:ConditionDescription>APPROVED BY AVA (MEAT). THIS CCP ALSO SERVES AS AN AVA PERMIT FOR ITEMS         UNDER AVA CONTROL UNDER SECTION 6 OF WHOLESOME MEAT AND FISH ACT.               FOR ALL ITEMS.</cbc:ConditionDescription>
+				</cac:CAApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>Y99</cbc:ConditionCode>
+					<cbc:ConditionDescription>SPECIMEN PERMIT ONLY</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>Z10</cbc:ConditionCode>
+					<cbc:ConditionDescription>APPROVED BY SINGAPORE CUSTOMS SUBJECT TO THE CONDITIONTHAT YOU COMPLY           WITH THE REQUIREMENTS OF THE COMPETENT      AUTHORITY.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>A13</cbc:ConditionCode>
+					<cbc:ConditionDescription>GOODS DECLARED MUST BE COLLECTED AND DELIVERED DIRECTLY TO THE PLACE OF  RECEIPT BY THE SAME COMMERCIAL VEHICLE(S). DETOURING IS PROHIBITED.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>A14</cbc:ConditionCode>
+					<cbc:ConditionDescription>APPROVED BY AVA (PHU) AND THE CONSIGNMENT IN FULL HAS BEEN SELECTED FOR  INSPECTION AT THE NEXT WORKING DAY. PLEASE SUBMIT THE APPLICATION FORM FOR POST ENTRY INSPECTION OF IMPORTED PLANTS TO AVA (PHU) ( FAX NO: 67520170). THE       ORIGINAL EXPORT DECLARATION PACKING LIST ISSUED BY THE ACCREDITED NURSERIES     UNDER DOA'S MPCA SCHEME AND INVOICE ISSUED BY THE MALAYSIA EXPORTER MUST BE     SUBMITTED TO OUR OFFICER DURING THE TIME OF INSPECTION OF THE CONSIGNMENT. THIS CCP ALSO SERVES AS AN IMPORT PERMIT.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>Y95</cbc:ConditionCode>
+					<cbc:ConditionDescription>PLS CHECK AGAIN THE DECLARED - 1) HS CODES\DESCRIPTION, OR 2) ITEM              QUANTITY OR VALUE, OR 3) ITEM VALUE WHICH      EXCEEDED $1 MILLION. IF WRONG,   PLEASE CANCEL THIS CCP WITHIN48 HOURS.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>GA</cbc:ConditionCode>
+					<cbc:ConditionDescription>APPROVED BY CUSTOMS SUBJECT TO THE DECLARANT COMPLYING WITH THE                 FOLLOWING CONDITION(S) FOR THE PERMIT TO BE VALID. FAILURE TO COMPLY WITH THE   CONDITION(S) IS AN OFFENCE.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>A2</cbc:ConditionCode>
+					<cbc:ConditionDescription>THE GOODS AND THIS PERMIT WITH INVOICES, BL/AWB, ETC MUST BE PRODUCED           FOR CUSTOMS CLEARANCE/ENDORSEMENT AT A FREE TRADE ZONE &apos;OUT&apos; GATE UNLESS IT IS  DIRECTED TO THE &apos;GREEN LANE&apos; AT THE TIME OF CLEARANCE.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>AX</cbc:ConditionCode>
+					<cbc:ConditionDescription>GOODS RELEASED FROM THE 1ST CUSTOMS CHECKPOINT MUST BE PRODUCED AT THE          2ND CHECKPOINT WITHIN 24 HOURS. OTHERWISE, THEY MUST BE STORED AT A PLACE       APPROVED BY A PROPER OFFICER OF CUSTOMS.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>H1</cbc:ConditionCode>
+					<cbc:ConditionDescription>THE GOODS AND THIS PERMIT  WITH INVOICES, BL/AWB, ETC MUST BE PRODUCED          FOR CUSTOMS CLEARANCE/ENDORSEMENT AT WOODLANDS CHECKPOINT/TUAS CHECKPOINT</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>A6</cbc:ConditionCode>
+					<cbc:ConditionDescription>IF THE PERMIT IS NOT USED, IT MUST BE CANCELLED OR RE-VALIDATED NOT             LATER THAN 24 HOURS OF ITS EXPIRY.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>EEE</cbc:ConditionCode>
+					<cbc:ConditionDescription>END OF CARGO CLEARANCE PERMIT.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+			</cac:Permit>
+		</out:OutwardPermit>
+	</OutboundMessage>
+</TradenetResponse>

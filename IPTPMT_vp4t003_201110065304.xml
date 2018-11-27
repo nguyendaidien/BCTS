@@ -1,0 +1,203 @@
+<TradenetResponse xmlns:inp="urn:crimsonlogic:tn:schema:xsd:InNonPayment" xmlns:app="urn:crimsonlogic:tn:schema:xsd:ApprovalMessage" dateTime="201110061425" xmlns:ipt="urn:crimsonlogic:tn:schema:xsd:InPayment" xmlns:rej="urn:crimsonlogic:tn:schema:xsd:RejectionMessage" xmlns:fee="urn:crimsonlogic:tn:schema:xsd:FeeMessage" xmlns="urn:crimsonlogic:tn:schema:xsd:TradenetResponse" xmlns:err="urn:crimsonlogic:tn:schema:xsd:ErrorMessage" xmlns:cac="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" xmlns:com="urn:crimsonlogic:tn:schema:xsd:CustomsCommonCode" xmlns:cbc="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" xmlns:tnp="urn:crimsonlogic:tn:schema:xsd:TranshipmentMovement" xmlns:cux="urn:crimsonlogic:tn:schema:xsd:CustomsExchangeRate" xmlns:coo="urn:crimsonlogic:tn:schema:xsd:CertificateOfOrigin" xmlns:out="urn:crimsonlogic:tn:schema:xsd:OutwardDeclaration" instanceIdentifier="91432467">
+	<cbc:MessageVersion>041</cbc:MessageVersion>
+	<cbc:SenderID>DCST.DCST401</cbc:SenderID>
+	<cbc:RecipientID>VP4T.VP4T003</cbc:RecipientID>
+	<cbc:TotalNumberOfResponse>1</cbc:TotalNumberOfResponse>
+	<OutboundMessage>
+		<ipt:InPaymentPermit>
+			<ipt:Declaration>
+				<ipt:Header>
+					<cbc:MessageReference>ETRADE1</cbc:MessageReference>
+					<cac:UniqueReferenceNumber>
+						<cbc:ID>200105123R</cbc:ID>
+						<cbc:Date>20111006</cbc:Date>
+						<cbc:SequenceNumeric>5304</cbc:SequenceNumeric>
+					</cac:UniqueReferenceNumber>
+					<cbc:CommonAccessReference>IPTPMT</cbc:CommonAccessReference>
+					<cbc:DeclarationType>GST</cbc:DeclarationType>
+					<cbc:DeclarationIndicator>true</cbc:DeclarationIndicator>
+					<cac:Remarks>
+						<cbc:FreeText>TESTED FOR TEST SCIRPT ID=TN_IPTDEC_GST_05</cbc:FreeText>
+					</cac:Remarks>
+					<cbc:SubmissionDatetime>20111006142534SST</cbc:SubmissionDatetime>
+				</ipt:Header>
+				<ipt:Cargo>
+					<cbc:CargoPackingType>9</cbc:CargoPackingType>
+					<cac:ReleaseLocation>
+						<cbc:LocationCode>KZ</cbc:LocationCode>
+						<cbc:LocationName>KEPPEL FTZ</cbc:LocationName>
+					</cac:ReleaseLocation>
+					<cac:ReceiptLocation>
+						<cbc:LocationCode>O</cbc:LocationCode>
+						<cbc:LocationName>32 INDUSTRIES PARK THE AAA BUILDING</cbc:LocationName>
+					</cac:ReceiptLocation>
+					<cac:TransportEquipment>
+						<cbc:SequenceNumeric>1</cbc:SequenceNumeric>
+						<cbc:EquipmentID>CONNO1236547I</cbc:EquipmentID>
+						<cbc:SizeTypeCode>LCL40</cbc:SizeTypeCode>
+						<cbc:EquipmentWeightMeasureNumeric>20</cbc:EquipmentWeightMeasureNumeric>
+						<cac:TransportEquipmentSeal>
+							<cbc:SealID>CSNO5986875325698PO</cbc:SealID>
+						</cac:TransportEquipmentSeal>
+					</cac:TransportEquipment>
+				</ipt:Cargo>
+				<ipt:Transport>
+					<cac:InwardTransport>
+						<cac:TransportMeans>
+							<cac:TransportMode>
+								<cbc:ModeCode>4</cbc:ModeCode>
+								<cbc:ConveyanceReferenceNumber>INWFNO1232968965E</cbc:ConveyanceReferenceNumber>
+								<cbc:TransportIdentifier>INWOO123VVVVVVVVVVVVVVVRRRRR874521E</cbc:TransportIdentifier>
+							</cac:TransportMode>
+							<cbc:MAWBOUCROBLNumber>INWOO123VVVVVVVVVVVVVVVRRRRR874521E</cbc:MAWBOUCROBLNumber>
+						</cac:TransportMeans>
+						<cbc:ArrivalDate>20110922</cbc:ArrivalDate>
+						<cbc:LoadingPort>GBCHE</cbc:LoadingPort>
+					</cac:InwardTransport>
+				</ipt:Transport>
+				<ipt:Party>
+					<cac:DeclarantParty>
+						<cac:PersonInformation>
+							<cbc:CodeValue>P00333333</cbc:CodeValue>
+							<cbc:Name>TEST THREE</cbc:Name>
+						</cac:PersonInformation>
+						<cbc:Telephone>68877333</cbc:Telephone>
+					</cac:DeclarantParty>
+					<cac:DeclaringAgentParty>
+						<cac:PartyIdentification>
+							<cbc:ID>200105123R</cbc:ID>
+						</cac:PartyIdentification>
+						<cac:PartyName>
+							<cbc:Name>CRIMSONLOGIC PTE LTD</cbc:Name>
+						</cac:PartyName>
+					</cac:DeclaringAgentParty>
+					<cac:FreightForwarderParty>
+						<cac:PartyIdentification>
+							<cbc:ID>37451600J</cbc:ID>
+						</cac:PartyIdentification>
+						<cac:PartyName>
+							<cbc:Name>TROP AQUARIUM</cbc:Name>
+						</cac:PartyName>
+					</cac:FreightForwarderParty>
+					<cac:InwardCarrierAgentParty>
+						<cac:PartyIdentification>
+							<cbc:ID>123456ABC</cbc:ID>
+						</cac:PartyIdentification>
+						<cac:PartyName>
+							<cbc:Name>TN41PARTYNAME</cbc:Name>
+						</cac:PartyName>
+					</cac:InwardCarrierAgentParty>
+					<cac:ImporterParty>
+						<cac:PartyIdentification>
+							<cbc:ID>197801536N</cbc:ID>
+						</cac:PartyIdentification>
+						<cac:PartyName>
+							<cbc:Name>BASFSOUTHEASTASIAPTELTD</cbc:Name>
+						</cac:PartyName>
+					</cac:ImporterParty>
+				</ipt:Party>
+				<cac:Invoice>
+					<cbc:InvoiceNumber>INV123456I.00</cbc:InvoiceNumber>
+					<cbc:InvoiceDate>20110923</cbc:InvoiceDate>
+					<cac:SupplierManufacturerParty>
+						<cbc:CodeValue>ABC PTE LTD</cbc:CodeValue>
+						<cbc:Name>QQOO AAA BBB CCC DDD EEE MANUFACTURE/SUPPLIER TRAD</cbc:Name>
+						<cbc:Name>QQOO AAA BBB CCC DDD EEE MANUFACTURE/SUPPLIER TRAD</cbc:Name>
+					</cac:SupplierManufacturerParty>
+					<cac:TotalInvoiceValue>
+						<cbc:Amount currencyID="HKD">25000.00</cbc:Amount>
+						<cbc:ExchangeRate>0.166250</cbc:ExchangeRate>
+					</cac:TotalInvoiceValue>
+				</cac:Invoice>
+				<ipt:Item>
+					<cbc:ItemSequenceNumeric>1</cbc:ItemSequenceNumeric>
+					<cbc:ItemHarmonizedSystemCode>76012000</cbc:ItemHarmonizedSystemCode>
+					<cbc:GoodsDescription>UNWROUGHT ALUMINIUM ALLOYS (TNE)</cbc:GoodsDescription>
+					<cac:ItemQuantity>
+						<cbc:HarmonizedSystemQuantity unitCode="TNE">2.0000</cbc:HarmonizedSystemQuantity>
+					</cac:ItemQuantity>
+					<cbc:OriginCountry>GL</cbc:OriginCountry>
+					<cac:TransactionValue>
+						<cbc:ItemCIFFOBValue>6534.00</cbc:ItemCIFFOBValue>
+					</cac:TransactionValue>
+					<cbc:BrandName>EAGLE BRAND</cbc:BrandName>
+					<cbc:ItemInvoiceNumber>INV123456I.00</cbc:ItemInvoiceNumber>
+					<cac:Tariff>
+						<cac:GoodsAndServicesTax>
+							<cbc:GoodsAndServicesTaxPercent>7</cbc:GoodsAndServicesTaxPercent>
+							<cbc:GoodsAndServicesTaxAmount>457.38</cbc:GoodsAndServicesTaxAmount>
+						</cac:GoodsAndServicesTax>
+					</cac:Tariff>
+				</ipt:Item>
+				<ipt:Summary>
+					<cbc:NumberOfItems>1</cbc:NumberOfItems>
+					<cbc:TotalCIFFOBValue>6534.00</cbc:TotalCIFFOBValue>
+					<cbc:TotalOuterPack unitCode="CTN">1</cbc:TotalOuterPack>
+					<cbc:TotalGrossWeight unitCode="KGM">2000.000</cbc:TotalGrossWeight>
+					<cac:TotalTariff>
+						<cbc:TotalGoodsAndServicesTaxAmount>457.38</cbc:TotalGoodsAndServicesTaxAmount>
+						<cbc:TotalAmountPayable>457.38</cbc:TotalAmountPayable>
+					</cac:TotalTariff>
+				</ipt:Summary>
+			</ipt:Declaration>
+			<cac:Permit>
+				<cbc:PermitNumber>IG1J139409P</cbc:PermitNumber>
+				<cac:PermitValidityPeriod>
+					<cbc:StartDate>20111006</cbc:StartDate>
+					<cbc:EndDate>20111019</cbc:EndDate>
+				</cac:PermitValidityPeriod>
+				<cbc:PermitApprovalDatetime>20111006142535SST</cbc:PermitApprovalDatetime>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>Y99</cbc:ConditionCode>
+					<cbc:ConditionDescription>SPECIMEN PERMIT ONLY</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>Z01</cbc:ConditionCode>
+					<cbc:ConditionDescription>APPROVED BY SINGAPORE CUSTOMS.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>GA</cbc:ConditionCode>
+					<cbc:ConditionDescription>APPROVED BY CUSTOMS SUBJECT TO THE DECLARANT COMPLYING WITH THE                 FOLLOWING CONDITION(S) FOR THE PERMIT TO BE VALID. FAILURE TO COMPLY WITH THE   CONDITION(S) IS AN OFFENCE.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>A73</cbc:ConditionCode>
+					<cbc:ConditionDescription>APPROVED BY PCD(HS) FOR COMPULSORY RE-EXPORT. YOU ARE NOT ALLOWED TO USE OR SELL THE GOODS LOCALLY WITHOUT PRIOR APPROVAL FROM PCD. RE-EXPORT DOCUMENTS  [QUOTING THE IMPORT CCO NO(S)] ARE TO BE FAXED TO 68362294 WITHIN 48 HRS OF     RE-EXPORT.FOR ITEMS 0001, 0002.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>Z02</cbc:ConditionCode>
+					<cbc:ConditionDescription>APPROVED BY SINGAPORE CUSTOMS ON CONDITION THAT THE PERMIT, INVOICES AND BILL OF LADING/AIR WAYBILL MUST BE SUBMITTED TO PERMITS COMPLIANCE BRANCH WITHIN48 HRS BY FAX (63371556) OR BY EMAIL AT CUSTOMS_TN48HR@CUSTOMS.GOV.SG.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>GQ</cbc:ConditionCode>
+					<cbc:ConditionDescription>IF THE DUTY/GST IS NOT PAID WITHIN THE VALIDITY PERIOD OF THE PERMIT,           THIS PERMIT MUST BE CANCELLED BEFORE ITS EXPIRY DATE  IF IT IS NOT USED FOR     CARGO CLEARANCE</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>P1</cbc:ConditionCode>
+					<cbc:ConditionDescription>THE CONTAINER(S) MUST BE PRODUCED AT CUSTOMS CHECKPOINT(S) FOR                  CLEARANCE UNLESS DIRECTED TO &apos;GREEN&apos; LANE. FOR CONTAINER(S) TO BE SCANNED,      PLEASE PRODUCE FOR SCANNING BY ICA AT SCANNING STATION AS DIRECTED.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>G7</cbc:ConditionCode>
+					<cbc:ConditionDescription>SUCCESSFUL GIRO DEDUCTION OF THE AMOUNT TO BE PAID FROM THE DECLARING           AGENT&apos;S ACCOUNT. YOU MUST HAVE ENOUGH FUNDS IN YOUR BANK ACCOUNT TO MEET        PAYMENT BEFORE MAKING THE DECLARATION.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>GX</cbc:ConditionCode>
+					<cbc:ConditionDescription>THE DUTY/GST MUST BE PAID SHOULD THE GIRO DEDUCTION FAIL. CUSTOMS MAY           INVOKE THE IMPORTER/DECLARANT&apos;S BG FOR RECOVERY OF THE DUTY/GST. A PENALTY      CHARGE MAY BE IMPOSED BY CUSTOMS FOR AN UNSUCCESSFUL GIRO DEDUCTION.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+				<cac:SCApprovalCondition>
+					<cbc:AgencyCode>SC</cbc:AgencyCode>
+					<cbc:ConditionCode>EEE</cbc:ConditionCode>
+					<cbc:ConditionDescription>END OF CARGO CLEARANCE PERMIT.</cbc:ConditionDescription>
+				</cac:SCApprovalCondition>
+			</cac:Permit>
+		</ipt:InPaymentPermit>
+	</OutboundMessage>
+</TradenetResponse>
