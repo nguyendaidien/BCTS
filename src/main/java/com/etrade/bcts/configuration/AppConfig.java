@@ -135,67 +135,18 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         matcher.setUseRegisteredSuffixPatternMatch(true);
     }
     
-	private boolean disregardStatus=false;
     
     
-    @Scheduled(fixedRateString = "6000", initialDelayString = "3000")
-   // @Scheduled(fixedDelay=5000)
+   // @Scheduled(fixedRateString = "25000", initialDelayString = "12500")
+    @Scheduled(fixedDelay=15000)
     public void perform() throws Exception{
     	LOG.info("perform() start");
-    	/*private AtomicBoolean enabled = new AtomicBoolean(true);
-        
-        private AtomicInteger batchRunCounter = new AtomicInteger(0);*/
-    	if(this.disregardStatus) {
-    		System.out.println("Alert Job ----:"+disregardStatus);
-    	}else {
-    		System.out.println("Alert Job ---- else");
-    		/*List<BctsRoute> routeList=batchService.findActiveJobs();*/
-    		
-    		/*for(BctsRoute r:routeList) {
-    			System.out.println("AJAY MAP ID:"+r.getRouteId());
-    			if(r.getStatus()=='A') {*/
     				JobParameters params = new JobParametersBuilder()
         	                .addString("JobID".toString(), String.valueOf(System.currentTimeMillis()))
         	                .toJobParameters();
         	        jobLaucher.run(job, params);
-    			/*}else {
-    				System.out.println("else bolck");
-    			}*/
-    		/*}*/
-    		
-    		 /*JobParameters params = new JobParametersBuilder()
-    	                .addString("JobID", String.valueOf(System.currentTimeMillis()))
-    	                .toJobParameters();
-    	        jobLaucher.run(job, params);*/
     	}
-    	
-    	
-    	
-    	
        
     }
-    
-    
-    /*private AtomicBoolean enabled = new AtomicBoolean(true);
-    
-    private AtomicInteger batchRunCounter = new AtomicInteger(0);
-     
-    @Scheduled(fixedRate = 5000)
-    public void launchJob() throws Exception {
-    	
-    	System.out.println("Ajay batch ############################");
-        if (enabled.get()) {
-            Date date = new Date();
-            org.springframework.batch.core.JobExecution jobExecution = jobLaucher
-              .run(job, new JobParametersBuilder()
-                .addDate("launchDate", date)
-                .toJobParameters());
-            batchRunCounter.incrementAndGet();
-        }
-    }*/
-    
-    
-    
-    
-}
+
 

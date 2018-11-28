@@ -64,5 +64,10 @@ public class BctsConstants {
 	public static final String INPUTPERMIT="IPTPMT";
 	public static final String OUTPUTPERMIT="OUTPMT";
 	
+	
+	public static final String INPUTPERMITPATH="/gets/bcts/permitIn/";
+	public static final String OUTPUTPERMITPATH="/gets/bcts/permitOut/";
+	public static final String SLASH="/";
+	
 }
 

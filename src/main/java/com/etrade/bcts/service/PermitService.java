@@ -8,4 +8,5 @@ import com.etrade.bcts.model.Permit;
 public interface PermitService { 
 	List<Permit> search(String term);
 	void saveJobHeader(BctsJobHeader jobHeader);
+	BctsJobHeader getJobHeaderInfo(String uid,String urn);
 }

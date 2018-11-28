@@ -1,0 +1,8 @@
+28112018-Ajay
+Start
+1. Updated Scheduler reader will read xml, writer will write objects to DB
+2. Need to create below folder structure and keep your test xml files in today's date of permitIn folder
+3. Now scheduler will take files based on chunk value
+/gets/bcts/permitIn/20181128
+/gets/bcts/permitOut/20181128
+END

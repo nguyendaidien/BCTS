@@ -53,7 +53,7 @@ public class PermitCargo implements Serializable{
 	@Column(name="MAX_AME_CTN_SEQ")
 	private BigDecimal maxAmeCtnSqe;
 	
-	@OneToMany(targetEntity=PermitCargoCtn.class,mappedBy="permitCargo",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=PermitCargoCtn.class,mappedBy="permitCargo",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<PermitCargoCtn> permitCCtnLst;
 	
 	

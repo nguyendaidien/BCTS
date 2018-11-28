@@ -61,35 +61,35 @@ public class BctsJobHeader implements Serializable{
 	private Date approvedDate;
 	
 	
-	@OneToMany(targetEntity=BctsPermitType.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=BctsPermitType.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<BctsPermitType> permits;
 	
-	@OneToMany(targetEntity=CaaApprovalCondition.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=CaaApprovalCondition.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<CaaApprovalCondition> permitConditions;
 	
-	@OneToMany(targetEntity=PermitSummary.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=PermitSummary.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<PermitSummary> summary;
 
 	
-	@OneToMany(targetEntity=PermitCertifate.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=PermitCertifate.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<PermitCertifate> certificates;
 	
-	@OneToMany(targetEntity=PermitInvoice.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=PermitInvoice.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<PermitInvoice> invoicesLst;
 	
-	@OneToMany(targetEntity=PermitLicence.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=PermitLicence.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<PermitLicence> licenseLst;
 	
-	@OneToMany(targetEntity=PermitCargo.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=PermitCargo.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<PermitCargo> cargoList;
 	
-	@OneToMany(targetEntity=PermitInTransport.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=PermitInTransport.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<PermitInTransport> inTransList;
 	
-	@OneToMany(targetEntity=PermitOutTransport.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=PermitOutTransport.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<PermitOutTransport> outTransList;
 	
-	@OneToMany(targetEntity=PermitParty.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=PermitParty.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<PermitParty> permitPartyLst;
 	
 	

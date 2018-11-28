@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.etrade.bcts.dao.JobHeaderDao;
 import com.etrade.bcts.dao.PermitDao;
 import com.etrade.bcts.model.BctsJobHeader;
-import com.etrade.bcts.model.BctsPermitType;
 import com.etrade.bcts.model.Permit;
 
 @Service("permitService")
@@ -36,6 +35,11 @@ public class PermitServiceImpl implements PermitService {
 		jobHeaderDao.saveJobHeader(jobHeader);
 		LOG.info("PermitServiceImpl saveJobHeader() end");
 		
+	}
+	
+	@Override
+	public BctsJobHeader getJobHeaderInfo(String uid, String urn) {
+		return jobHeaderDao.getJobHeaderInfo(uid, urn);
 	}
 
 }
