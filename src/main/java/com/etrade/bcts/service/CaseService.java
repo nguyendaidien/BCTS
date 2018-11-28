@@ -9,7 +9,7 @@ import com.etrade.bcts.model.User;
 
 public interface CaseService {
 	BCTSAlert getCaseDetailById(int caseId, Object uen, boolean getComments);
-	List<BCTSAlert> getCasesByType(String type, Company uen);
+	List<BCTSAlert> getCasesByCategory(String category, Company uen);
 	void update(CaseComment comment, boolean completed);
 	void save(BCTSAlert bctsAlert);
 	void update(BCTSAlert bctsAlert);

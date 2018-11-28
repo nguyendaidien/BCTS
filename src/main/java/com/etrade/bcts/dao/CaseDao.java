@@ -12,7 +12,7 @@ public interface CaseDao {
 	
 	BCTSAlert getCaseDetailById(int caseId, Object uen, boolean getComments);
 	
-	List<BCTSAlert> getCasesByType(String type, Company uen);
+	List<BCTSAlert> getCasesByCategory(String category, Company uen);
 	
 	void updateStatus(CaseComment comment);
 	

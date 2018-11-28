@@ -39,8 +39,8 @@ public class CaseServiceImpl implements CaseService {
 	}
 
 	@Override
-	public List<BCTSAlert> getCasesByType(String type, Company uen) {
-		return caseDao.getCasesByType(type, uen);
+	public List<BCTSAlert> getCasesByCategory(String category, Company uen) {
+		return caseDao.getCasesByCategory(category, uen);
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class CaseServiceImpl implements CaseService {
 		BCTSAlert bctsAlert = new BCTSAlert(b);
 		caseDao.save(bctsAlert);
 		
-		if(b.getCategory().equals(BctsConstants.CASETYPE_LICENCE_VALIDITY)) {
+		if(b.getCategory().equals(BctsConstants.CASE_CATEGORY_LICENCE_VALIDITY)) {
 			LicenceValidity lv = b.getLicence();
 			lv.setCaseId(bctsAlert.getCaseId());
 			bctsAlert.setLicence(lv);
@@ -68,7 +68,7 @@ public class CaseServiceImpl implements CaseService {
 		b.setJobNo(bctsAlert.getJobNo());
 		b.setPermitNo(bctsAlert.getPermitNo());
 		b.setToAlertCompany(bctsAlert.getToAlertCompany());
-		if(b.getCategory().equals(BctsConstants.CASETYPE_LICENCE_VALIDITY)) {
+		if(b.getCategory().equals(BctsConstants.CASE_CATEGORY_LICENCE_VALIDITY)) {
 			LicenceValidity lv = b.getLicence();
 			lv.setLicenceStartDate(bctsAlert.getLicence().getLicenceStartDate());
 			lv.setLicenceEndDate(bctsAlert.getLicence().getLicenceEndDate());

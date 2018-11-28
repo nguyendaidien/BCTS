@@ -58,7 +58,7 @@ public class CaseController {
 		}
 		model.put("caseComment", new CaseComment());
 		model.put("caseDetail", caseDetail);
-		if(caseDetail.getCategory().equals(BctsConstants.CASETYPE_PERMIT_CONDITION)) {
+		if(caseDetail.getCategory().equals(BctsConstants.CASE_CATEGORY_PERMIT_CONDITION)) {
 			model.put("pc", new PermitCondition(caseDetail));
 		}
 		List<CaseComment> comments= caseDetail.getComments();
@@ -70,7 +70,7 @@ public class CaseController {
 	@RequestMapping(value="/lvList", method=RequestMethod.GET)
 	public String getLicenceValidityList(ModelMap model, Principal principal) {
 		User user = userService.findByUserId(principal.getName(), false);
-		List<BCTSAlert> lvList = caseService.getCasesByType(BctsConstants.CASETYPE_LICENCE_VALIDITY, user.getCompany());
+		List<BCTSAlert> lvList = caseService.getCasesByCategory(BctsConstants.CASE_CATEGORY_LICENCE_VALIDITY, user.getCompany());
 		model.put("lvList", lvList);
 		return "licenceValidityList";
 	}
@@ -134,7 +134,7 @@ public class CaseController {
 		}
 		User user = userService.findByUserId(principal.getName(), false);
 		bctsAlert.setAlertEmails(BCTSUtil.convertJsonArrToString(alertEmails,','));
-		bctsAlert.setCategory(BctsConstants.CASETYPE_LICENCE_VALIDITY);
+		bctsAlert.setCategory(BctsConstants.CASE_CATEGORY_LICENCE_VALIDITY);
 		bctsAlert.setOpenBy(user);
 		bctsAlert.setOpenDate(new Date());
 		bctsAlert.setStatus(BctsConstants.CASE_STATUS_OPEN);

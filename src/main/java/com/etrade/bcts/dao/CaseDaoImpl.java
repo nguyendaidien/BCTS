@@ -50,9 +50,9 @@ public class CaseDaoImpl extends AbstractDao<Integer, BCTSAlert> implements Case
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<BCTSAlert> getCasesByType(String type, Company uen) {
+	public List<BCTSAlert> getCasesByCategory(String category, Company uen) {
 		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("category", type));
+		crit.add(Restrictions.eq("category", category));
 		if(uen != null) {
 			crit.add(Restrictions.eq("uen", uen));
 		}

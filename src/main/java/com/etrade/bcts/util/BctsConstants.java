@@ -38,10 +38,10 @@ public class BctsConstants {
 	public static final String KEY_CC_EMAIL = "ccEmail";
 	public static final String DOWNLOADFOLDER ="ftp:gets/bcts/urn/";
 	
-	/*CASE TYPE*/
-	public static final String CASETYPE_LICENCE_VALIDITY ="LV"; // Licence Validity
-	public static final String CASETYPE_PERMIT_CONDITION ="PC"; // Permit Condition
-	public static final String CASETYPE_CASE_MANAGEMENT  ="CM"; // Case Mgt
+	/*CASE CATEGORY*/
+	public static final String CASE_CATEGORY_LICENCE_VALIDITY ="LV"; // Licence Validity
+	public static final String CASE_CATEGORY_PERMIT_CONDITION ="PC"; // Permit Condition
+	public static final String CASE_CATEGORY_CASE_MANAGEMENT  ="CM"; // Case Mgt
 	public static final String CASE_STATUS_OPEN="O"; 
 	public static final String CASE_STATUS_COMPLETED="C"; 
 	
