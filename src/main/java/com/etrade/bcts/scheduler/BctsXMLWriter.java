@@ -16,12 +16,15 @@ import com.etrade.bcts.model.BCTSAlert;
 import com.etrade.bcts.model.BctsJobHeader;
 import com.etrade.bcts.model.CaaApprovalCondition;
 import com.etrade.bcts.model.Company;
+import com.etrade.bcts.model.PermitCondition;
 import com.etrade.bcts.model.PermitInTransport;
 import com.etrade.bcts.model.PermitOutTransport;
 import com.etrade.bcts.model.User;
 import com.etrade.bcts.service.CaseService;
 import com.etrade.bcts.service.PermitService;
 import com.etrade.bcts.util.BctsConstants;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class BctsXMLWriter implements ItemWriter<BctsJobHeader> {
@@ -121,31 +124,43 @@ public class BctsXMLWriter implements ItemWriter<BctsJobHeader> {
 	 * @author ajayasamanta
 	 * @param caaApr
 	 * @return
+	 * @throws JsonProcessingException 
 	 */
+//	public static String converntJsonDetais(CaaApprovalCondition caaApr) {
+//		StringBuilder curlyS = new StringBuilder();
+//		curlyS.append("{");
+//		StringBuilder curlyE = new StringBuilder();
+//		curlyE.append("}");
+//		StringBuilder quote = new StringBuilder();
+//		quote.append("\"");
+//		StringBuilder colon = new StringBuilder();
+//		colon.append(":");
+//		StringBuilder comma = new StringBuilder();
+//		comma.append(",");
+//		StringBuilder sb = new StringBuilder();
+//		sb.append(curlyS);
+//		sb.append(quote).append("AgencyCode").append(quote).append(colon);
+//		sb.append(quote).append(caaApr.getAgencyCode()).append(quote).append(comma);
+//		sb.append(quote).append("ConditionCode").append(quote).append(colon);
+//		sb.append(quote).append(caaApr.getConditionCode()).append(quote).append(comma);
+//		sb.append(quote).append("ConditionDescription").append(quote).append(colon);
+//		sb.append(quote).append(caaApr.getCondtionDesc1()).append(quote);
+//		sb.append(curlyE);
+//		return sb.toString();
+//
+//	}
+
 	public static String converntJsonDetais(CaaApprovalCondition caaApr) {
-		StringBuilder curlyS = new StringBuilder();
-		curlyS.append("{");
-		StringBuilder curlyE = new StringBuilder();
-		curlyE.append("}");
-		StringBuilder quote = new StringBuilder();
-		quote.append("\"");
-		StringBuilder colon = new StringBuilder();
-		colon.append(":");
-		StringBuilder comma = new StringBuilder();
-		comma.append(",");
-		StringBuilder sb = new StringBuilder();
-		sb.append(curlyS);
-		sb.append(quote).append("AgencyCode").append(quote).append(colon);
-		sb.append(quote).append(caaApr.getAgencyCode()).append(quote).append(comma);
-		sb.append(quote).append("ConditionCode").append(quote).append(colon);
-		sb.append(quote).append(caaApr.getConditionCode()).append(quote).append(comma);
-		sb.append(quote).append("ConditionDescription").append(quote).append(colon);
-		sb.append(quote).append(caaApr.getCondtionDesc1()).append(quote);
-		sb.append(curlyE);
-		return sb.toString();
-
+		ObjectMapper mapper = new ObjectMapper();
+		String condition = "";
+		try {
+			condition = mapper.writeValueAsString(new PermitCondition(caaApr));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return condition;
 	}
-
 	/**
 	 * This method will write into all permit related tables
 	 * 

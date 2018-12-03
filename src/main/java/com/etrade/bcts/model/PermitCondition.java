@@ -18,13 +18,19 @@ public class PermitCondition {
     	JSONObject pcJson;
 		try {
 			pcJson = new JSONObject(b.getAlertContent());
-			this.agencyCode =  pcJson.getString("AgencyCode");
-			this.conditionCode =  pcJson.getString("ConditionCode");
-			this.conditionDescription = pcJson.getString("ConditionDescription");
+			this.agencyCode =  pcJson.getString("agencyCode");
+			this.conditionCode =  pcJson.getString("conditionCode");
+			this.conditionDescription = pcJson.getString("conditionDescription");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
     };
+    
+    public PermitCondition(CaaApprovalCondition cac) {
+    	this.agencyCode = cac.getAgencyCode();
+    	this.conditionCode = cac.getConditionCode();
+    	this.conditionDescription = cac.getCondtionDesc1();
+    }
     
 	public String getJobNo() {
 		return jobNo;
