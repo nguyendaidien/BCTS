@@ -47,11 +47,11 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 	@Autowired
 	RoleToUserProfileConverter roleToUserProfileConverter;
 	
-	@Autowired
-	private JobLauncher jobLaucher;
-	
-	@Autowired
-	private Job job;
+//	@Autowired
+//	private JobLauncher jobLaucher;
+//	
+//	@Autowired
+//	private Job job;
 
 	
 	
@@ -137,15 +137,15 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     
     
     
-   // @Scheduled(fixedRateString = "25000", initialDelayString = "12500")
-    @Scheduled(fixedDelay=15000)
-    public void perform() throws Exception{
-    	LOG.info("perform() start");
-    				JobParameters params = new JobParametersBuilder()
-        	                .addString("JobID".toString(), String.valueOf(System.currentTimeMillis()))
-        	                .toJobParameters();
-        	        jobLaucher.run(job, params);
-    	}
+//   // @Scheduled(fixedRateString = "25000", initialDelayString = "12500")
+//    @Scheduled(fixedDelay=15000)
+//    public void perform() throws Exception{
+//    	LOG.info("perform() start");
+//    				JobParameters params = new JobParametersBuilder()
+//        	                .addString("JobID".toString(), String.valueOf(System.currentTimeMillis()))
+//        	                .toJobParameters();
+//        	        jobLaucher.run(job, params);
+//    	}
        
     }
 

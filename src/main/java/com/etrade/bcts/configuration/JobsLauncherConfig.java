@@ -42,7 +42,10 @@ public class JobsLauncherConfig extends WebMvcConfigurerAdapter{
 	@Autowired
 	private Job pcJob;
 	
-//    @Scheduled(fixedDelay=10000)
+	@Autowired
+	private Job permitXMLJob;
+	
+    @Scheduled(fixedDelay=5000)
     public void performLvCmJob() throws Exception
     {
     	LOG.info("Alert Job ----performLvCmJob");
@@ -61,5 +64,15 @@ public class JobsLauncherConfig extends WebMvcConfigurerAdapter{
                 .toJobParameters();
         jobLaucher.run(pcJob, params);
     }
+    
+	  @Scheduled(fixedDelay=5000)
+	  public void performPermitXMLJob() throws Exception
+	  {
+	  		LOG.info("Alert Job ----performPermitXMLJob");
+	      JobParameters params = new JobParametersBuilder()
+	              .addString("JobID", String.valueOf(System.currentTimeMillis()))
+	              .toJobParameters();
+	      jobLaucher.run(permitXMLJob, params);
+	  }
 }
 

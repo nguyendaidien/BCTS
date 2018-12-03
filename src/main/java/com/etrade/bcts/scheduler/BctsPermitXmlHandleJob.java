@@ -1,4 +1,4 @@
-package com.etrade.bcts.configuration;
+package com.etrade.bcts.scheduler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,16 +18,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.etrade.bcts.configuration.HibernateConfiguration;
 import com.etrade.bcts.handler.InterceptingJobExecution;
 import com.etrade.bcts.model.BctsJobHeader;
-import com.etrade.bcts.scheduler.BctsXMLReader;
-import com.etrade.bcts.scheduler.BctsXMLWriter;
 
 
 @Configuration
 @EnableBatchProcessing
-public class BctsRouteSftpJob {
-	static final Logger logger = LoggerFactory.getLogger(BctsRouteSftpJob.class);
+public class BctsPermitXmlHandleJob {
+	static final Logger logger = LoggerFactory.getLogger(BctsPermitXmlHandleJob.class);
 	@Autowired
 	HibernateConfiguration configuration;
 	@Autowired
@@ -40,12 +39,12 @@ public class BctsRouteSftpJob {
 	
 	
 	@Bean
-	ItemReader<BctsJobHeader> itemReader() {
-	return new BctsXMLReader();
+	ItemReader<BctsJobHeader> permitXmlItemReader() {
+		return new BctsXMLReader();
 	}
 	
 	@Bean
-	ItemProcessor<BctsJobHeader, BctsJobHeader> itemProcessor() {
+	ItemProcessor<BctsJobHeader, BctsJobHeader> permitXmlItemProcessor() {
 		logger.info("itemProcessor():Start");
 		return new ItemProcessor<BctsJobHeader, BctsJobHeader>() {
 			@Override
@@ -59,24 +58,24 @@ public class BctsRouteSftpJob {
 	}
 	
 	@Bean
-	ItemWriter<BctsJobHeader> itemWriter() {
+	ItemWriter<BctsJobHeader> permitXmlItemWriter() {
 		logger.info("itemWriter()################ ");
 		return new BctsXMLWriter();
 
 	}
 	 
 	@Bean
-	Step step1(ItemReader<BctsJobHeader> itemReader, ItemProcessor<BctsJobHeader, BctsJobHeader> itemProcessor, ItemWriter<BctsJobHeader> itemWriter){
-		logger.info("stepAjay1()##################################: {}",itemReader);
-		 logger.info("stepAjay2()##################################: {}",itemProcessor);
-		 logger.info("stepAjay3()##################################: {}",itemWriter);
-		return stepBuilderFact.get("step1").<BctsJobHeader, BctsJobHeader> chunk(3)
-				.reader(itemReader).processor(itemProcessor).writer(itemWriter).build();
+	Step permitXMLStep1(ItemReader<BctsJobHeader> permitXmlItemReader, ItemProcessor<BctsJobHeader, BctsJobHeader> permitXmlItemProcessor, ItemWriter<BctsJobHeader> permitXmlItemWriter){
+		logger.info("stepAjay1()##################################: {}",permitXmlItemReader);
+		 logger.info("stepAjay2()##################################: {}",permitXmlItemProcessor);
+		 logger.info("stepAjay3()##################################: {}",permitXmlItemWriter);
+		return stepBuilderFact.get("permitXMLStep1").<BctsJobHeader, BctsJobHeader> chunk(3)
+				.reader(permitXmlItemReader).processor(permitXmlItemProcessor).writer(permitXmlItemWriter).build();
 	}
 	
 	@Bean
-	public Job job(@Qualifier("step1") Step step1) {
+	public Job permitXMLJob(@Qualifier("permitXMLStep1") Step step1) {
 		logger.info("job()##################################: {}",step1);
-		return jobBuilderFactory.get("BctsRouteSftpJob").start(step1).listener(interceptingJob).build(); 
+		return jobBuilderFactory.get("BctsPermitXmlHandleJob").start(step1).listener(interceptingJob).build(); 
 	}
 }

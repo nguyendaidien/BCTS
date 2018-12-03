@@ -18,7 +18,7 @@ public class BCTSAlertItemWriter implements ItemWriter<BCTSAlert> {
 	
 	@Override
 	public void write(List<? extends BCTSAlert> list) throws Exception {
-			LOGGER.info("chunk size: " + list.size());
+			LOGGER.info("start BCTSAlertJob BCTSAlertItemWriter....");
 			
 			for (BCTSAlert bctsAlert : list) {		
 				emailService.sendBCTSAlertMail(bctsAlert, null);

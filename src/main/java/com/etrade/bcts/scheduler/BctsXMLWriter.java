@@ -80,7 +80,7 @@ public class BctsXMLWriter implements ItemWriter<BctsJobHeader> {
 					comp.setUeiNo(bctsJobHeader.getUenId());
 					bctsAlert.setJobNo(bctsJobHeader.getUrnSeq());
 					bctsAlert.setUen(comp);
-					bctsAlert.setCategory(BctsConstants.CASETYPE_PERMIT_CONDITION);
+					bctsAlert.setCategory(BctsConstants.CASE_CATEGORY_PERMIT_CONDITION);
 					bctsAlert.setPermitNo(bctsJobHeader.getPermits().get(0).getPermitNumber());
 					bctsAlert.setOpenDate(openDate);
 					User user = new User();
@@ -102,7 +102,7 @@ public class BctsXMLWriter implements ItemWriter<BctsJobHeader> {
 					comp.setUeiNo(bctsJobHeader.getUenId());
 					bctsAlert.setJobNo(bctsJobHeader.getUrnSeq());
 					bctsAlert.setUen(comp);
-					bctsAlert.setCategory(BctsConstants.CASETYPE_PERMIT_CONDITION);
+					bctsAlert.setCategory(BctsConstants.CASE_CATEGORY_PERMIT_CONDITION);
 					bctsAlert.setPermitNo(bctsJobHeader.getPermits().get(0).getPermitNumber());
 					bctsAlert.setOpenDate(openDate);
 					User user = new User();

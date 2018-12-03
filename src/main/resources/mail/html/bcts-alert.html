@@ -21,14 +21,14 @@
                         <p>
                             Please access Brokerage Control Tower System and take necessary actions asap for following case!
                         </p>
-                        <span th:if="${case.caseType != 'PC'}">
+                        <span th:if="${case.category != 'PC'}">
                         	<a href="home.html" th:href="@{http://localhost:8082/bcts/cases/{caseId}(caseId=${case.caseId})}" data-th-text="${case.alertContent}"></a><br/>
                         </span>
                         	<!-- <a href="home.html" th:href="@{{domain}(domain=${domainName})/bcts/cases/{caseId}(caseId=${case.caseId})}" data-th-text="${case.alertContent}"></a><br/>
                         	<a href="home.html" th:href="@{${domainName}/bcts/cases/{caseId}(caseId=${case.caseId})}" data-th-text="${case.alertContent}"></a><br/>
                         	<a href="home.html" th:href="@{{domain}(domain=${domainName2})/bcts/cases/{caseId}(caseId=${case.caseId})}" data-th-text="${case.alertContent}"></a><br/>
                         	<a href="home.html" th:href="@{${domainName2}/bcts/cases/{caseId}(caseId=${case.caseId})}" data-th-text="${case.alertContent}"></a>	 -->
-                        <div th:if="${case.caseType == 'PC'}" class="table-responsive-sm">
+                        <div th:if="${case.category == 'PC'}" class="table-responsive-sm">
 							<table class="table">  
 							  <tbody>
 							    <tr>      

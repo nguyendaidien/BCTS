@@ -3,7 +3,7 @@ package com.etrade.bcts.scheduler;
 import java.util.Date;
 import java.util.Map;
 
-import org.apache.commons.collections.map.HashedMap;
+import java.util.HashMap;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,16 +54,17 @@ public class BCTSAlertJob {
 	
 	@Bean
 	ItemReader<BCTSAlert> itemReader() {
+		LOGGER.info("start BCTSAlertJob itemReader....");
 		HibernateCursorItemReader<BCTSAlert> itemReader = new HibernateCursorItemReader<>();
 		String query = "FROM BCTSAlert b WHERE b.reminderDate <= :today "
 										+ "AND b.status=:status "
-										+ "AND (b.caseType=:type1 OR b.caseType=:type2)";
+										+ "AND (b.category=:category1 OR b.category=:category2)";
 //		String query = "FROM BCTSAlert b WHERE b.status=:status";
-		Map<String, Object> parameterValues = new HashedMap();		
+		Map<String, Object> parameterValues = new HashMap();		
 		parameterValues.put("today", new Date());
 		parameterValues.put("status", BctsConstants.CASE_STATUS_OPEN);
-		parameterValues.put("type1", BctsConstants.CASETYPE_LICENCE_VALIDITY);
-		parameterValues.put("type2", BctsConstants.CASETYPE_CASE_MANAGEMENT);
+		parameterValues.put("category1", BctsConstants.CASE_CATEGORY_LICENCE_VALIDITY);
+		parameterValues.put("category2", BctsConstants.CASE_CATEGORY_CASE_MANAGEMENT);
 		
 		itemReader.setSessionFactory(sessionFactory);
 		itemReader.setQueryString(query);		
@@ -73,12 +74,13 @@ public class BCTSAlertJob {
 	
 	@Bean
 	ItemReader<BCTSAlert> pcItemReader() {
+		LOGGER.info("start BCTSAlertJob pcItemReader....");
 		HibernateCursorItemReader<BCTSAlert> itemReader = new HibernateCursorItemReader<>();
 		String query = "FROM BCTSAlert b WHERE b.status=:status "
-										+ "AND caseType=:type1";
-		Map<String, Object> parameterValues = new HashedMap();		
+										+ "AND category=:category";
+		Map<String, Object> parameterValues = new HashMap();		
 		parameterValues.put("status", BctsConstants.CASE_STATUS_OPEN);
-		parameterValues.put("type1", BctsConstants.CASETYPE_PERMIT_CONDITION);
+		parameterValues.put("category", BctsConstants.CASE_CATEGORY_PERMIT_CONDITION);
 		
 		itemReader.setSessionFactory(sessionFactory);
 		itemReader.setQueryString(query);		
@@ -96,11 +98,12 @@ public class BCTSAlertJob {
 	
 	@Bean
 	ItemProcessor<BCTSAlert, BCTSAlert> itemProcessor() {
+		LOGGER.info("start BCTSAlertJob itemProcessor....");
 		return new ItemProcessor<BCTSAlert, BCTSAlert>() {
 			
 			@Override
-			public BCTSAlert process(BCTSAlert arg0) throws Exception {
-				System.out.println("Processing case: " + arg0.getCaseId());
+			public BCTSAlert process(BCTSAlert arg0) throws Exception {				
+				LOGGER.info("Processing case: " + arg0.getCaseId());
 				return arg0;
 			}
 		};
