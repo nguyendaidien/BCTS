@@ -31,18 +31,20 @@ public class BatchDaoImpl extends AbstractDao<Integer, BctsRoute> implements Bat
 	
 	@SuppressWarnings("unchecked")
 	public List<BctsRoute> findActiveJobs() {
-		Criteria criteria = createEntityCriteria().addOrder(Order.asc("routeId"));
-		criteria.add(Restrictions.eq("status", 'A'));
-		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
-		return (List<BctsRoute>) criteria.list();
+//		Criteria criteria = createEntityCriteria().addOrder(Order.asc("routeId"));
+//		criteria.add(Restrictions.eq("status", 'A'));
+//		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
+//		return (List<BctsRoute>) criteria.list();
+		return null;
 	}
 	
 	
 	@SuppressWarnings("unchecked")
 	public List<BctsRoute> findAllJobs() {
-		Criteria criteria = createEntityCriteria().addOrder(Order.asc("routeId"));
-		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
-		return (List<BctsRoute>) criteria.list();
+//		Criteria criteria = createEntityCriteria().addOrder(Order.asc("routeId"));
+//		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
+//		return (List<BctsRoute>) criteria.list();
+		return null;
 	}
 	
 	

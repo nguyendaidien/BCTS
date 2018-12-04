@@ -42,4 +42,10 @@ public class PermitServiceImpl implements PermitService {
 		return jobHeaderDao.getJobHeaderInfo(uid, urn);
 	}
 
+	public List<BctsJobHeader> fulltextSearch(String text) {
+		return jobHeaderDao.searchPermitByKeywordQuery(text);
+	}
+	public void indexing() {
+		jobHeaderDao.indexing();
+	}
 }

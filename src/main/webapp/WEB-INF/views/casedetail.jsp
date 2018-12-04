@@ -7,13 +7,13 @@
 <div class="card mb-3">
 <div class="card-header"><b>Case Detail</b></div>
 <div class="card-body">
-		<c:if test="${caseDetail.caseType eq 'LV'}">
+		<c:if test="${caseDetail.category eq 'LV'}">
 			<c:import url="./../../casedetail_lv.jsp"></c:import>
 		</c:if>
-		<c:if test="${caseDetail.caseType eq 'PC'}">
+		<c:if test="${caseDetail.category eq 'PC'}">
 			<c:import url="./../../casedetail_pc.jsp"></c:import>
 		</c:if>
-		<c:if test="${caseDetail.caseType eq 'CM'}">
+		<c:if test="${caseDetail.category eq 'CM'}">
 			<c:import url="./../../casedetail_cm.jsp"></c:import>
 		</c:if>
 </div> 

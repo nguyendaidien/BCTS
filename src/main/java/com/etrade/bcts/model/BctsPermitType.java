@@ -14,8 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 @Entity
 @Table(name="BCTS_PERMIT")
+@Indexed
 public class BctsPermitType implements Serializable {
 
 	
@@ -28,6 +32,8 @@ public class BctsPermitType implements Serializable {
 	@Id
 	@Column(name="JOB_NO")
 	private String urnSeq;//JOB
+	
+	@Field
 	@Column(name="PERMIT_NO")
 	private String permitNumber;
 	@Column(name="CERT_NO")

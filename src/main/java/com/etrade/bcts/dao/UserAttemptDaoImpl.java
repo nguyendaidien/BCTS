@@ -11,10 +11,13 @@
 package com.etrade.bcts.dao;
 
 import java.util.Date;
+import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,32 +39,37 @@ public class UserAttemptDaoImpl extends AbstractDao<Integer, UserAttempts>implem
 
 	@Override
 	public UserAttempts getUserAttempts(String userName) {
-		logger.info("getUserAttempts() username : {}", userName);
-		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("username", userName));
-		UserAttempts userAttempts = (UserAttempts)crit.uniqueResult();
+//		logger.info("getUserAttempts() username : {}", userName);
+//		Criteria crit = createEntityCriteria();
+//		crit.add(Restrictions.eq("username", userName));
+//		UserAttempts userAttempts = (UserAttempts)crit.uniqueResult();
+//		return userAttempts;
+		CriteriaQuery<UserAttempts> crit = createEntityCriteria();
+		Root<UserAttempts> root = crit.from(UserAttempts.class);
+		Predicate condition = getCriteriaBuilder().equal(root.get("username"), userName);
+		crit.where(condition);
+		Query<UserAttempts> query = getSession().createQuery(crit);
+		UserAttempts userAttempts = null;
+		try{
+			userAttempts = (UserAttempts) query.getSingleResult();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		return userAttempts;
 	}
 	
-	
-	/*@Override
+
 	public void resetFailAttempts(String userName) {
-		Query q=getSession().createQuery("update UserAttempts SET attempts =:attmpt, lastmodified =:modif WHERE username = :usr");
-		q.setString("attmpt","0");
-		Date dt=new Date();
-		q.setDate("modif",dt);
-		q.setString("usr",userName);
-		q.executeUpdate();
-		
-	}*/
-	
-	
-	public void resetFailAttempts(String userName) {
-		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("username", userName));
-		UserAttempts userAttempts = (UserAttempts)crit.uniqueResult();
+//		Criteria crit = createEntityCriteria();
+//		crit.add(Restrictions.eq("username", userName));
+//		UserAttempts userAttempts = (UserAttempts)crit.uniqueResult();
+//		if(null!=userAttempts) {
+//		delete(userAttempts);
+//		}
+		UserAttempts userAttempts = getUserAttempts(userName);
 		if(null!=userAttempts) {
-		delete(userAttempts);
+			delete(userAttempts);
 		}
 	}
 	
@@ -84,10 +92,10 @@ public class UserAttemptDaoImpl extends AbstractDao<Integer, UserAttempts>implem
 			if (null != user) {
 				Query q = getSession().createQuery(
 						"update UserAttempts SET attempts =:attmpt,lastModified=:modif WHERE username = :usr");
-				q.setInteger("attmpt", userAttempts.getAttempts() + 1);
+				q.setParameter("attmpt", userAttempts.getAttempts() + 1);
 				Date dt=new Date();
-				q.setDate("modif", dt);
-				q.setString("usr", userName);
+				q.setParameter("modif", dt);
+				q.setParameter("usr", userName);
 				logger.info("before update in user attempt :{}",q);
 				q.executeUpdate();
 				

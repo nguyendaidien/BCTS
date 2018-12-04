@@ -9,4 +9,6 @@ public interface PermitService {
 	List<Permit> search(String term);
 	void saveJobHeader(BctsJobHeader jobHeader);
 	BctsJobHeader getJobHeaderInfo(String uid,String urn);
+	List<BctsJobHeader> fulltextSearch(String text);
+	void indexing();
 }

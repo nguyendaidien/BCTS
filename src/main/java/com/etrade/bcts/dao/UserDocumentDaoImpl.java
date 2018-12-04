@@ -13,8 +13,9 @@ public class UserDocumentDaoImpl extends AbstractDao<Integer, UserDocument> impl
 
 	@SuppressWarnings("unchecked")
 	public List<UserDocument> findAll() {
-		Criteria crit = createEntityCriteria();
-		return (List<UserDocument>)crit.list();
+//		Criteria crit = createEntityCriteria();
+//		return (List<UserDocument>)crit.list();
+		return null;
 	}
 
 	public void save(UserDocument document) {
@@ -28,17 +29,19 @@ public class UserDocumentDaoImpl extends AbstractDao<Integer, UserDocument> impl
 
 	@SuppressWarnings("unchecked")
 	public List<UserDocument> findAllByUserId(String userId){
-		Criteria crit = createEntityCriteria();
-		Criteria userCriteria = crit.createCriteria("user");
-		userCriteria.add(Restrictions.eq("ssoId", userId));
-		return (List<UserDocument>)crit.list();
+//		Criteria crit = createEntityCriteria();
+//		Criteria userCriteria = crit.createCriteria("user");
+//		userCriteria.add(Restrictions.eq("ssoId", userId));
+//		return (List<UserDocument>)crit.list();
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<UserDocument> findAllByPermitNo(String permitNo){
-		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("permitNo", permitNo));
-		return (List<UserDocument>)crit.list();
+//		Criteria crit = createEntityCriteria();
+//		crit.add(Restrictions.eq("permitNo", permitNo));
+//		return (List<UserDocument>)crit.list();
+		return null;
 	}
 
 	public void deleteById(int id) {
@@ -49,9 +52,10 @@ public class UserDocumentDaoImpl extends AbstractDao<Integer, UserDocument> impl
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<UserDocument> findAllByCaseId(String caseId) {
-		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("caseId", caseId));
-		return (List<UserDocument>)crit.list();
+//		Criteria crit = createEntityCriteria();
+//		crit.add(Restrictions.eq("caseId", caseId));
+//		return (List<UserDocument>)crit.list();
+		return null;
 	}
 
 }

@@ -17,9 +17,16 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Index;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+
 @Entity
 @Table(name="BCTS_JOB_HEADER")
 @IdClass(value=BctsPermitPk.class)
+@Indexed
 public class BctsJobHeader implements Serializable{
 	 
 	private static final long serialVersionUID = -257178022837581959L;
@@ -33,10 +40,14 @@ public class BctsJobHeader implements Serializable{
 	@Column(name="JOB_DATE")
 	private BigDecimal jobDate;
 	
+	@Field
 	@Column(name="JOB_SEQ_NO")
 	private String jobSeq;
+	
+	@Field
 	@Column(name="CR_UEI_NO")
 	private String crUeiNo;
+	
 	@Column(name="CAR_TYPE")
 	private String carType;
 	@Column(name="DEC_TYPE")
@@ -60,7 +71,7 @@ public class BctsJobHeader implements Serializable{
 	@Column(name="APPROVED_DATE")
 	private Date approvedDate;
 	
-	
+	@IndexedEmbedded
 	@OneToMany(targetEntity=BctsPermitType.class,mappedBy="jobHeader",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<BctsPermitType> permits;
 	

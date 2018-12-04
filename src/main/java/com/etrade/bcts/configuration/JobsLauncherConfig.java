@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.etrade.bcts.controller.CaseController;
@@ -31,7 +32,7 @@ import com.etrade.bcts.controller.CaseController;
 @EnableWebMvc
 @EnableScheduling
 @ComponentScan(basePackages = "com.etrade.bcts")
-public class JobsLauncherConfig extends WebMvcConfigurerAdapter{
+public class JobsLauncherConfig implements WebMvcConfigurer{
 	private static final Logger LOG = LoggerFactory.getLogger(JobsLauncherConfig.class);
 	@Autowired
 	private JobLauncher jobLaucher;
@@ -55,7 +56,7 @@ public class JobsLauncherConfig extends WebMvcConfigurerAdapter{
         jobLaucher.run(lvCmJob, params);
     }
     
-//    @Scheduled(fixedDelay=5000)
+    @Scheduled(fixedDelay=5000)
     public void performPcJob() throws Exception
     {
     	LOG.info("Alert Job ----performPcJob");

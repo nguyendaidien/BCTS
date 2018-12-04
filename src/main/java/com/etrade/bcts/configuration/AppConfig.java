@@ -12,10 +12,6 @@ package com.etrade.bcts.configuration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobParameters;
-import org.springframework.batch.core.JobParametersBuilder;
-import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -24,40 +20,31 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import com.etrade.bcts.converter.RoleToUserProfileConverter;
+import com.etrade.bcts.service.ProductService;
+import com.etrade.bcts.service.UserProfileService;
+import com.etrade.bcts.service.UserProfileServiceImpl;
 
 
 @Configuration
 @EnableWebMvc
 @EnableScheduling
 @ComponentScan(basePackages = "com.etrade.bcts")
-public class AppConfig extends WebMvcConfigurerAdapter{
+public class AppConfig implements WebMvcConfigurer {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(AppConfig.class);
 	@Autowired
 	RoleToUserProfileConverter roleToUserProfileConverter;
-	
-//	@Autowired
-//	private JobLauncher jobLaucher;
-//	
-//	@Autowired
-//	private Job job;
 
-	
-	
-	
-	/*@Autowired
-	private BatchService batchService;*/
 	 /**
      * Configure TilesConfigurer.
      */
@@ -68,7 +55,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         tilesConfigurer.setCheckRefresh(true);
         return tilesConfigurer;
     }
- 
+
     /**
      * Configure ViewResolvers to deliver preferred views.
      */
@@ -135,18 +122,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         matcher.setUseRegisteredSuffixPatternMatch(true);
     }
     
-    
-    
-//   // @Scheduled(fixedRateString = "25000", initialDelayString = "12500")
-//    @Scheduled(fixedDelay=15000)
-//    public void perform() throws Exception{
-//    	LOG.info("perform() start");
-//    				JobParameters params = new JobParametersBuilder()
-//        	                .addString("JobID".toString(), String.valueOf(System.currentTimeMillis()))
-//        	                .toJobParameters();
-//        	        jobLaucher.run(job, params);
-//    	}
-       
-    }
+
+}
 
 

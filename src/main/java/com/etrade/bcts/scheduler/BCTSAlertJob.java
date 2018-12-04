@@ -1,9 +1,9 @@
 package com.etrade.bcts.scheduler;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
-import java.util.HashMap;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,6 @@ import org.springframework.context.annotation.Configuration;
 
 import com.etrade.bcts.model.BCTSAlert;
 import com.etrade.bcts.util.BctsConstants;
-import com.etrade.bcts.util.TrwDate;
 
 
 @Configuration
@@ -39,8 +38,6 @@ public class BCTSAlertJob {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
-	
-	private static final String SQL_QUERY= "Select * from BCTS_ALERT";
 	
 //	@Bean
 //	ItemReader<BCTSAlert> itemReader() {
@@ -116,13 +113,13 @@ public class BCTSAlertJob {
 	
 	@Bean
 	Step lvCmStep1(ItemReader<BCTSAlert> itemReader, ItemProcessor<BCTSAlert, BCTSAlert> itemProcessor, ItemWriter<BCTSAlert> itemWriter){
-		return steps.get("lvCmStep1").<BCTSAlert, BCTSAlert> chunk(15)
+		return steps.get("lvCmStep1").<BCTSAlert, BCTSAlert> chunk(5)
 				.reader(itemReader).processor(itemProcessor).writer(itemWriter).build();
 	}
 	
 	@Bean
 	Step pcStep1(ItemReader<BCTSAlert> pcItemReader, ItemProcessor<BCTSAlert, BCTSAlert> itemProcessor, ItemWriter<BCTSAlert> itemWriter){
-		return steps.get("pcStep1").<BCTSAlert, BCTSAlert> chunk(15)
+		return steps.get("pcStep1").<BCTSAlert, BCTSAlert> chunk(5)
 				.reader(pcItemReader).processor(itemProcessor).writer(itemWriter).build();
 	}
 	

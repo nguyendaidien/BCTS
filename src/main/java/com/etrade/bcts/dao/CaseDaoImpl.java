@@ -2,10 +2,15 @@ package com.etrade.bcts.dao;
 
 import java.util.List;
 
+//import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
-import org.hibernate.Query;
+//import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -38,25 +43,34 @@ public class CaseDaoImpl extends AbstractDao<Integer, BCTSAlert> implements Case
 		getSession().persist(comment);		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void updateStatus(CaseComment comment) {
-		Query q = getSession().createQuery("update BCTSAlert set status=:status, completedDate=:completedDate, completedBy=:completedBy where caseId=:caseId");
-		q.setString("status", "C");
-		q.setInteger("caseId", comment.getBctsAlert().getCaseId());
-		q.setDate("completedDate", comment.getUpdateTime());
-		q.setInteger("completedBy", comment.getUser().getId());
+		Query<CaseComment> q = getSession().createQuery("update BCTSAlert set status=:status, completedDate=:completedDate, completedBy=:completedBy where caseId=:caseId");
+		q.setParameter("status", "C");
+		q.setParameter("caseId", comment.getBctsAlert().getCaseId());
+		q.setParameter("completedDate", comment.getUpdateTime());
+		q.setParameter("completedBy", comment.getUser().getId());
+//		q.setString("status", "C");
+//		q.setInteger("caseId", comment.getBctsAlert().getCaseId());
+//		q.setDate("completedDate", comment.getUpdateTime());
+//		q.setInteger("completedBy", comment.getUser().getId());
 		q.executeUpdate();		
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<BCTSAlert> getCasesByCategory(String category, Company uen) {
-		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("category", category));
-		if(uen != null) {
-			crit.add(Restrictions.eq("uen", uen));
-		}
-		return (List<BCTSAlert>)crit.list();
+		CriteriaQuery<BCTSAlert> crit = createEntityCriteria();
+		Root<BCTSAlert> root = crit.from(BCTSAlert.class);
+		crit.select(root);
+		 
+		Query<BCTSAlert> query = getSession().createQuery(crit);
+//		crit.select(root).where(getQueryBuilder().keyword().);
+//		crit.add(Restrictions.eq("category", category));
+//		if(uen != null) {
+//			crit.add(Restrictions.eq("uen", uen));
+//		}
+		return (List<BCTSAlert>)query.getResultList();
 	}
 
 	@Override
