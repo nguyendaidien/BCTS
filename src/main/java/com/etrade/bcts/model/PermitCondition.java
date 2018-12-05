@@ -27,9 +27,9 @@ public class PermitCondition {
     };
     
     public PermitCondition(CaaApprovalCondition cac) {
-    	this.agencyCode = cac.getAgencyCode();
-    	this.conditionCode = cac.getConditionCode();
-    	this.conditionDescription = cac.getCondtionDesc1();
+    	this.agencyCode = null!=cac.getAgencyCode()?cac.getAgencyCode():"";
+    	this.conditionCode = null!=cac.getConditionCode()?cac.getConditionCode():"";
+    	this.conditionDescription = null!=cac.getCondtionDesc1()?cac.getCondtionDesc1():"";
     }
     
 	public String getJobNo() {

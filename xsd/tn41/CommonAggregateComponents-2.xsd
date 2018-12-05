@@ -1,0 +1,964 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Eric (Crimsonlogic) -->
+<xsd:schema xmlns="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cbc="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" targetNamespace="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" schemaLocation="CommonBasicComponents-2.xsd"/>
+	<xsd:complexType name="AdditionalCASCIdentificationType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:CASCCodeOne"/>
+			<xsd:element ref="cbc:CASCCodeTwo" minOccurs="0"/>
+			<xsd:element ref="cbc:CASCCodeThree" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AdditionalVesselInformationType">
+		<xsd:annotation>
+			<xsd:documentation>Not being used by COO</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="cbc:VesselType" minOccurs="0"/>
+			<xsd:element ref="cbc:NetRegisterTonnage" minOccurs="0"/>
+			<xsd:element ref="cbc:VesselNationality" minOccurs="0"/>
+			<xsd:element ref="TowingVessel" minOccurs="0"/>
+			<xsd:element ref="cbc:LoadingNextPort" minOccurs="0"/>
+			<xsd:element ref="cbc:LoadingFinalPort" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AddressLineType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:Line" maxOccurs="3"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AddressType">
+		<xsd:sequence>
+			<xsd:element ref="AddressLine"/>
+			<xsd:element ref="cbc:CityName" minOccurs="0"/>
+			<xsd:element ref="cbc:CountrySubentityCode" minOccurs="0"/>
+			<xsd:element ref="cbc:CountrySubentity" minOccurs="0"/>
+			<xsd:element ref="cbc:PostalZone" minOccurs="0"/>
+			<xsd:element ref="cbc:CountryCode"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AmendmentType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:NumberOfAmendedFields" minOccurs="0"/>
+			<xsd:element ref="SCUpdateInformation" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="cbc:PermitValidityExtensionIndicator" minOccurs="0"/>
+			<xsd:element ref="cbc:ExtensionReason" minOccurs="0" maxOccurs="4"/>
+			<xsd:element ref="cbc:AmendmentReason" minOccurs="0" maxOccurs="4"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CancellationHeaderType">
+		<xsd:sequence>
+			<xsd:group ref="BaseHeaderAlternativeGroup"/>
+			<xsd:element ref="cbc:CancellationReasonCode"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CancellationType">
+		<xsd:sequence>
+			<xsd:element ref="CancellationHeader"/>
+			<xsd:element ref="DeclarantParty"/>
+			<xsd:element ref="SupportingDocumentReference" minOccurs="0" maxOccurs="10"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CASCProductType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:CASCProductCode" minOccurs="0"/>
+			<xsd:element ref="cbc:CASCProductQuantity" minOccurs="0"/>
+			<xsd:element ref="AdditionalCASCIdentification" minOccurs="0" maxOccurs="50"/>
+			<xsd:element ref="EndUseDescription" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CertificateDetailType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:SequenceNumeric"/>
+			<xsd:element ref="cbc:CertificateType"/>
+			<xsd:element ref="cbc:CopiesNumeric" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ChargeValueType">
+		<xsd:complexContent>
+			<xsd:extension base="ForeignAmountType">
+				<xsd:sequence>
+					<xsd:element ref="cbc:ChargePercent" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ClaimantPartyType">
+		<xsd:sequence>
+			<xsd:element ref="PartyDetail"/>
+			<xsd:element ref="ClaimantInformation"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ConditionType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:AgencyCode" minOccurs="0"/>
+			<xsd:element ref="cbc:ConditionCode"/>
+			<xsd:element ref="cbc:ConditionDescription"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ConsigneePartyType">
+		<xsd:sequence>
+			<xsd:element ref="PartyName"/>
+			<xsd:element ref="AddressLine" minOccurs="0"/>
+			<xsd:element ref="Address" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DeclarantPartyType">
+		<xsd:sequence>
+			<xsd:element ref="PersonInformation"/>
+			<xsd:element ref="cbc:Telephone"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DocumentReferenceType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:DocumentID"/>
+			<xsd:element ref="cbc:Filename"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DutyType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:DutyRate"/>
+			<xsd:element ref="cbc:DutyRateUnit"/>
+			<xsd:element ref="cbc:DutyAmount"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="EndUserPartyType">
+		<xsd:sequence>
+			<xsd:element ref="PartyName"/>
+			<xsd:element ref="AddressLine" minOccurs="0"/>
+			<xsd:element ref="Address" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="EndUseDescriptionType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:EndUseLine"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ErrorDetailType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ErrorCode"/>
+			<xsd:element ref="cbc:ErrorDescription"/>
+			<xsd:element ref="cbc:ErrorTrace" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ExchangeRateType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:CurrencyCode"/>
+			<xsd:element ref="cbc:CurrencyDescription"/>
+			<xsd:element ref="cbc:CurrencyExchangeRate"/>
+			<xsd:element ref="cbc:RateUnit"/>
+			<xsd:element ref="cbc:CountryName"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ExporterPartyType">
+		<xsd:sequence>
+			<xsd:element ref="PartyDetail"/>
+			<xsd:element ref="AddressLine" minOccurs="0"/>
+			<xsd:element ref="Address" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FeeDetailType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:FeeAmount"/>
+			<xsd:element ref="cbc:FeeDate"/>
+			<xsd:element ref="FeeRemarks" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ForeignAmountType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:Amount"/>
+			<xsd:element ref="cbc:ExchangeRate" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GoodsAndServicesTaxType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:GoodsAndServicesTaxPercent"/>
+			<xsd:element ref="cbc:GoodsAndServicesTaxAmount"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InvoiceType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:InvoiceNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:InvoiceDate" minOccurs="0"/>
+			<xsd:element ref="SupplierManufacturerParty" minOccurs="0"/>
+			<xsd:element ref="cbc:UnitPriceTermType" minOccurs="0"/>
+			<xsd:element ref="TotalInvoiceValue" minOccurs="0"/>
+			<xsd:element ref="FreightCharge" minOccurs="0"/>
+			<xsd:element ref="InsuranceCharge" minOccurs="0"/>
+			<xsd:element ref="OtherTaxableCharge" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InwardTransportType">
+		<xsd:group ref="InwardTransportGroup"/>
+	</xsd:complexType>
+	<xsd:complexType name="ItemCertificateDescriptionType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:Line" maxOccurs="5"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ItemCertificateType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ItemCertificateQuantity" minOccurs="0"/>
+			<xsd:element ref="cbc:ItemValue" minOccurs="0"/>
+			<xsd:element ref="ItemCertificateDescription" minOccurs="0" maxOccurs="10"/>
+			<xsd:element ref="cbc:ManufacturingCostDate" minOccurs="0"/>
+			<xsd:group ref="TextileGroup"/>
+			<xsd:group ref="InvoiceOriginCriterionGroup"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ItemQuantityType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:HarmonizedSystemQuantity"/>
+			<xsd:element ref="cbc:TotalDutiableQuantity" minOccurs="0"/>
+			<xsd:element ref="cbc:DutiableQuantity" minOccurs="0"/>
+			<xsd:element ref="cbc:AlcoholPercent" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LicenceType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ReferenceID"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LocationType">
+		<xsd:annotation>
+			<xsd:documentation> Location Type is meant to define ReleaseLocation, ReceiptLocation.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="cbc:LocationCode"/>
+			<xsd:element ref="cbc:LocationName" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LotIdentificationType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:CurrentLotNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:PreviousLotNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:Marking" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MaritimeTransportType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:VesselID"/>
+			<xsd:element ref="cbc:VesselName"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MotorVehicleType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:EngineCapacity" minOccurs="0"/>
+			<xsd:element ref="cbc:OriginalRegistrationDate" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="OutwardTransportType">
+		<xsd:group ref="OutwardTransportGroup"/>
+	</xsd:complexType>
+	<xsd:complexType name="PackingDescriptionType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:OuterPackQuantity" minOccurs="0"/>
+			<xsd:element ref="cbc:InPackQuantity" minOccurs="0"/>
+			<xsd:element ref="cbc:InnerPackQuantity" minOccurs="0"/>
+			<xsd:element ref="cbc:InmostPackQuantity" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ShippingMarksInformationType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ShippingMarks" maxOccurs="10"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PartyIdentificationType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ID"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PartyNameType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:Name" maxOccurs="2"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PartyDetailType">
+		<xsd:sequence>
+			<xsd:element ref="PartyIdentification"/>
+			<xsd:element ref="PartyName"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PeriodType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:StartDate"/>
+			<xsd:element ref="cbc:EndDate"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PeriodOptionalEndType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:StartDate"/>
+			<xsd:element ref="cbc:EndDate" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PermitType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:PermitNumber"/>
+			<xsd:element ref="cbc:CertificateNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:OriginalApprovalDatetime" minOccurs="0"/>
+			<xsd:element ref="PermitValidityPeriod" minOccurs="0"/>
+			<xsd:element ref="cbc:CAApprovalDatetime" minOccurs="0"/>
+			<xsd:element ref="cbc:PermitApprovalDatetime" minOccurs="0"/>
+			<xsd:element ref="CAApprovalCondition" minOccurs="0" maxOccurs="20"/>
+			<xsd:element ref="RefundApprovalCondition" minOccurs="0" maxOccurs="20"/>
+			<xsd:element ref="SCApprovalCondition" minOccurs="0" maxOccurs="40"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PersonInformationType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:CodeValue" minOccurs="0"/>
+			<xsd:element ref="cbc:Name" minOccurs="0" maxOccurs="2"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RefundHeaderType">
+		<xsd:sequence>
+			<xsd:group ref="BaseHeaderAlternativeGroup"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RefundItemType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ItemSequenceNumeric"/>
+			<xsd:element ref="cbc:ItemHarmonizedSystemCode"/>
+			<xsd:element ref="TariffRefund" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RefundOnlyType">
+		<xsd:sequence>
+			<xsd:element ref="RefundHeader"/>
+			<xsd:element ref="DeclarantParty"/>
+			<xsd:element ref="SupportingDocumentReference" minOccurs="0" maxOccurs="10"/>
+			<xsd:element ref="RefundItem" minOccurs="0" maxOccurs="50"/>
+			<xsd:element ref="RefundSummary"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RefundSummaryType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:NumberOfItems" minOccurs="0"/>
+			<xsd:element ref="TotalTariffRefund" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RefundType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:RefundReferenceNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:ReasonCode"/>
+			<xsd:element ref="cbc:Reason" minOccurs="0" maxOccurs="4"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RejectionDetailType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ErrorID"/>
+			<xsd:element ref="cbc:ErrorDescription" maxOccurs="2"/>
+			<xsd:element ref="cbc:ErrorSequenceNumeric" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RemarksType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:FreeText" maxOccurs="5"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ResponseType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ConditionCode"/>
+			<xsd:element ref="cbc:FreeText" maxOccurs="2"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="StorageLocationType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:LocationCode"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TariffRefundType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:GoodsAndServicesTaxRefundAmount" minOccurs="0"/>
+			<xsd:element ref="cbc:ExciseDutyRefundAmount" minOccurs="0"/>
+			<xsd:element ref="cbc:CustomsDutyRefundAmount" minOccurs="0"/>
+			<xsd:element ref="cbc:OtherTaxRefundAmount" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TariffType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:PreferentialCode" minOccurs="0"/>
+			<xsd:element ref="GoodsAndServicesTax" minOccurs="0"/>
+			<xsd:element ref="ExciseDuty" minOccurs="0"/>
+			<xsd:element ref="CustomsDuty" minOccurs="0"/>
+			<xsd:element ref="OtherTax" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TotalTariffRefundType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:TotalGoodsAndServicesTaxRefundAmount" minOccurs="0"/>
+			<xsd:element ref="cbc:TotalExciseDutyRefundAmount" minOccurs="0"/>
+			<xsd:element ref="cbc:TotalCustomsDutyRefundAmount" minOccurs="0"/>
+			<xsd:element ref="cbc:TotalOtherTaxRefundAmount" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TotalTariffType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:TotalGoodsAndServicesTaxAmount" minOccurs="0"/>
+			<xsd:element ref="cbc:TotalExciseDutyAmount" minOccurs="0"/>
+			<xsd:element ref="cbc:TotalCustomsDutyAmount" minOccurs="0"/>
+			<xsd:element ref="cbc:TotalOtherTaxAmount" minOccurs="0"/>
+			<xsd:element ref="cbc:TotalAmountPayable" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TransactionValueType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ItemCIFFOBValue" minOccurs="0"/>
+			<xsd:group ref="BaseItemPriceGroup" minOccurs="0"/>
+			<xsd:element ref="OptionalItemCharge" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TransportEquipmentSealType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:SealID"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TransportEquipmentType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:SequenceNumeric"/>
+			<xsd:element ref="cbc:EquipmentID"/>
+			<xsd:element ref="cbc:SizeTypeCode"/>
+			<xsd:element ref="cbc:EquipmentWeightMeasureNumeric"/>
+			<xsd:element ref="TransportEquipmentSeal"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TransportMeansType">
+		<xsd:sequence>
+			<xsd:element ref="TransportMode"/>
+			<xsd:element ref="cbc:MAWBOUCROBLNumber" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TransportModeType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ModeCode"/>
+			<xsd:element ref="cbc:ConveyanceReferenceNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:TransportIdentifier" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UniqueReferenceNumberType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ID"/>
+			<xsd:element ref="cbc:Date"/>
+			<xsd:element ref="cbc:SequenceNumeric"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:UpdateIndicatorCode"/>
+			<xsd:element ref="cbc:UpdateRequestNumber"/>
+			<xsd:element ref="cbc:UpdatePermitNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:CertificateNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:ReplacementPermitNumber" minOccurs="0"/>
+			<xsd:element ref="Refund" minOccurs="0"/>
+			<xsd:element ref="Amendment" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateInformationType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:UpdateSummaryCode" maxOccurs="5"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CPCProcessingCodeType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ProcessingCodeOne"/>
+			<xsd:element ref="cbc:ProcessingCodeTwo" minOccurs="0"/>
+			<xsd:element ref="cbc:ProcessingCodeThree" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CustomsProcedureCodeInformationType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:CustomsProcedureCode"/>
+			<xsd:element ref="CPCProcessingCode" minOccurs="0" maxOccurs="5"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CustomsCommonCodeInformationType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:CustomsCommonCodeTableName"/>
+			<xsd:element ref="Record" maxOccurs="unbounded"/>
+			<!--xsd:element ref="CustomsCommonCodeData" maxOccurs="unbounded"/-->
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--xsd:complexType name="CustomsCommonCodeDataType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:OperationCode"/>
+			<xsd:element ref="RecordDetails"/>
+			<xsd:element ref="AdditionalRecordDetails" minOccurs="0" maxOccurs="9"/>
+		</xsd:sequence>
+	</xsd:complexType-->
+	<!--xsd:complexType name="RecordDetailsType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:EffectiveDate" minOccurs="0"/>
+			<xsd:element ref="cbc:ExpiryDate" minOccurs="0"/>
+			<xsd:element ref="Record" maxOccurs="4"/>
+			<xsd:element ref="cbc:UnitCode" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType-->
+	<xsd:complexType name="RecordType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ReferenceID"/>
+			<xsd:element ref="cbc:Code" maxOccurs="9"/>
+			<xsd:element ref="Description" minOccurs="0" maxOccurs="9"/>
+			<xsd:element ref="cbc:EffectiveDate"/>
+			<xsd:element ref="cbc:ExpiryDate"/>
+			<xsd:element ref="cbc:Field" minOccurs="0" maxOccurs="99"/>
+			<!--xsd:element ref="cbc:RecordCode"/>
+			<xsd:element ref="cbc:RecordDescription" minOccurs="0"/-->
+		</xsd:sequence>
+		<xsd:attribute name="OperationCode" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:minLength value="1"/>
+					<xsd:maxLength value="3"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="AdditionalRecordDetailsType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:GoodsDescription" maxOccurs="5"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--===================================Start Element======================================-->
+	<xsd:element name="AdditionalCASCIdentification" type="AdditionalCASCIdentificationType"/>
+	<xsd:element name="AdditionalVesselInformation" type="AdditionalVesselInformationType"/>
+	<xsd:element name="AddressLine" type="AddressLineType"/>
+	<xsd:element name="Address" type="AddressType"/>
+	<xsd:element name="Amendment" type="AmendmentType">
+		<xsd:annotation>
+			<xsd:documentation>For IPTUPD:
+
+Mandatory to specify amendment details for all updates except for
+Update Indicator = CNL (Cancellation) and RFP (Refund only).
+
+Not applicable for Update Indicator = CNL (Cancellation) and RFP
+(Refund only).
+
+
+For INPUPD, OUTUPD, TNPUPD:
+Mandatory to specify amendment details for all updates except for
+Update Indicator = CNL (Cancellation).
+
+Not applicable for Update Indicator = CNL (Cancellation).
+
+For IPTUPT:
+Mandatory to specify amendment details for all updates except for
+Update Indicator = RFP (Refund only).
+
+For INPUPT, OUTUPT,TNPUPT:
+Mandatory to specify amendment details.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ApprovalCondition" type="ResponseType"/>
+	<xsd:element name="Cancellation" type="CancellationType"/>
+	<xsd:element name="CancellationHeader" type="CancellationHeaderType"/>
+	<xsd:element name="CAApprovalCondition" type="ConditionType"/>
+	<xsd:element name="CASCProduct" type="CASCProductType"/>
+	<xsd:element name="CertificateAdditionalInformation" type="ItemCertificateDescriptionType"/>
+	<xsd:element name="CertificateDetail" type="CertificateDetailType"/>
+	<xsd:element name="ClaimantInformation" type="PersonInformationType"/>
+	<xsd:element name="ClaimantParty" type="ClaimantPartyType"/>
+	<xsd:element name="ConsigneeParty" type="ConsigneePartyType"/>
+	<xsd:element name="CustomsDuty" type="DutyType"/>
+	<xsd:element name="CustomsRemarks" type="RemarksType"/>
+	<xsd:element name="DeclarantParty" type="DeclarantPartyType"/>
+	<xsd:element name="DeclaringAgentParty" type="PartyDetailType"/>
+	<xsd:element name="EffectivePeriod" type="PeriodType"/>
+	<xsd:element name="EndUseDescription" type="EndUseDescriptionType"/>
+	<xsd:element name="EndUserParty" type="EndUserPartyType"/>
+	<xsd:element name="ErrorDetail" type="ErrorDetailType"/>
+	<xsd:element name="ExchangeRate" type="ExchangeRateType"/>
+	<xsd:element name="ExciseDuty" type="DutyType"/>
+	<xsd:element name="ExporterParty" type="ExporterPartyType"/>
+	<xsd:element name="FeeDetail" type="FeeDetailType"/>
+	<xsd:element name="FeeRemarks" type="RemarksType"/>
+	<xsd:element name="FreightCharge" type="ChargeValueType"/>
+	<xsd:element name="FreightForwarderParty" type="PartyDetailType"/>
+	<xsd:element name="GoodsAndServicesTax" type="GoodsAndServicesTaxType"/>
+	<xsd:element name="HandlingAgentParty" type="PartyDetailType"/>
+	<xsd:element name="ImporterParty" type="PartyDetailType"/>
+	<xsd:element name="Invoice" type="InvoiceType"/>
+	<xsd:element name="ItemCertificate" type="ItemCertificateType"/>
+	<xsd:element name="ItemCertificateDescription" type="ItemCertificateDescriptionType"/>
+	<xsd:element name="ItemQuantity" type="ItemQuantityType"/>
+	<xsd:element name="InsuranceCharge" type="ChargeValueType"/>
+	<xsd:element name="InwardCarrierAgentParty" type="PartyDetailType"/>
+	<xsd:element name="InwardTransport" type="InwardTransportType"/>
+	<xsd:element name="Licence" type="LicenceType"/>
+	<xsd:element name="LotIdentification" type="LotIdentificationType"/>
+	<xsd:element name="ManufacturerParty" type="ExporterPartyType"/>
+	<xsd:element name="MotorVehicle" type="MotorVehicleType"/>
+	<xsd:element name="OptionalItemCharge" type="ForeignAmountType"/>
+	<xsd:element name="OtherTaxableCharge" type="ChargeValueType"/>
+	<xsd:element name="OutwardCarrierAgentParty" type="PartyDetailType"/>
+	<xsd:element name="OutwardTransport" type="OutwardTransportType"/>
+	<xsd:element name="PackingDescription" type="PackingDescriptionType"/>
+	<xsd:element name="ShippingMarksInformation" type="ShippingMarksInformationType"/>
+	<xsd:element name="PartyDetail" type="PartyDetailType"/>
+	<xsd:element name="PartyIdentification" type="PartyIdentificationType"/>
+	<xsd:element name="PartyName" type="PartyNameType"/>
+	<xsd:element name="Permit" type="PermitType"/>
+	<xsd:element name="PermitValidityPeriod" type="PeriodType"/>
+	<xsd:element name="PersonInformation" type="PersonInformationType"/>
+	<xsd:element name="ReceiptLocation" type="LocationType"/>
+	<xsd:element name="Refund" type="RefundType"/>
+	<xsd:element name="RefundApprovalCondition" type="ConditionType"/>
+	<xsd:element name="RefundHeader" type="RefundHeaderType"/>
+	<xsd:element name="RefundItem" type="RefundItemType"/>
+	<xsd:element name="RefundOnly" type="RefundOnlyType"/>
+	<xsd:element name="RefundSummary" type="RefundSummaryType"/>
+	<xsd:element name="RejectionDetail" type="RejectionDetailType"/>
+	<xsd:element name="ReleaseLocation" type="LocationType"/>
+	<xsd:element name="Remarks" type="RemarksType"/>
+	<xsd:element name="Description" type="RemarksType"/>
+	<xsd:element name="SCApprovalCondition" type="ConditionType"/>
+	<xsd:element name="SCUpdateInformation" type="UpdateInformationType"/>
+	<xsd:element name="StorageLocation" type="StorageLocationType"/>
+	<xsd:element name="SupplierManufacturerParty" type="PersonInformationType"/>
+	<xsd:element name="SupportingDocumentReference" type="DocumentReferenceType"/>
+	<xsd:element name="Tariff" type="TariffType"/>
+	<xsd:element name="TariffRefund" type="TariffRefundType"/>
+	<xsd:element name="TotalInvoiceValue" type="ForeignAmountType"/>
+	<xsd:element name="TotalTariffRefund" type="TotalTariffRefundType"/>
+	<xsd:element name="TowingVessel" type="MaritimeTransportType"/>
+	<xsd:element name="TransactionValue" type="TransactionValueType"/>
+	<xsd:element name="TransportEquipment" type="TransportEquipmentType"/>
+	<xsd:element name="TransportEquipmentSeal" type="TransportEquipmentSealType"/>
+	<xsd:element name="TransportMeans" type="TransportMeansType"/>
+	<xsd:element name="TransportMode" type="TransportModeType"/>
+	<xsd:element name="UnitPriceValue" type="ForeignAmountType"/>
+	<xsd:element name="UniqueReferenceNumber" type="UniqueReferenceNumberType"/>
+	<xsd:element name="Update" type="UpdateType"/>
+	<xsd:element name="CPCProcessingCode" type="CPCProcessingCodeType"/>
+	<xsd:element name="CustomsProcedureCodeInformation" type="CustomsProcedureCodeInformationType"/>
+	<xsd:element name="ExhibitionTemporaryImportPeriod" type="PeriodOptionalEndType"/>
+	<xsd:element name="OtherTax" type="DutyType"/>
+	<xsd:element name="CustomsCommonCodeInformation" type="CustomsCommonCodeInformationType"/>
+	<!--xsd:element name="CustomsCommonCodeData" type="CustomsCommonCodeDataType"/-->
+	<!--xsd:element name="RecordDetails" type="RecordDetailsType"/-->
+	<xsd:element name="Record" type="RecordType"/>
+	<!--xsd:element name="Record">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="RecordType">
+					<xsd:attribute name="OperationCode" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="3"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element-->
+	<xsd:element name="AdditionalRecordDetails" type="AdditionalRecordDetailsType"/>
+	<!--===================================End Element======================================-->
+	<!--===================================Start Group =======================================-->
+	<xsd:group name="BaseItemPriceGroup">
+		<xsd:sequence>
+			<xsd:element ref="cbc:LastSellingPriceValue" minOccurs="0"/>
+			<xsd:element ref="UnitPriceValue" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="BaseCargoGroup">
+		<xsd:sequence>
+			<xsd:element ref="cbc:CargoPackingType"/>
+			<xsd:element ref="ReleaseLocation"/>
+			<xsd:element ref="ReceiptLocation"/>
+			<xsd:element ref="StorageLocation" minOccurs="0"/>
+			<xsd:element ref="TransportEquipment" minOccurs="0" maxOccurs="99"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="BaseHeaderAlternativeGroup">
+		<xsd:sequence>
+			<xsd:group ref="BaseHeaderResponseGroup"/>
+			<xsd:element ref="cbc:DeclarationType" minOccurs="0"/>
+			<xsd:element ref="cbc:DeclarationIndicator"/>
+			<xsd:element ref="cbc:AdditionalRecipientID" minOccurs="0" maxOccurs="3"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="BaseHeaderGroup">
+		<xsd:sequence>
+			<xsd:element ref="cbc:MessageReference"/>
+			<xsd:element ref="UniqueReferenceNumber"/>
+			<xsd:choice>
+				<xsd:element ref="cbc:DeclarantID"/>
+				<xsd:element ref="cbc:IssuingAuthorityID" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="cbc:CommonAccessReference"/>
+			<xsd:choice>
+				<xsd:element ref="cbc:DeclarationType"/>
+				<xsd:element ref="cbc:ApplicationType"/>
+			</xsd:choice>
+			<xsd:element ref="cbc:DeclarationIndicator"/>
+			<xsd:element ref="cbc:PreviousPermitNumber" minOccurs="0"/>
+			<xsd:element ref="Remarks" minOccurs="0" maxOccurs="5"/>
+			<xsd:element ref="CertificateAdditionalInformation" minOccurs="0" maxOccurs="5"/>
+			<!--xsd:element ref="cbc:SubmissionDatetime"/-->
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="BaseHeaderResponseGroup">
+		<xsd:sequence>
+			<xsd:element ref="cbc:MessageReference"/>
+			<xsd:element ref="UniqueReferenceNumber"/>
+			<xsd:element ref="cbc:IssuingAuthorityID" minOccurs="0"/>
+			<xsd:element ref="cbc:DeclarantID" minOccurs="0"/>
+			<xsd:element ref="cbc:CommonAccessReference"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="BaseItemGroup">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ItemSequenceNumeric"/>
+			<xsd:element ref="cbc:ItemHarmonizedSystemCode"/>
+			<xsd:element ref="cbc:GoodsDescription" maxOccurs="2"/>
+			<xsd:element ref="ItemQuantity"/>
+			<xsd:element ref="cbc:OriginCountry"/>
+			<xsd:element ref="TransactionValue" minOccurs="0"/>
+			<xsd:element ref="CASCProduct" minOccurs="0" maxOccurs="5"/>
+			<xsd:element ref="cbc:BrandName" minOccurs="0"/>
+			<xsd:element ref="cbc:ModelDescription" minOccurs="0"/>
+			<xsd:element ref="cbc:DangerousGoodsIndicator" minOccurs="0"/>
+			<xsd:element ref="PackingDescription" minOccurs="0"/>
+			<xsd:element ref="ShippingMarksInformation" minOccurs="0" maxOccurs="4"/>
+			<xsd:element ref="LotIdentification" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="BaseOutPartyGroup">
+		<xsd:sequence>
+			<xsd:element ref="OutwardCarrierAgentParty" minOccurs="0"/>
+			<xsd:element ref="ExporterParty" minOccurs="0"/>
+			<xsd:element ref="ConsigneeParty" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="BasePartyGroup">
+		<xsd:sequence>
+			<xsd:element ref="DeclarantParty"/>
+			<xsd:element ref="DeclaringAgentParty" minOccurs="0"/>
+			<xsd:element ref="FreightForwarderParty" minOccurs="0"/>
+			<xsd:element ref="InwardCarrierAgentParty" minOccurs="0"/>
+			<xsd:element ref="ImporterParty" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="BaseSummaryGroup">
+		<xsd:sequence>
+			<xsd:element ref="cbc:NumberOfItems"/>
+			<xsd:element ref="cbc:TotalCIFFOBValue" minOccurs="0"/>
+			<xsd:element ref="cbc:TotalOuterPack"/>
+			<xsd:element ref="cbc:TotalGrossWeight"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="CertificateApprovalGroup">
+		<xsd:sequence>
+			<xsd:element ref="cbc:CertificateNumber"/>
+			<xsd:element ref="cbc:CertificateApprovalDate"/>
+			<xsd:element ref="SCApprovalCondition" maxOccurs="20"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="CertificateGroup">
+		<xsd:annotation>
+			<xsd:documentation>Used by OUTDEC.xsd and COO.xsd</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="cbc:ApplicationProductType"/>
+			<xsd:element ref="cbc:EntryYear" minOccurs="0"/>
+			<xsd:element ref="cbc:GSPDonorCountry" minOccurs="0"/>
+			<xsd:element ref="CertificateDetail" maxOccurs="2"/>
+			<xsd:element ref="cbc:PreferenceContentPercent" minOccurs="0"/>
+			<xsd:element ref="cbc:CurrencyCode" minOccurs="0"/>
+			<xsd:element ref="cbc:AdditionalCertificateDetails" minOccurs="0" maxOccurs="5"/>
+			<xsd:element ref="cbc:TransportDetails" minOccurs="0" maxOccurs="5"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="CertificateOriginItemGroup">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ItemSequenceNumeric"/>
+			<xsd:element ref="cbc:ItemHarmonizedSystemCode"/>
+			<xsd:element ref="cbc:HarmonizedSystemQuantity"/>
+			<xsd:element ref="cbc:OriginCountry"/>
+			<xsd:element ref="cbc:ItemCIFFOBValue"/>
+			<xsd:element ref="ShippingMarksInformation" minOccurs="0"/>
+			<xsd:element ref="ItemCertificate"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="CertificateOriginPartyGroup">
+		<xsd:sequence>
+			<xsd:element ref="DeclarantParty"/>
+			<xsd:element ref="DeclaringAgentParty" minOccurs="0"/>
+			<xsd:element ref="FreightForwarderParty" minOccurs="0"/>
+			<xsd:group ref="BaseOutPartyGroup"/>
+			<xsd:element ref="ManufacturerParty" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="CertificateOriginSummaryGroup">
+		<xsd:sequence>
+			<xsd:element ref="cbc:NumberOfItems"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="CustomsExchangeRateHeaderGroup">
+		<xsd:sequence>
+			<xsd:element ref="cbc:MessageReference"/>
+			<xsd:element ref="cbc:IssuingAuthorityID" minOccurs="0"/>
+			<xsd:element ref="cbc:DeclarantID" minOccurs="0"/>
+			<xsd:element ref="cbc:CommonAccessReference"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="CustomsCommonCodesHeaderGroup">
+		<xsd:sequence>
+			<xsd:element ref="cbc:MessageReference"/>
+			<xsd:element ref="cbc:IssuingAuthorityID"/>
+			<xsd:element ref="cbc:CommonAccessReference"/>
+			<!--xsd:element ref="cbc:SubmissionDatetime"/-->
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="HeaderGroup">
+		<xsd:sequence>
+			<xsd:group ref="BaseHeaderGroup"/>
+			<xsd:element ref="cbc:AdditionalRecipientID" minOccurs="0" maxOccurs="3"/>
+			<xsd:element ref="cbc:BankerGuaranteeCode" minOccurs="0"/>
+			<xsd:element ref="CustomsProcedureCodeInformation" minOccurs="0" maxOccurs="5"/>
+			<xsd:element ref="cbc:SubmissionDatetime" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="InItemGroup">
+		<xsd:sequence>
+			<xsd:group ref="BaseItemGroup"/>
+			<xsd:element ref="cbc:InHAWBHUCRHBLNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:OutHAWBHUCRHBLNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:ItemInvoiceNumber" minOccurs="0"/>
+			<xsd:element ref="MotorVehicle" minOccurs="0"/>
+			<xsd:element ref="Tariff" minOccurs="0"/>
+			<xsd:element ref="TariffRefund" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="InNonPaymentCargoGroup">
+		<xsd:sequence>
+			<xsd:group ref="BaseCargoGroup"/>
+			<xsd:element ref="cbc:SupplyIndicator" minOccurs="0"/>
+			<xsd:element ref="ExhibitionTemporaryImportPeriod" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="InNonPaymentPartyType">
+		<xsd:sequence>
+			<xsd:group ref="BasePartyGroup"/>
+			<xsd:group ref="BaseOutPartyGroup"/>
+			<xsd:element ref="ClaimantParty" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="InPaymentCargoGroup">
+		<xsd:sequence>
+			<xsd:group ref="BaseCargoGroup"/>
+			<xsd:element ref="cbc:SupplyIndicator" minOccurs="0"/>
+			<xsd:element ref="cbc:BlanketStartDate" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="InPaymentPartyGroup">
+		<xsd:sequence>
+			<xsd:group ref="BasePartyGroup"/>
+			<xsd:element ref="ClaimantParty" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="InSummaryGroup">
+		<xsd:sequence>
+			<xsd:group ref="BaseSummaryGroup"/>
+			<xsd:element name="TotalTariff" type="TotalTariffType" minOccurs="0"/>
+			<xsd:element name="TotalTariffRefund" type="TotalTariffRefundType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="InvoiceOriginCriterionGroup">
+		<xsd:sequence>
+			<xsd:element ref="cbc:ItemInvoiceNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:ItemInvoiceDate" minOccurs="0"/>
+			<xsd:group ref="OriginCriterionGroup" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="InwardTransportGroup">
+		<xsd:sequence>
+			<xsd:element ref="TransportMeans" minOccurs="0"/>
+			<xsd:element ref="cbc:ArrivalDate"/>
+			<xsd:element ref="cbc:LoadingPort" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="OriginCriterionGroup">
+		<xsd:sequence>
+			<xsd:element ref="cbc:OriginCriterion" minOccurs="0" maxOccurs="3"/>
+			<xsd:element ref="cbc:HarmonizedSystemCode" minOccurs="0"/>
+			<xsd:element ref="cbc:ContentPercent" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="OutwardCargoGroup">
+		<xsd:sequence>
+			<xsd:group ref="BaseCargoGroup"/>
+			<xsd:element ref="cbc:BlanketStartDate" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="OutwardItemGroup">
+		<xsd:sequence>
+			<xsd:group ref="BaseItemGroup"/>
+			<xsd:element ref="cbc:InHAWBHUCRHBLNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:OutHAWBHUCRHBLNumber" minOccurs="0"/>
+			<xsd:element ref="ItemCertificate" minOccurs="0"/>
+			<xsd:element ref="Tariff" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="OutwardPartyGroup">
+		<xsd:sequence>
+			<xsd:group ref="BasePartyGroup"/>
+			<xsd:group ref="BaseOutPartyGroup" minOccurs="0"/>
+			<xsd:element ref="EndUserParty" minOccurs="0"/>
+			<xsd:element ref="ManufacturerParty" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="OutwardTransportGroup">
+		<xsd:sequence>
+			<xsd:element ref="TransportMeans"/>
+			<xsd:element ref="AdditionalVesselInformation" minOccurs="0"/>
+			<xsd:element ref="cbc:DepartureDate"/>
+			<xsd:element ref="cbc:DischargePort" minOccurs="0"/>
+			<xsd:element ref="cbc:FinalDestinationCountry" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="StatusHeaderGroup">
+		<xsd:sequence>
+			<xsd:group ref="BaseHeaderResponseGroup"/>
+			<xsd:element ref="cbc:StatusType"/>
+			<xsd:element ref="cbc:PermitNumber" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="TextileGroup">
+		<xsd:sequence>
+			<xsd:element ref="cbc:TextileCategoryCode" minOccurs="0"/>
+			<xsd:element ref="cbc:TextileQuotaQuantity" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="TranshipmentCargoGroup">
+		<xsd:sequence>
+			<xsd:group ref="BaseCargoGroup"/>
+			<xsd:element ref="cbc:RemovalStartDate" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="TranshipmentItemGroup">
+		<xsd:sequence>
+			<xsd:group ref="BaseItemGroup"/>
+			<xsd:element ref="cbc:InMAWBOUCROBLNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:OutMAWBOUCROBLNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:InHAWBHUCRHBLNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:OutHAWBHUCRHBLNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:EngineCapacity" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="TranshipmentPartyGroup">
+		<xsd:sequence>
+			<xsd:group ref="BasePartyGroup"/>
+			<xsd:group ref="BaseOutPartyGroup" minOccurs="0"/>
+			<xsd:element ref="EndUserParty" minOccurs="0"/>
+			<xsd:element ref="HandlingAgentParty" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="UpdateSummaryGroup">
+		<xsd:sequence>
+			<xsd:element ref="cbc:UpdateSummaryCode"/>
+			<xsd:element ref="cbc:UpdateType"/>
+		</xsd:sequence>
+	</xsd:group>
+</xsd:schema>

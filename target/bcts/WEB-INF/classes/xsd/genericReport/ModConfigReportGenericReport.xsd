@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="modConfigReportGenericReport" type="reportGenericReportType"/>
+	<xs:complexType name="reportGenericReportType">
+		<xs:sequence>
+			<xs:element name="configuration" type="configurationType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="configurationType">
+		<xs:sequence>
+			<xs:element name="userId" type="xs:string"/>
+			<xs:element name="configName" type="xs:string"/>
+			<xs:element name="searchCriterias" type="searchCriteriasType" maxOccurs="unbounded"/>
+			<xs:element name="fieldsSelected" type="fieldsSelectedType" maxOccurs="unbounded"/>
+			<xs:element name="fieldsSortOrder" type="fieldsSortOrderType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>	
+	<xs:complexType name="searchCriteriasType">
+		<xs:sequence>
+			<xs:element name="searchField" type="xs:string"/>
+			<xs:element name="searchValue" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="fieldsSelectedType">
+		<xs:sequence>
+			<xs:element name="fieldNameSelected" type="xs:string"/>
+			<xs:element name="orderIndexSelected" type="xs:positiveInteger"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="fieldsSortOrderType">
+		<xs:sequence>
+			<xs:element name="fieldNameSortOrder" type="xs:string"/>
+			<xs:element name="orderIndexSortOrder" type="xs:positiveInteger"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

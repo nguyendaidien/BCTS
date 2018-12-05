@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Carmen (Crimsonlogic) -->
+<xsd:schema xmlns="urn:crimsonlogic:tn:schema:xsd:InPayment" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cac="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" targetNamespace="urn:crimsonlogic:tn:schema:xsd:InPayment" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" schemaLocation="CommonAggregateComponents-2.xsd"/>
+	<!--=====Declaration and Update======-->
+	<xsd:element name="InPayment" type="InPaymentType"/>
+	<xsd:complexType name="InPaymentType">
+		<xsd:sequence>
+			<xsd:element ref="Header"/>
+			<xsd:element ref="Cargo"/>
+			<xsd:element ref="Transport" minOccurs="0"/>
+			<xsd:element ref="Party"/>
+			<xsd:element ref="cac:Licence" minOccurs="0" maxOccurs="5"/>
+			<xsd:element ref="cac:SupportingDocumentReference" minOccurs="0" maxOccurs="10"/>
+			<xsd:element ref="cac:Invoice" minOccurs="0" maxOccurs="20"/>
+			<xsd:element ref="Item" maxOccurs="50"/>
+			<xsd:element ref="Summary"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="InPaymentUpdate" type="InPaymentUpdateType"/>
+	<xsd:complexType name="InPaymentUpdateType">
+		<xsd:sequence>
+			<xsd:element ref="cac:Update"/>
+			<xsd:group ref="DeclarationGroup"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--==============================-->
+	<!---->
+	<!--=====Permit and Update Permit=====-->
+	<xsd:element name="InPaymentPermit" type="InPaymentPermitType"/>
+	<xsd:complexType name="InPaymentPermitType">
+		<xsd:sequence>
+			<xsd:element ref="Declaration"/>
+			<xsd:element ref="cac:Permit"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="InPaymentUpdatePermit" type="InPaymentUpdatePermitType"/>
+	<xsd:complexType name="InPaymentUpdatePermitType">
+		<xsd:sequence>
+			<xsd:element ref="cac:Update"/>
+			<xsd:group ref="BaseDeclarationGroup"/>
+			<xsd:element ref="cac:Permit"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--==============================-->
+	<!---->
+	<!--==============================-->
+	<xsd:group name="DeclarationGroup">
+		<xsd:choice>
+			<xsd:group ref="BaseDeclarationGroup"/>
+			<xsd:element ref="cac:Cancellation"/>
+		</xsd:choice>
+	</xsd:group>
+	<xsd:group name="BaseDeclarationGroup">
+		<xsd:choice>
+			<xsd:element ref="Declaration"/>
+			<xsd:element ref="cac:RefundOnly"/>
+		</xsd:choice>
+	</xsd:group>
+	<xsd:element name="Declaration" type="InPaymentType"/>
+	<!--==============================-->
+	<!---->
+	<!--====InPayment Elements and Type====-->
+	<xsd:element name="Header" type="HeaderType"/>
+	<xsd:complexType name="HeaderType">
+		<xsd:group ref="cac:HeaderGroup"/>
+	</xsd:complexType>
+	<xsd:element name="Cargo" type="CargoType"/>
+	<xsd:complexType name="CargoType">
+		<xsd:group ref="cac:InPaymentCargoGroup"/>
+	</xsd:complexType>
+	<xsd:element name="Transport" type="TransportType"/>
+	<xsd:complexType name="TransportType">
+		<xsd:sequence>
+			<xsd:element ref="cac:InwardTransport"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Party" type="PartyType"/>
+	<xsd:complexType name="PartyType">
+		<xsd:group ref="cac:InPaymentPartyGroup"/>
+	</xsd:complexType>
+	<xsd:element name="Item" type="ItemType"/>
+	<xsd:complexType name="ItemType">
+		<xsd:group ref="cac:InItemGroup"/>
+	</xsd:complexType>
+	<xsd:element name="Summary" type="SummaryType"/>
+	<xsd:complexType name="SummaryType">
+		<xsd:group ref="cac:InSummaryGroup"/>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by KumariKushum (Crimsonlogic) -->
+<xsd:schema xmlns="urn:crimsonlogic:tn:schema:xsd:CustomsCommonCode" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cbc="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" xmlns:cac="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" targetNamespace="urn:crimsonlogic:tn:schema:xsd:CustomsCommonCode" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" schemaLocation="CommonBasicComponents-2.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" schemaLocation="CommonAggregateComponents-2.xsd"/>
+	<xsd:element name="CustomsCommonCode" type="CustomsCommonCodeType"/>
+	<xsd:complexType name="CustomsCommonCodeType">
+		<xsd:sequence>
+			<xsd:group ref="cac:CustomsCommonCodesHeaderGroup"/>
+			<xsd:element ref="cac:CustomsRemarks" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="cbc:ReleaseNumber" minOccurs="1"/>
+			<xsd:element ref="cbc:ReleaseDate" minOccurs="1"/>
+			<xsd:element ref="cbc:PreviousReleaseNumber" minOccurs="0"/>
+			<xsd:element ref="cbc:PreviousReleaseDate" minOccurs="0"/>
+			<xsd:element ref="cac:CustomsCommonCodeInformation" minOccurs="1" maxOccurs="99"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

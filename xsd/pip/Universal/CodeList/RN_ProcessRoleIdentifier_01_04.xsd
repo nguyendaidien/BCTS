@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by CrimsonLogic (Crimsonlogic) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:urss="urn:rosettanet:specification:system:xml:1.0" xmlns:tns="urn:rosettanet:specification:universal:ProcessRoleIdentifier:xsd:codelist:01.04" targetNamespace="urn:rosettanet:specification:universal:ProcessRoleIdentifier:xsd:codelist:01.04" elementFormDefault="qualified" attributeFormDefault="unqualified" version="01.04">
+	<xs:annotation>
+		<xs:documentation>
+			<urss:Copyright>© 2006 RosettaNet. All rights reserved. No part of this publication may be reproduced, stored in a retrieval system, or transmitted, in any form or by any means, electronic, mechanical, photocopying, recording, or otherwise, without the inclusion of this copyright notice. Any derivative works must cite the copyright notice. Any public redistribution or sale of this publication or derivative works requires prior written permission of the publisher.</urss:Copyright>
+			<urss:Disclaimer>RosettaNet makes no representation about the suitability of this work for any purpose or regarding any claims made by products which use it. It is provided as is without expressed or implied warranty.</urss:Disclaimer>
+			<urss:Program>Domain Model Foundational Program</urss:Program>
+			<urss:Purpose>Provides the RosettaNet business Process Role Identifier codes</urss:Purpose>
+		</xs:documentation>
+		<xs:appinfo>
+			<urss:CreationDate>2005-03-24</urss:CreationDate>
+			<urss:LastUpdatedDate>2006-05-19</urss:LastUpdatedDate>
+		</xs:appinfo>
+	</xs:annotation>
+	<xs:element name="ProcessRoleIdentifierA" abstract="true"/>
+	<xs:element name="ProcessRoleIdentifier" type="tns:ProcessRoleIdentifierType" substitutionGroup="tns:ProcessRoleIdentifierA"/>
+	<xs:simpleType name="ProcessRoleIdentifierContentType">
+		<xs:annotation>
+			<xs:appinfo>
+				<urss:Definition>Describes the role of the partner in the business process. A partner will fulfill at least one or more roles during the business process.</urss:Definition>
+				<urss:Identifier>upri:ProcessRoleIdentifierType</urss:Identifier>
+				<urss:RegisteredBy>RosettaNet</urss:RegisteredBy>
+				<urss:CreationDate>2005-03-24</urss:CreationDate>
+				<urss:LastUpdatedDate>2006-05-19</urss:LastUpdatedDate>
+				<urss:TypeVersion>01.03</urss:TypeVersion>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="ADM">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Administered by - The party who is the administrative authority of an account.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALT">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Alternate approval by - The party who has approved a request in the event the approver is not able to respond.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APP">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Approval by - The party who has approved a request.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BIF">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Bill from - The party that will issue the invoice.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BIT">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Bill to - The party that will pay the invoice.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CNC">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Cancellation party - The party who is cancelling the shipping order.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COR">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Change originated by - The party who originates a proposed change.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COW">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Change owned by - The party who owns or who is assigned responsibility for a proposed change.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRA">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Credit applicant - The party who is applying for credit.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRE">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Created by - The party responsible for creating a process or task.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DIS">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Distributed by - The party who supplies products to retailers.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FIN">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Financed by - The party who is the financier.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FOR">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Forwarded to - The party to whom a business document has been forwarded.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INL">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Inventory location - The party where the inventory product entry is located.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INO">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Inventory owner - The party that owns the inventory product entry.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ITF">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>In transit from - The party sending the product quantity in a product location transfer.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ITT">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>In transit to - The party receiving the product quantity in a product location transfer.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MFG">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Manufactured by - The party who creates, processes or produces goods especially in large quantities and by means of industrial machines.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OWN">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Owned by - The party who owns a process.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PUR">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Purchased by - The party who is a purchaser of a product.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="REA">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Requested approval by - The party who has been selected to approve a request.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="REC">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Received by - The party who has received a product shipment.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="REQ">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Requested by - The party who has initiated a request.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RES">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Respond to - The party to whom a responding business document must be sent when it is not equal to the partner specified in the document header.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RET">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Return by - The party responsible for either carrying or forwarding the returned product.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="REV">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Reviewed by - The party responsible for reviewing a business document.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SBF">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Self-billing from - The party who initiates the billing in self-billing scenario.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SBT">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Self-billing to - The party whom the invoice is addressed to.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SCP">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Shipping charges paid by - The party responsible for administering payment of the shipping charges.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SHF">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Ship From - The collection of business properties used to identify the business partner initiating a shipment or transaction.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SHT">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Ship To - The partner and/or location to which the product must be delivered.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SLD">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Sold to - The party to whom a product has been sold.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SOB">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Sold By - The seller involved in a business transaction.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPL">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Supplied by - The party who supplies an item, part or assembly.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SRT">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Submit returns to - The party to whom product returns are to be submitted.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TFR">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Transfer From - The party responsible for making the payment (Payer).</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TRA">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Transported by - The party responsible for either carrying or forwarding the product.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TTR">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Transfer To - The party who is receiving the payment (payee).</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ULR">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Ultimate recipient - The party who ultimately receives the shipment, when an intermediate party takes responsibility for payment and final delivery.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USE">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Used by - The party who is the end user of the product.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SVA">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>ShipVia - The partner and/or location through which the product must be shipped, such as the "cross dock" at a shipping hub.
+It must not be specified for the last leg, since this would be the same as the final destination specified in the ShipmentInformation/shipTo.
+</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RTT">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>ReturnTo - The partner and/or location to which the returned product must be delivered.
+</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CBK">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Customs Broker - CustomsBroker
+This object represents the party that declare the shipment on behalf of declarant. </urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DCT">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Declared To - This object represents the party that the declaration goes to.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DST">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Distributed To - This object represents the party to send information to.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CLM">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Claimed By - This object represents the claimant.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RLS">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Released By - This object represents the party that releases the goods.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UST">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Unstuffed By - This object represents the party that unstuffs the goods.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="STR">
+				<xs:annotation>
+					<xs:appinfo>
+						<urss:Definition>Stored By - This object represents the party that stores the goods.</urss:Definition>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TRO"/>
+			<xs:enumeration value="TRI"/>
+			<xs:enumeration value="IMP"/>
+			<xs:enumeration value="EXP"/>
+			<xs:enumeration value="HDL"/>
+			<xs:enumeration value="CLM"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ProcessRoleIdentifierType">
+		<xs:annotation>
+			<xs:appinfo>
+				<urss:Identifier>ProcessRoleIdentifierType</urss:Identifier>
+				<urss:RegisteredBy>RosettaNet</urss:RegisteredBy>
+				<urss:CreationDate>2005-03-24</urss:CreationDate>
+				<urss:LastUpdatedDate>2006-05-19</urss:LastUpdatedDate>
+				<urss:TypeVersion>01.03</urss:TypeVersion>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="tns:ProcessRoleIdentifierContentType">
+				<xs:attribute name="identifier" type="xs:token" fixed="ProcessRoleIdentifier"/>
+				<xs:attribute name="codeListVersion" type="xs:token" fixed="01.03"/>
+				<xs:attribute name="agency" type="xs:token" fixed="RosettaNet"/>
+				<xs:attribute name="schemaVersion" type="xs:token"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Crimsonlogic (Crimsonlogic) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="response" type="responseType">
+		<xs:annotation>
+			<xs:documentation>Validation Response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="WarnType">
+		<xs:sequence>
+			<xs:element name="warn_code" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="field_name" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="description">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="512"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErrorType">
+		<xs:sequence>
+			<xs:element name="error_code" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="field_name" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="description">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="512"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErrorListType">
+		<xs:sequence>
+			<xs:element name="error" type="ErrorType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErrorWarnType">
+		<xs:sequence>
+			<xs:element name="error" type="ErrorType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="warn" type="WarnType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ItemErrorListType">
+		<xs:sequence>
+			<xs:element name="seq_no">
+				<xs:annotation>
+					<xs:documentation>Sequence Number of the Item or Invoice</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="2"/>
+						<xs:fractionDigits value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="error" type="ErrorType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ItemErrorWarnType">
+		<xs:sequence>
+			<xs:element name="seq_no">
+				<xs:annotation>
+					<xs:documentation>Sequence Number of the Item or Invoice</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="2"/>
+						<xs:fractionDigits value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="error" type="ErrorType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="warn" type="WarnType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeclarationType">
+		<xs:sequence>
+			<xs:annotation>
+				<xs:documentation>Responses for Declaration / Certificate Of Origin</xs:documentation>
+			</xs:annotation>
+			<xs:element name="header" type="ErrorListType" minOccurs="0"/>
+			<xs:element name="cargo" type="ErrorListType" minOccurs="0"/>
+			<xs:element name="transport" type="ErrorListType" minOccurs="0"/>
+			<xs:element name="party" type="ErrorListType" minOccurs="0"/>
+			<xs:element name="licence" type="ItemErrorListType" minOccurs="0" maxOccurs="5"/>
+			<xs:element name="support_doc" type="ItemErrorListType" minOccurs="0" maxOccurs="10"/>
+			<xs:element name="certificate" type="ErrorListType" minOccurs="0"/>
+			<xs:element name="invoice" type="ItemErrorListType" minOccurs="0" maxOccurs="20"/>
+			<xs:element name="item" type="ItemErrorListType" minOccurs="0" maxOccurs="50"/>
+			<xs:element name="summary" type="ErrorListType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="URNType">
+		<xs:sequence>
+			<xs:element name="cr_uei_no">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="date">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="8"/>
+						<xs:fractionDigits value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="seq_no">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="4"/>
+						<xs:fractionDigits value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="general_errorType">
+		<xs:sequence>
+			<xs:element name="description">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="512"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="val_outcomeType">
+		<xs:sequence>
+			<xs:element name="declarant_id">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="17"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="unique_ref_no" type="URNType">
+				<xs:annotation>
+					<xs:documentation>Previously urn</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="trans_status" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Status of the Transmission: Pass, Warn, Error, Reject</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="general" type="ErrorListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>General Validation Error Applying to the whole message</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="declaration" type="DeclarationType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Responses for Declaration / Certificate Of Origin</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="cancel" type="ErrorListType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Validation Result of Cancellation Message</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="refund_only" type="ErrorListType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Validation Result of Refund Only Message</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="responseType">
+		<xs:choice>
+			<xs:element name="val_outcome" type="val_outcomeType">
+				<xs:annotation>
+					<xs:documentation>Validation Outcome</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="general_error" type="general_errorType">
+				<xs:annotation>
+					<xs:documentation>Used when Sent File is not in any Correct Xml structure or Data contains lower case characters</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="fileType">
+		<xs:sequence>
+			<xs:element name="filename">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="70"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="content">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="response" type="responseType">
+							<xs:annotation>
+								<xs:documentation>Validation Response</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

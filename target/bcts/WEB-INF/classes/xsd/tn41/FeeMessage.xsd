@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Carmen (Crimsonlogic) -->
+<xsd:schema xmlns="urn:crimsonlogic:tn:schema:xsd:FeeMessage" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cbc="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" xmlns:cac="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" targetNamespace="urn:crimsonlogic:tn:schema:xsd:FeeMessage" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" schemaLocation="CommonBasicComponents-2.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" schemaLocation="CommonAggregateComponents-2.xsd"/>
+	<xsd:element name="FeeMessage" type="FeeMessageType"/>
+	<xsd:complexType name="FeeMessageType">
+		<xsd:sequence>
+			<xsd:group ref="cac:BaseHeaderResponseGroup"/>
+			<xsd:element ref="cbc:IssueDateTime"/>
+			<xsd:element ref="cbc:PermitNumber" minOccurs="0"/>
+			<xsd:element ref="cac:Licence" minOccurs="0" maxOccurs="5"/>
+			<xsd:element ref="cac:FeeDetail"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

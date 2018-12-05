@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--this is for TN4.1-->
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Carmen (Crimsonlogic) -->
+<xsd:schema xmlns="urn:crimsonlogic:tn:schema:xsd:TradenetResponse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cbc="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" xmlns:cac="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" xmlns:ipt="urn:crimsonlogic:tn:schema:xsd:InPayment" xmlns:inp="urn:crimsonlogic:tn:schema:xsd:InNonPayment" xmlns:out="urn:crimsonlogic:tn:schema:xsd:OutwardDeclaration" xmlns:tnp="urn:crimsonlogic:tn:schema:xsd:TranshipmentMovement" xmlns:coo="urn:crimsonlogic:tn:schema:xsd:CertificateOfOrigin" xmlns:app="urn:crimsonlogic:tn:schema:xsd:ApprovalMessage" xmlns:rej="urn:crimsonlogic:tn:schema:xsd:RejectionMessage" xmlns:err="urn:crimsonlogic:tn:schema:xsd:ErrorMessage" xmlns:fee="urn:crimsonlogic:tn:schema:xsd:FeeMessage" xmlns:cux="urn:crimsonlogic:tn:schema:xsd:CustomsExchangeRate" xmlns:com="urn:crimsonlogic:tn:schema:xsd:CustomsCommonCode" targetNamespace="urn:crimsonlogic:tn:schema:xsd:TradenetResponse" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<!--xsd:schema xmlns="urn:crimsonlogic:tn:schema:xsd:TradenetResponse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cbc="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" xmlns:cac="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" xmlns:ipt="urn:crimsonlogic:tn:schema:xsd:InPayment" xmlns:inp="urn:crimsonlogic:tn:schema:xsd:InNonPayment" xmlns:out="urn:crimsonlogic:tn:schema:xsd:OutwardDeclaration" xmlns:tnp="urn:crimsonlogic:tn:schema:xsd:TranshipmentMovement" xmlns:coo="urn:crimsonlogic:tn:schema:xsd:CertificateOfOrigin" xmlns:app="urn:crimsonlogic:tn:schema:xsd:ApprovalMessage" xmlns:rej="urn:crimsonlogic:tn:schema:xsd:RejectionMessage" xmlns:err="urn:crimsonlogic:tn:schema:xsd:ErrorMessage" xmlns:fee="urn:crimsonlogic:tn:schema:xsd:FeeMessage" xmlns:cux="urn:crimsonlogic:tn:schema:xsd:CustomsExchangeRate" targetNamespace="urn:crimsonlogic:tn:schema:xsd:TradenetResponse" elementFormDefault="qualified" attributeFormDefault="unqualified"-->
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" schemaLocation="CommonBasicComponents-2.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" schemaLocation="CommonAggregateComponents-2.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:InPayment" schemaLocation="InPayment.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:InNonPayment" schemaLocation="InNonPayment.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:OutwardDeclaration" schemaLocation="OutwardDeclaration.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:TranshipmentMovement" schemaLocation="TranshipmentMovement.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CertificateOfOrigin" schemaLocation="CertificateOfOrigin.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:ApprovalMessage" schemaLocation="ApprovalMessage.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:RejectionMessage" schemaLocation="RejectionMessage.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:ErrorMessage" schemaLocation="ErrorMessage.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:FeeMessage" schemaLocation="FeeMessage.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CustomsExchangeRate" schemaLocation="CustomsExchangeRate.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CustomsCommonCode" schemaLocation="CustomsCommonCode.xsd"/>
+	<xsd:element name="TradenetResponse" type="TradenetResponseType"/>
+	<xsd:complexType name="TradenetResponseType">
+		<xsd:sequence>
+			<xsd:element ref="cbc:MessageVersion"/>
+			<xsd:element ref="cbc:SenderID"/>
+			<xsd:element ref="cbc:RecipientID"/>
+			<xsd:element ref="cbc:TotalNumberOfResponse"/>
+			<xsd:element ref="OutboundMessage" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="dateTime" use="required">
+			<xsd:annotation>
+				<xsd:documentation>Local date when an interchange or a group was prepared.
+Format:  CCYYMMDDHHMM</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:decimal">
+					<xsd:totalDigits value="12"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="instanceIdentifier" use="required">
+			<xsd:annotation>
+				<xsd:documentation>System generated sequence number to an interchange.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:minLength value="1"/>
+					<xsd:maxLength value="14"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:element name="OutboundMessage" type="OutboundMessageType"/>
+	<xsd:complexType name="OutboundMessageType">
+		<xsd:choice>
+			<xsd:element ref="ipt:InPaymentPermit"/>
+			<xsd:element ref="inp:InNonPaymentPermit"/>
+			<xsd:element ref="out:OutwardPermit"/>
+			<xsd:element ref="tnp:TranshipmentMovementPermit"/>
+			<xsd:element ref="coo:CertificateOfOriginApproval"/>
+			<xsd:element ref="ipt:InPaymentUpdatePermit"/>
+			<xsd:element ref="inp:InNonPaymentUpdatePermit"/>
+			<xsd:element ref="out:OutwardUpdatePermit"/>
+			<xsd:element ref="tnp:TranshipmentMovementUpdatePermit"/>
+			<xsd:element ref="app:ApprovalMessage"/>
+			<xsd:element ref="rej:RejectionMessage"/>
+			<xsd:element ref="err:ErrorMessage"/>
+			<xsd:element ref="fee:FeeMessage"/>
+			<xsd:element ref="cux:CustomsExchangeRate"/>
+			<xsd:element ref="com:CustomsCommonCode"/>
+		</xsd:choice>
+	</xsd:complexType>
+</xsd:schema>

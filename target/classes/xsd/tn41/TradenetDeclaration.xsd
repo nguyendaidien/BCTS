@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Yuan Moe, Lui (Crimsonlogic) -->
+<xs:schema xmlns="urn:crimsonlogic:tn:schema:xsd:TradenetDeclaration" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cbc="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" xmlns:cac="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" xmlns:ipt="urn:crimsonlogic:tn:schema:xsd:InPayment" xmlns:inp="urn:crimsonlogic:tn:schema:xsd:InNonPayment" xmlns:out="urn:crimsonlogic:tn:schema:xsd:OutwardDeclaration" xmlns:tnp="urn:crimsonlogic:tn:schema:xsd:TranshipmentMovement" xmlns:coo="urn:crimsonlogic:tn:schema:xsd:CertificateOfOrigin" targetNamespace="urn:crimsonlogic:tn:schema:xsd:TradenetDeclaration" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" schemaLocation="CommonBasicComponents-2.xsd"/>
+<xs:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" schemaLocation="CommonAggregateComponents-2.xsd"/>
+<xs:import namespace="urn:crimsonlogic:tn:schema:xsd:InPayment" schemaLocation="InPayment.xsd"/>
+<xs:import namespace="urn:crimsonlogic:tn:schema:xsd:InNonPayment" schemaLocation="InNonPayment.xsd"/>
+<xs:import namespace="urn:crimsonlogic:tn:schema:xsd:OutwardDeclaration" schemaLocation="OutwardDeclaration.xsd"/>
+<xs:import namespace="urn:crimsonlogic:tn:schema:xsd:TranshipmentMovement" schemaLocation="TranshipmentMovement.xsd"/>
+<xs:import namespace="urn:crimsonlogic:tn:schema:xsd:CertificateOfOrigin" schemaLocation="CertificateOfOrigin.xsd"/>
+<xs:element name="TradenetDeclaration" type="TradenetDeclarationType"/>
+<xs:complexType name="TradenetDeclarationType">
+<xs:sequence>
+<xs:element ref="cbc:MessageVersion"/>
+<xs:element ref="cbc:SenderID"/>
+<xs:element ref="cbc:RecipientID"/>
+<xs:element ref="cbc:TotalNumberOfDeclaration"/>
+<xs:element ref="InboundMessage" maxOccurs="unbounded"/>
+</xs:sequence>
+<xs:attribute name="dateTime" use="required">
+<xs:simpleType>
+<xs:restriction base="xs:decimal">
+<xs:totalDigits value="12"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+<xs:attribute name="instanceIdentifier" use="required">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:minLength value="1"/>
+<xs:maxLength value="14"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:complexType>
+<xs:element name="InboundMessage" type="InboundMessageType"/>
+<xs:complexType name="InboundMessageType">
+<xs:choice>
+<xs:element ref="ipt:InPayment"/>
+<xs:element ref="inp:InNonPayment"/>
+<xs:element ref="out:Outward"/>
+<xs:element ref="tnp:TranshipmentMovement"/>
+<xs:element ref="coo:CertificateOfOrigin"/>
+<xs:element ref="ipt:InPaymentUpdate"/>
+<xs:element ref="inp:InNonPaymentUpdate"/>
+<xs:element ref="out:OutwardUpdate"/>
+<xs:element ref="tnp:TranshipmentMovementUpdate"/>
+</xs:choice>
+</xs:complexType>
+</xs:schema>

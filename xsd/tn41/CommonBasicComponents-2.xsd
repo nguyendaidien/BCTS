@@ -1,0 +1,1079 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Eric (Crimsonlogic) -->
+<xsd:schema xmlns="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:simpleType name="AgencyCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="AgencyCode" type="AgencyCodeType"/>
+	<xsd:simpleType name="AmountNumericType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="16"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CustomsDutyRefundAmount" type="AmountNumericType"/>
+	<xsd:element name="DutyAmount" type="AmountNumericType"/>
+	<xsd:element name="ExciseDutyRefundAmount" type="AmountNumericType"/>
+	<xsd:element name="GoodsAndServicesTaxAmount" type="AmountNumericType"/>
+	<xsd:element name="GoodsAndServicesTaxRefundAmount" type="AmountNumericType"/>
+	<xsd:element name="ItemCIFFOBValue" type="AmountNumericType"/>
+	<xsd:element name="ItemValue" type="AmountNumericType"/>
+	<xsd:element name="LastSellingPriceValue" type="AmountNumericType"/>
+	<xsd:element name="TotalAmountPayable" type="AmountNumericType"/>
+	<xsd:element name="TotalCIFFOBValue" type="AmountNumericType"/>
+	<xsd:element name="TotalCustomsDutyAmount" type="AmountNumericType"/>
+	<xsd:element name="TotalCustomsDutyRefundAmount" type="AmountNumericType"/>
+	<xsd:element name="TotalExciseDutyAmount" type="AmountNumericType"/>
+	<xsd:element name="TotalExciseDutyRefundAmount" type="AmountNumericType"/>
+	<xsd:element name="TotalGoodsAndServicesTaxAmount" type="AmountNumericType"/>
+	<xsd:element name="TotalGoodsAndServicesTaxRefundAmount" type="AmountNumericType"/>
+	<xsd:element name="TotalOtherTaxAmount" type="AmountNumericType"/>
+	<xsd:element name="OtherTaxRefundAmount" type="AmountNumericType"/>
+	<xsd:element name="TotalOtherTaxRefundAmount" type="AmountNumericType"/>
+	<xsd:simpleType name="AmountType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="16"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="Amount">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="AmountType">
+					<xsd:attribute name="currencyID" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="3"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="ApplicationProductTypeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="2"/>
+			<xsd:maxLength value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ApplicationProductType" type="ApplicationProductTypeType"/>
+	<xsd:simpleType name="ApplicationTypeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ApplicationType" type="ApplicationTypeType"/>
+	<xsd:simpleType name="BankerGuaranteeCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="BankerGuaranteeCode" type="BankerGuaranteeCodeType"/>
+	<xsd:simpleType name="CancellationReasonCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="3"/>
+			<xsd:maxLength value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CancellationReasonCode" type="CancellationReasonCodeType"/>
+	<xsd:simpleType name="CargoPackingTypeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CargoPackingType" type="CargoPackingTypeType"/>
+	<xsd:simpleType name="CategoryCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="TextileCategoryCode" type="CategoryCodeType"/>
+	<xsd:simpleType name="CertificateTypeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CertificateType" type="CertificateTypeType"/>
+	<xsd:simpleType name="CodeValueType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="17"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CodeValue" type="CodeValueType"/>
+	<xsd:simpleType name="ConditionCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ConditionCode" type="ConditionCodeType"/>
+	<xsd:simpleType name="ConditionDescriptionType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="512"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ConditionDescription" type="ConditionDescriptionType"/>
+	<xsd:simpleType name="ContentPercentType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ContentPercent" type="ContentPercentType"/>
+	<xsd:element name="PreferenceContentPercent" type="ContentPercentType"/>
+	<xsd:simpleType name="CopiesNumericType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CopiesNumeric" type="CopiesNumericType"/>
+	<xsd:element name="NumberOfAmendedFields" type="CopiesNumericType"/>
+	<xsd:element name="UpdateRequestNumber" type="CopiesNumericType">
+		<xsd:annotation>
+			<xsd:documentation>Mandatory to specify the number of request(s) for Update (excluding
+rejected requests).</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="CountryCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="2"/>
+			<xsd:maxLength value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CountryCode" type="CountryCodeType"/>
+	<xsd:element name="FinalDestinationCountry" type="CountryCodeType"/>
+	<xsd:element name="GSPDonorCountry" type="CountryCodeType"/>
+	<xsd:element name="OriginCountry" type="CountryCodeType"/>
+	<xsd:element name="VesselNationality" type="CountryCodeType"/>
+	<xsd:simpleType name="CountryNameType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="25"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CountryName" type="CountryNameType"/>
+	<xsd:simpleType name="CurrencyCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CurrencyCode" type="CurrencyCodeType"/>
+	<xsd:simpleType name="DateTimeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="12"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="IssueDateTime" type="DateTimeType"/>
+	<xsd:simpleType name="DateType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="8"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ArrivalDate" type="DateType"/>
+	<xsd:element name="CertificateApprovalDate" type="DateType"/>
+	<xsd:element name="Date" type="DateType"/>
+	<xsd:element name="DepartureDate" type="DateType"/>
+	<xsd:element name="EndDate" type="DateType"/>
+	<xsd:element name="FeeDate" type="DateType"/>
+	<xsd:element name="InvoiceDate" type="DateType"/>
+	<xsd:element name="IssueDate" type="DateType"/>
+	<xsd:element name="ItemInvoiceDate" type="DateType"/>
+	<xsd:element name="ManufacturingCostDate" type="DateType"/>
+	<xsd:element name="OriginalRegistrationDate" type="DateType"/>
+	<xsd:element name="RemovalStartDate" type="DateType"/>
+	<xsd:element name="StartDate" type="DateType"/>
+	<xsd:element name="BlanketStartDate" type="DateType"/>
+	<xsd:element name="ReleaseDate" type="DateType"/>
+	<xsd:element name="PreviousReleaseDate" type="DateType"/>
+	<xsd:simpleType name="DateTimeZoneType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="17"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="OriginalApprovalDatetime" type="DateTimeZoneType"/>
+	<xsd:element name="SubmissionDatetime" type="DateTimeZoneType"/>
+	<xsd:element name="EffectiveDate" type="DateTimeZoneType"/>
+	<xsd:element name="ExpiryDate" type="DateTimeZoneType"/>
+	<xsd:element name="CAApprovalDatetime" type="DateTimeZoneType"/>
+	<xsd:element name="PermitApprovalDatetime" type="DateTimeZoneType"/>
+	<xsd:simpleType name="DeclarationTypeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="7"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="DeclarationType" type="DeclarationTypeType"/>
+	<xsd:simpleType name="DescriptionType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="35"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CurrencyDescription" type="DescriptionType"/>
+	<xsd:element name="ModelDescription" type="DescriptionType"/>
+	<xsd:simpleType name="DocumentIDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="35"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="DocumentID" type="DocumentIDType"/>
+	<xsd:simpleType name="DutyRateType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="8"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="DutyRate" type="DutyRateType"/>
+	<xsd:simpleType name="DutyRateUnitType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="DutyRateUnit" type="DutyRateUnitType"/>
+	<xsd:simpleType name="EngineCapacityType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="7"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="EngineCapacity">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="EngineCapacityType">
+					<xsd:attribute name="unitCode" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="2"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="EquipmentIDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="13"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="EquipmentID" type="EquipmentIDType"/>
+	<xsd:simpleType name="EquipmentWeightMeasureNumericType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="EquipmentWeightMeasureNumeric" type="EquipmentWeightMeasureNumericType"/>
+	<xsd:simpleType name="ErrorCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="6"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ErrorCode" type="ErrorCodeType"/>
+	<xsd:simpleType name="ErrorIDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="8"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ErrorID" type="ErrorIDType"/>
+	<xsd:simpleType name="ExchangeRateType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="11"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CurrencyExchangeRate" type="ExchangeRateType"/>
+	<xsd:element name="ExchangeRate" type="ExchangeRateType"/>
+	<xsd:simpleType name="FeeAmountType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="11"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="FeeAmount">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="FeeAmountType">
+					<xsd:attribute name="currencyID" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="3"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="FileNameType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="70"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="Filename" type="FileNameType"/>
+	<xsd:simpleType name="FreeTextType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="512"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ErrorDescription" type="FreeTextType"/>
+	<xsd:element name="ErrorTrace" type="FreeTextType"/>
+	<xsd:element name="FreeText" type="FreeTextType"/>
+	<xsd:element name="Remarks" type="FreeTextType"/>
+	<xsd:element name="GoodsDescription" type="FreeTextType"/>
+	<xsd:simpleType name="HarmonizedSystemCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="10"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="HarmonizedSystemCode" type="HarmonizedSystemCodeType"/>
+	<xsd:element name="ItemHarmonizedSystemCode" type="HarmonizedSystemCodeType"/>
+	<xsd:simpleType name="IDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="17"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ID" type="IDType"/>
+	<xsd:simpleType name="IndicatorType">
+		<xsd:restriction base="xsd:boolean"/>
+	</xsd:simpleType>
+	<xsd:element name="DangerousGoodsIndicator" type="IndicatorType"/>
+	<xsd:element name="DeclarationIndicator" type="IndicatorType"/>
+	<xsd:element name="PermitValidityExtensionIndicator" type="IndicatorType"/>
+	<xsd:element name="SupplyIndicator" type="IndicatorType"/>
+	<xsd:simpleType name="LineType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="35"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="AdditionalCertificateDetails" type="LineType"/>
+	<xsd:element name="Line" type="LineType"/>
+	<xsd:element name="TransportDetails" type="LineType"/>
+	<xsd:simpleType name="EndUseLineType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="256"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="EndUseLine" type="EndUseLineType"/>
+	<xsd:element name="RecordDescription" type="EndUseLineType"/>
+	<xsd:simpleType name="LocationCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="7"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="LocationCode" type="LocationCodeType"/>
+	<xsd:simpleType name="LocationNameType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="256"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="LocationName" type="LocationNameType"/>
+	<xsd:simpleType name="LotNumberType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="30"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CurrentLotNumber" type="LotNumberType"/>
+	<xsd:element name="PreviousLotNumber" type="LotNumberType"/>
+	<xsd:simpleType name="MarkingType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="Marking" type="MarkingType"/>
+	<xsd:simpleType name="MessageControlCountType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="6"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="TotalNumberOfDeclaration" type="MessageControlCountType"/>
+	<xsd:element name="TotalNumberOfResponse" type="MessageControlCountType"/>
+	<xsd:simpleType name="MessageReferenceType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="14"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="MessageReference" type="MessageReferenceType">
+		<xsd:annotation>
+			<xsd:documentation>Sender unique message reference. Sequence number of messages in the
+interchange (Sender generated).</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="MessageVersionType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="MessageVersion" type="MessageVersionType"/>
+	<xsd:simpleType name="PartyPersonNameType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="100"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="Name" type="PartyPersonNameType"/>
+	<xsd:simpleType name="NameType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="35"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="BrandName" type="NameType"/>
+	<xsd:element name="VesselName" type="NameType"/>
+	<xsd:element name="TransportIdentifier" type="NameType"/>
+	<xsd:simpleType name="OriginCriterionType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="25"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="OriginCriterion" type="OriginCriterionType"/>
+	<xsd:simpleType name="PackageQuantityType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="8"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="InmostPackQuantity">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="PackageQuantityType">
+					<xsd:attribute name="unitCode" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="3"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="InnerPackQuantity">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="PackageQuantityType">
+					<xsd:attribute name="unitCode" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="3"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="InPackQuantity">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="PackageQuantityType">
+					<xsd:attribute name="unitCode" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="3"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OuterPackQuantity">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="PackageQuantityType">
+					<xsd:attribute name="unitCode" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="3"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="PercentNumericType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="7"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ChargePercent" type="PercentNumericType"/>
+	<xsd:element name="AlcoholPercent" type="PercentNumericType"/>
+	<xsd:simpleType name="PermitNumberType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="10"/>
+			<xsd:maxLength value="11"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="PermitNumber" type="PermitNumberType">
+		<xsd:annotation>
+			<xsd:documentation>For *PMT:
+Specify Permit number.
+
+For  *UPT:
+Specify Update Permit number.
+
+Not applicable for DCI
+
+For ApprovalMessage: 
+Mandatory if Status Type = AAC, CAC to specify Permit number.
+
+For RejectionMessage:
+Mandatory if Status Type = ARA, ARC, ARE, ARR, CRA, CRC, CRE, CRR to
+specify Permit number.
+
+For FeeMessage:
+Specify Permit number where the permit fee is due.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PreviousPermitNumber">
+		<xsd:simpleType>
+			<xsd:restriction base="ReferenceIDType">
+				<xsd:minLength value="10"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReplacementPermitNumber" type="PermitNumberType"/>
+	<xsd:element name="UpdatePermitNumber" type="PermitNumberType">
+		<xsd:annotation>
+			<xsd:documentation>For INPUPD, OUTUPD, TNPUPD:
+
+Mandatory to specify permit number of the permit to be
+updated/cancelled.
+
+For IPTUPD:
+
+Mandatory to specify permit number of the permit to be
+updated/cancelled or subjected for refund.
+
+Not Applicable for *UPT
+</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="PortCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="DischargePort" type="PortCodeType"/>
+	<xsd:element name="LoadingFinalPort" type="PortCodeType"/>
+	<xsd:element name="LoadingNextPort" type="PortCodeType"/>
+	<xsd:element name="LoadingPort" type="PortCodeType"/>
+	<xsd:element name="PortCode" type="PortCodeType"/>
+	<xsd:simpleType name="PreferentialCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="PreferentialCode" type="PreferentialCodeType"/>
+	<xsd:simpleType name="ProductCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="0"/>
+			<xsd:maxLength value="35"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CASCCodeOne" type="ProductCodeType"/>
+	<xsd:element name="CASCCodeThree" type="ProductCodeType"/>
+	<xsd:element name="CASCCodeTwo" type="ProductCodeType"/>
+	<xsd:element name="CASCProductCode">
+		<xsd:simpleType>
+			<xsd:restriction base="ProductCodeType"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ProcessingCodeOne" type="ProductCodeType"/>
+	<xsd:element name="ProcessingCodeTwo" type="ProductCodeType"/>
+	<xsd:element name="ProcessingCodeThree" type="ProductCodeType"/>
+	<xsd:simpleType name="QuantityType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="16"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CASCProductQuantity">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="QuantityType">
+					<xsd:attribute name="unitCode" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="3"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DutiableQuantity">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="QuantityType">
+					<xsd:attribute name="unitCode" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="3"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="HarmonizedSystemQuantity">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="QuantityType">
+					<xsd:attribute name="unitCode" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="3"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ItemCertificateQuantity">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="QuantityType">
+					<xsd:attribute name="unitCode" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="3"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TextileQuotaQuantity">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="QuantityType">
+					<xsd:attribute name="unitCode" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="3"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TotalDutiableQuantity">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="QuantityType">
+					<xsd:attribute name="unitCode" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="3"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="TotalGrossWeightType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="15"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="TotalGrossWeight">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="TotalGrossWeightType">
+					<xsd:attribute name="unitCode" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="3"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="TotalOuterPackType">
+		<xsd:restriction base="xsd:int">
+			<xsd:totalDigits value="8"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="TotalOuterPack">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="TotalOuterPackType">
+					<xsd:attribute name="unitCode" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="3"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="RatePercentType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="GoodsAndServicesTaxPercent" type="RatePercentType"/>
+	<xsd:simpleType name="RateUnitType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="RateUnit" type="RateUnitType"/>
+	<xsd:simpleType name="ReasonCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ReasonCode" type="ReasonCodeType"/>
+	<xsd:simpleType name="ReasonType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="70"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="AmendmentReason" type="ReasonType"/>
+	<xsd:element name="ExtensionReason" type="ReasonType"/>
+	<xsd:element name="Reason" type="ReasonType"/>
+	<xsd:simpleType name="ReferenceIDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="35"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ReferenceID" type="ReferenceIDType"/>
+	<xsd:element name="MAWBOUCROBLNumber" type="ReferenceIDType"/>
+	<xsd:element name="InHAWBHUCRHBLNumber" type="ReferenceIDType"/>
+	<xsd:element name="OutHAWBHUCRHBLNumber" type="ReferenceIDType"/>
+	<xsd:element name="InMAWBOUCROBLNumber" type="ReferenceIDType"/>
+	<xsd:element name="OutMAWBOUCROBLNumber" type="ReferenceIDType"/>
+	<xsd:element name="ItemInvoiceNumber" type="ReferenceIDType"/>
+	<xsd:element name="InvoiceNumber" type="ReferenceIDType"/>
+	<xsd:simpleType name="ReferenceNumberType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="17"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="AdditionalRecipientID" type="ReferenceNumberType"/>
+	<xsd:element name="CertificateNumber" type="ReferenceNumberType">
+		<xsd:annotation>
+			<xsd:documentation>Not Applicable for IPTPMT/UPT, INPPMT/UPT, TNPPMT/UPT
+
+For OUTPMT/UPT:
+Mandatory for CO application, specify Certificate Number.
+
+For DCI:
+Mandatory to specify Certificate Number.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DeclarantID" type="ReferenceNumberType"/>
+	<xsd:element name="IssuingAuthorityID" type="ReferenceNumberType"/>
+	<xsd:element name="RecipientID" type="ReferenceNumberType"/>
+	<xsd:element name="SenderID" type="ReferenceNumberType"/>
+	<xsd:element name="ShippingMarks" type="ReferenceNumberType">
+		<xsd:annotation>
+			<xsd:documentation>Specify markings  on the cargo (marks and numbers).
+
+</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RecordCode" type="ReferenceNumberType"/>
+	<xsd:element name="Code" type="ReferenceNumberType"/>
+	<xsd:simpleType name="SealIDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="35"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="SealID" type="SealIDType"/>
+	<xsd:simpleType name="SequenceNumericType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="5"/>
+			<xsd:minInclusive value="1"/>
+			<xsd:maxInclusive value="99999"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ErrorSequenceNumeric" type="SequenceNumericType"/>
+	<xsd:element name="ItemSequenceNumeric" type="SequenceNumericType"/>
+	<xsd:element name="NumberOfItems" type="SequenceNumericType"/>
+	<xsd:element name="SequenceNumeric" type="SequenceNumericType"/>
+	<xsd:simpleType name="SizeTypeCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="5"/>
+			<xsd:maxLength value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="SizeTypeCode" type="SizeTypeCodeType"/>
+	<xsd:simpleType name="StatusTypeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="3"/>
+			<xsd:maxLength value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="StatusType" type="StatusTypeType"/>
+	<xsd:simpleType name="TelephoneType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="25"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="Telephone" type="TelephoneType"/>
+	<xsd:simpleType name="TermTypeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="UnitPriceTermType" type="TermTypeType"/>
+	<xsd:simpleType name="UpdateIndicatorCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="3"/>
+			<xsd:maxLength value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="UpdateIndicatorCode" type="UpdateIndicatorCodeType">
+		<xsd:annotation>
+			<xsd:documentation>For IPTUPD:
+Mandatory to specify Update Indicator.
+AME=Amend only
+AMR=Amend and Refund (partial refund)
+CNL=Cancel only
+RFP=Refund only
+
+(AMR=Amend and Refund (partial refund is not used and reserved for future version upgrade)
+
+For INPUPD, OUTUPD, TNPUPD:
+Mandatory to specify Update Indicator.
+AME=Amend only
+CNL=Cancel only
+
+For IPTUPT:
+Mandatory to specify Update Indicator.
+AME=Amend only
+AMR=Amend and Refund (partial refund)
+RFP=Refund only
+
+(AMR=Amend and Refund (partial refund is not used and reserved for future version upgrade)
+
+For INPUPT, OUTUPT, TNPUPT:
+Mandatory to specify Update Indicator.
+AME=Amend only
+</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="UpdateSummaryCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="12"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="UpdateSummaryCode">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="UpdateSummaryCodeType">
+					<xsd:attribute name="type">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="2"/>
+								<xsd:maxLength value="2"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="UpdateTypeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="2"/>
+			<xsd:maxLength value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="UpdateType" type="UpdateTypeType"/>
+	<xsd:simpleType name="ConveyanceReferenceNumberType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="17"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ConveyanceReferenceNumber" type="ConveyanceReferenceNumberType"/>
+	<xsd:element name="VesselID" type="ConveyanceReferenceNumberType"/>
+	<xsd:simpleType name="VesselTypeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="VesselType" type="VesselTypeType"/>
+	<xsd:simpleType name="WeightMeasureNumericType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="15"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="NetRegisterTonnage">
+		<xsd:simpleType>
+			<xsd:restriction base="WeightMeasureNumericType"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:simpleType name="YearType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="EntryYear" type="YearType"/>
+	<xsd:simpleType name="RefundReferenceNumberType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="13"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="RefundReferenceNumber" type="RefundReferenceNumberType"/>
+	<xsd:simpleType name="ModeCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ModeCode" type="ModeCodeType"/>
+	<xsd:simpleType name="CommonAccessReferenceType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="7"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CommonAccessReference" type="CommonAccessReferenceType"/>
+	<xsd:simpleType name="CustomsProcedureCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="7"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CustomsProcedureCode" type="CustomsProcedureCodeType"/>
+	<xsd:simpleType name="CustomsCommonCodeTableNameType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="7"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CustomsCommonCodeTableName" type="CustomsCommonCodeTableNameType"/>
+	<xsd:simpleType name="OperationCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="OperationCode" type="OperationCodeType"/>
+	<xsd:element name="UnitCode" type="OperationCodeType"/>
+	<xsd:simpleType name="CityNameType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="35"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CityName" type="CityNameType"/>
+	<xsd:simpleType name="CountrySubentityCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="9"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CountrySubentityCode" type="CountrySubentityCodeType"/>
+	<xsd:simpleType name="CountrySubentityType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="35"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CountrySubentity" type="CountrySubentityType"/>
+	<xsd:simpleType name="PostalZoneType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="9"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="PostalZone" type="PostalZoneType"/>
+	<xsd:simpleType name="ReleaseNumberType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ReleaseNumber" type="ReleaseNumberType"/>
+	<xsd:element name="PreviousReleaseNumber" type="ReleaseNumberType"/>
+	<xsd:simpleType name="FieldType">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="512"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="Field">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="FieldType">
+					<xsd:attribute name="ID" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"/>
+								<xsd:maxLength value="17"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

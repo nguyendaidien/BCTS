@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Carmen (Crimsonlogic) -->
+<xsd:schema xmlns="urn:crimsonlogic:tn:schema:xsd:ApprovalMessage" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cbc="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" xmlns:cac="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" targetNamespace="urn:crimsonlogic:tn:schema:xsd:ApprovalMessage" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" schemaLocation="CommonBasicComponents-2.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" schemaLocation="CommonAggregateComponents-2.xsd"/>
+	<xsd:element name="ApprovalMessage" type="ApprovalMessageType"/>
+	<xsd:complexType name="ApprovalMessageType">
+		<xsd:sequence>
+			<xsd:group ref="cac:StatusHeaderGroup"/>
+			<xsd:element ref="cac:ApprovalCondition" maxOccurs="unbounded"/>
+			<xsd:element ref="cbc:SubmissionDatetime"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

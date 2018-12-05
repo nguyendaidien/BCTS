@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Carmen (Crimsonlogic) -->
+<xsd:schema xmlns="urn:crimsonlogic:tn:schema:xsd:OutwardDeclaration" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cac="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" targetNamespace="urn:crimsonlogic:tn:schema:xsd:OutwardDeclaration" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" schemaLocation="CommonAggregateComponents-2.xsd"/>
+	<!--=====Declaration and Update======-->
+	<xsd:element name="Outward" type="OutwardType"/>
+	<xsd:complexType name="OutwardType">
+		<xsd:sequence>
+			<xsd:element ref="Header"/>
+			<xsd:element ref="Certificate" minOccurs="0"/>
+			<xsd:element ref="Cargo"/>
+			<xsd:element ref="Transport" minOccurs="0"/>
+			<xsd:element ref="Party"/>
+			<xsd:element ref="cac:Licence" minOccurs="0" maxOccurs="5"/>
+			<xsd:element ref="cac:SupportingDocumentReference" minOccurs="0" maxOccurs="10"/>
+			<xsd:element ref="Item" maxOccurs="50"/>
+			<xsd:element ref="Summary"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="OutwardUpdate" type="OutwardUpdateType"/>
+	<xsd:complexType name="OutwardUpdateType">
+		<xsd:sequence>
+			<xsd:element ref="cac:Update"/>
+			<xsd:group ref="DeclarationGroup"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--==============================-->
+	<!---->
+	<!--=====Permit and Update Permit=====-->
+	<xsd:element name="OutwardPermit" type="OutwardPermitType"/>
+	<xsd:complexType name="OutwardPermitType">
+		<xsd:group ref="PermitGroup"/>
+	</xsd:complexType>
+	<xsd:element name="OutwardUpdatePermit" type="OutwardUpdatePermitType"/>
+	<xsd:complexType name="OutwardUpdatePermitType">
+		<xsd:sequence>
+			<xsd:element ref="cac:Update"/>
+			<xsd:group ref="PermitGroup"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--==============================-->
+	<!---->
+	<!--==============================-->
+	<xsd:group name="DeclarationGroup">
+		<xsd:choice>
+			<xsd:element ref="Declaration"/>
+			<xsd:element ref="cac:Cancellation"/>
+		</xsd:choice>
+	</xsd:group>
+	<xsd:element name="Declaration" type="OutwardType"/>
+	<xsd:group name="PermitGroup">
+		<xsd:sequence>
+			<xsd:element ref="Declaration"/>
+			<xsd:element ref="cac:Permit"/>
+		</xsd:sequence>
+	</xsd:group>
+	<!--==============================-->
+	<!---->
+	<!--====InPayment Elements and Type====-->
+	<xsd:element name="Header" type="HeaderType"/>
+	<xsd:complexType name="HeaderType">
+		<xsd:group ref="cac:HeaderGroup"/>
+	</xsd:complexType>
+	<xsd:element name="Certificate" type="CertificateType"/>
+	<xsd:complexType name="CertificateType">
+		<xsd:group ref="cac:CertificateGroup"/>
+	</xsd:complexType>
+	<xsd:element name="Cargo" type="CargoType"/>
+	<xsd:complexType name="CargoType">
+		<!--xsd:group ref="cac:BaseCargoGroup"/-->
+		<xsd:group ref="cac:OutwardCargoGroup"/>
+	</xsd:complexType>
+	<xsd:element name="Transport" type="TransportType"/>
+	<xsd:complexType name="TransportType">
+		<xsd:sequence>
+			<xsd:element ref="cac:InwardTransport" minOccurs="0"/>
+			<xsd:element ref="cac:OutwardTransport" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Party" type="PartyType"/>
+	<xsd:complexType name="PartyType">
+		<xsd:group ref="cac:OutwardPartyGroup"/>
+	</xsd:complexType>
+	<xsd:element name="Item" type="ItemType"/>
+	<xsd:complexType name="ItemType">
+		<xsd:group ref="cac:OutwardItemGroup"/>
+	</xsd:complexType>
+	<xsd:element name="Summary" type="SummaryType"/>
+	<xsd:complexType name="SummaryType">
+		<xsd:group ref="cac:BaseSummaryGroup"/>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Carmen (Crimsonlogic) -->
+<xsd:schema xmlns="urn:crimsonlogic:tn:schema:xsd:CertificateOfOrigin" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cbc="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" xmlns:cac="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" targetNamespace="urn:crimsonlogic:tn:schema:xsd:CertificateOfOrigin" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonBasicComponents-2" schemaLocation="CommonBasicComponents-2.xsd"/>
+	<xsd:import namespace="urn:crimsonlogic:tn:schema:xsd:CommonAggregateComponents-2" schemaLocation="CommonAggregateComponents-2.xsd"/>
+	<!--=====Declaration======-->
+	<xsd:element name="CertificateOfOrigin" type="CertificateOfOriginType"/>
+	<xsd:complexType name="CertificateOfOriginType">
+		<xsd:sequence>
+			<xsd:element ref="Header"/>
+			<xsd:element ref="Certificate"/>
+			<xsd:element ref="Transport"/>
+			<xsd:element ref="Party"/>
+			<xsd:element ref="cac:SupportingDocumentReference" minOccurs="0" maxOccurs="10"/>
+			<xsd:element ref="Item" maxOccurs="50"/>
+			<xsd:element ref="Summary"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--====================-->
+	<!---->
+	<!--=====Approval=====-->
+	<xsd:element name="CertificateOfOriginApproval" type="CertificateOfOriginApprovalType"/>
+	<xsd:complexType name="CertificateOfOriginApprovalType">
+		<xsd:sequence>
+			<xsd:element ref="OriginalApplication"/>
+			<xsd:element ref="Approval"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--==================-->
+	<!---->
+	<!--==============================-->
+	<xsd:element name="OriginalApplication" type="CertificateOfOriginType"/>
+	<xsd:element name="Approval" type="ApprovalType"/>
+	<xsd:complexType name="ApprovalType">
+		<xsd:group ref="cac:CertificateApprovalGroup"/>
+	</xsd:complexType>
+	<!--==============================-->
+	<!---->
+	<!--====Certificate of Origin Elements and Type====-->
+	<xsd:element name="Header" type="HeaderType"/>
+	<xsd:complexType name="HeaderType">
+		<xsd:sequence>
+			<xsd:group ref="cac:BaseHeaderGroup"/>
+			<xsd:element ref="cbc:SubmissionDatetime" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Certificate" type="CertificateType"/>
+	<xsd:complexType name="CertificateType">
+		<xsd:group ref="cac:CertificateGroup"/>
+	</xsd:complexType>
+	<xsd:element name="Transport" type="TransportType"/>
+	<xsd:complexType name="TransportType">
+		<xsd:sequence>
+			<xsd:element ref="cac:OutwardTransport"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Party" type="PartyType"/>
+	<xsd:complexType name="PartyType">
+		<xsd:group ref="cac:CertificateOriginPartyGroup"/>
+	</xsd:complexType>
+	<xsd:element name="Item" type="ItemType"/>
+	<xsd:complexType name="ItemType">
+		<xsd:group ref="cac:CertificateOriginItemGroup"/>
+	</xsd:complexType>
+	<xsd:element name="Summary" type="SummaryType"/>
+	<xsd:complexType name="SummaryType">
+		<xsd:group ref="cac:CertificateOriginSummaryGroup"/>
+	</xsd:complexType>
+</xsd:schema>

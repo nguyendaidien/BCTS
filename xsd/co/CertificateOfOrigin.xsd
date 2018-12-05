@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by CrimsonLogic (Crimsonlogic) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="CertificateOfOrigin" type="CertificateOfOriginType">
+		<xs:annotation>
+			<xs:documentation>ECO to TRADEVAN</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="CertificateOfOriginType">
+		<xs:sequence>
+			<xs:element name="ID">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="15"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="UUID">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="15" fixed="false"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="IssueDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="IssueTime">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="11"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Note">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="VersionID">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="8"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="EndorserParty">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="RoleCode" minOccurs="0">
+							<xs:simpleType>
+								<xs:restriction base="xs:string"/>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="SequenceNumeric">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="15"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CertificateofOriginApplication">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ReferenceID">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:length value="15"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="CertificateType" type="xs:string"/>
+						<xs:element name="IssuingCountry">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="IdentificationCode">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:length value="2"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="Name">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="70"/>
+												<xs:minLength value="1"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Shipment">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="TotalGoodsItemQuantity">
+										<xs:complexType>
+											<xs:simpleContent>
+												<xs:extension base="xs:string">
+													<xs:attribute name="unitCode" type="xs:string"/>
+												</xs:extension>
+											</xs:simpleContent>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Consignment">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="NetWeightMeasure">
+													<xs:complexType>
+														<xs:simpleContent>
+															<xs:extension base="xs:string">
+																<xs:attribute name="unitCode" type="xs:string"/>
+															</xs:extension>
+														</xs:simpleContent>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="ExporterParty">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="PartyIdentification">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="ID">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:maxLength value="35"/>
+																					<xs:minLength value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="PartyName">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="Name">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="1"/>
+																					<xs:maxLength value="70"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="Address" type="Address" minOccurs="0"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="ImporterParty">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="PartyIdentification">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="ID">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="1"/>
+																					<xs:maxLength value="35"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="Address" type="Address" minOccurs="0"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="ShipmentStage">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="TransportMeans">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="AirTransport" minOccurs="0">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="AircraftID" minOccurs="0">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:maxLength value="12"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="MaritimeTransport" minOccurs="0">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="VesselID" minOccurs="0">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:maxLength value="12"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="VesselName" minOccurs="0">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:maxLength value="10"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="LoadingPortLocation">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="ID" type="xs:string"/>
+															<xs:element name="Description" minOccurs="0">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:maxLength value="35"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+															<xs:element name="Address">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="Country" type="Country"/>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="UnLoadingPortLocation">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="ID" type="xs:string"/>
+															<xs:element name="Description" minOccurs="0">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:maxLength value="35"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+															<xs:element name="Address">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="Country" type="Country"/>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="TransportHandlingUnit">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="TotalPackageQuantity" type="xs:string"/>
+												<xs:element name="ActualPackage">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="ID" type="xs:int"/>
+															<xs:element name="GoodsItem">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="ID" type="xs:int"/>
+																		<xs:element name="SequenceNumberID" type="xs:int"/>
+																		<xs:element name="Description" type="xs:string"/>
+																		<xs:element name="GrossWeightMeasure">
+																			<xs:complexType>
+																				<xs:simpleContent>
+																					<xs:extension base="xs:string">
+																						<xs:attribute name="unitCode" type="xs:string"/>
+																					</xs:extension>
+																				</xs:simpleContent>
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="NetWeightMeasure">
+																			<xs:complexType>
+																				<xs:simpleContent>
+																					<xs:extension base="xs:string">
+																						<xs:attribute name="unitCode" type="xs:string"/>
+																					</xs:extension>
+																				</xs:simpleContent>
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="QuantityNumeric">
+																			<xs:complexType>
+																				<xs:simpleContent>
+																					<xs:extension base="xs:string">
+																						<xs:attribute name="unitCode" type="xs:string"/>
+																					</xs:extension>
+																				</xs:simpleContent>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="OriginAddress">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Country" type="Country"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="IssuerParty">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="PartyName">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Name" type="xs:string"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IssuerEndorsement">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="EndorserParty">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Party">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="PartyIdentification" minOccurs="0">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="ID"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="PartyName">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Name" type="xs:string"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Address" type="Address"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Address">
+		<xs:sequence>
+			<xs:element name="AddressLine" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Line" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Country">
+		<xs:sequence>
+			<xs:element name="IdentificationCode">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="5"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Name">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
