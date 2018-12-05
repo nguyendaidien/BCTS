@@ -12,9 +12,12 @@ package com.etrade.bcts.dao;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -28,26 +31,43 @@ public class BatchDaoImpl extends AbstractDao<Integer, BctsRoute> implements Bat
 	
 	static final Logger LOG = LoggerFactory.getLogger(BatchDaoImpl.class);
 	
-	
-	@SuppressWarnings("unchecked")
+	/**
+	 * @author ajayasamanta
+	 * Used javax.persistence.criteria.CriteriaQuery to get all record whose status is A
+	 */
 	public List<BctsRoute> findActiveJobs() {
-//		Criteria criteria = createEntityCriteria().addOrder(Order.asc("routeId"));
-//		criteria.add(Restrictions.eq("status", 'A'));
-//		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
-//		return (List<BctsRoute>) criteria.list();
-		return null;
+		CriteriaQuery<BctsRoute> crit = createEntityCriteria();
+		Root<BctsRoute> root = crit.from(BctsRoute.class);
+		CriteriaBuilder cbuilder=getCriteriaBuilder();
+		Predicate condition = cbuilder.equal(root.get("status"), 'A');
+		crit.where(condition).select(root).distinct(true).orderBy(cbuilder.asc(root.get("routeId")));
+		Query<BctsRoute> query = getSession().createQuery(crit);
+		List<BctsRoute> routeList=null;
+		try {
+			routeList=query.getResultList();
+		}catch(Exception e) {
+			LOG.error("Error while findActiveJobs():",e);
+		}
+		return routeList;
 	}
 	
-	
-	@SuppressWarnings("unchecked")
+	/**
+	 * @author ajayasamanta
+	 * Used javax.persistence.criteria.CriteriaQuery to get all records
+	 */
 	public List<BctsRoute> findAllJobs() {
-//		Criteria criteria = createEntityCriteria().addOrder(Order.asc("routeId"));
-//		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
-//		return (List<BctsRoute>) criteria.list();
-		return null;
+		CriteriaQuery<BctsRoute> crit = createEntityCriteria();
+		Root<BctsRoute> root = crit.from(BctsRoute.class);
+		CriteriaBuilder cbuilder=getCriteriaBuilder();
+		crit.select(root).distinct(true).orderBy(cbuilder.asc(root.get("routeId")));
+		Query<BctsRoute> query = getSession().createQuery(crit);
+		List<BctsRoute> routeList=null;
+		try {
+			routeList=query.getResultList();
+		}catch(Exception e) {
+			LOG.error("Error while findAllJobs():",e);
+		}
+		return routeList;
 	}
 	
-	
-	
-
 }

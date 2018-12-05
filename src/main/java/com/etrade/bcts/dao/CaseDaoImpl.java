@@ -6,10 +6,7 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
-//import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,11 +48,11 @@ public class CaseDaoImpl extends AbstractDao<Integer, BCTSAlert> implements Case
 		q.setParameter("caseId", comment.getBctsAlert().getCaseId());
 		q.setParameter("completedDate", comment.getUpdateTime());
 		q.setParameter("completedBy", comment.getUser().getId());
-//		q.setString("status", "C");
-//		q.setInteger("caseId", comment.getBctsAlert().getCaseId());
-//		q.setDate("completedDate", comment.getUpdateTime());
-//		q.setInteger("completedBy", comment.getUser().getId());
-		q.executeUpdate();		
+		try {
+		q.executeUpdate();
+		}catch(Exception e) {
+			LOG.error("Error while updating in updateStatus():",e);
+		}
 	}
 
 	@Override
@@ -70,7 +67,7 @@ public class CaseDaoImpl extends AbstractDao<Integer, BCTSAlert> implements Case
 //		if(uen != null) {
 //			crit.add(Restrictions.eq("uen", uen));
 //		}
-		return (List<BCTSAlert>)query.getResultList();
+		return query.getResultList();
 	}
 
 	@Override

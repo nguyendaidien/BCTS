@@ -2,20 +2,34 @@ package com.etrade.bcts.dao;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.etrade.bcts.model.UserDocument;
 
 @Repository("userDocumentDao")
 public class UserDocumentDaoImpl extends AbstractDao<Integer, UserDocument> implements UserDocumentDao{
-
-	@SuppressWarnings("unchecked")
+	static final Logger LOG = LoggerFactory.getLogger(UserDocumentDaoImpl.class);
+	
 	public List<UserDocument> findAll() {
-//		Criteria crit = createEntityCriteria();
-//		return (List<UserDocument>)crit.list();
-		return null;
+		CriteriaQuery<UserDocument> crit = createEntityCriteria();
+		Root<UserDocument> root = crit.from(UserDocument.class);
+		crit.select(root);
+		Query<UserDocument> query = getSession().createQuery(crit);
+		List<UserDocument> userLst=null;
+		try {
+		userLst = query.getResultList();
+		}catch(Exception e) {
+			LOG.error("Error while findAll Document:",e);
+		}
+		return userLst;
 	}
 
 	public void save(UserDocument document) {
@@ -27,21 +41,36 @@ public class UserDocumentDaoImpl extends AbstractDao<Integer, UserDocument> impl
 		return getByKey(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<UserDocument> findAllByUserId(String userId){
-//		Criteria crit = createEntityCriteria();
-//		Criteria userCriteria = crit.createCriteria("user");
-//		userCriteria.add(Restrictions.eq("ssoId", userId));
-//		return (List<UserDocument>)crit.list();
-		return null;
+		CriteriaQuery<UserDocument> crit = createEntityCriteria();
+		Root<UserDocument> root = crit.from(UserDocument.class);
+		CriteriaBuilder cbuilder=getCriteriaBuilder();
+		Predicate condition = cbuilder.equal(root.get("ssoId"), userId);
+		crit.where(condition).select(root).distinct(true);
+		Query<UserDocument> query = getSession().createQuery(crit);
+		List<UserDocument> docList=null;
+		try {
+			docList=query.getResultList();
+		}catch(Exception e) {
+			LOG.error("Error while findAllByUserId():",e);
+		}
+		return docList;
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<UserDocument> findAllByPermitNo(String permitNo){
-//		Criteria crit = createEntityCriteria();
-//		crit.add(Restrictions.eq("permitNo", permitNo));
-//		return (List<UserDocument>)crit.list();
-		return null;
+		CriteriaQuery<UserDocument> crit = createEntityCriteria();
+		Root<UserDocument> root = crit.from(UserDocument.class);
+		CriteriaBuilder cbuilder=getCriteriaBuilder();
+		Predicate condition = cbuilder.equal(root.get("permitNo"), permitNo);
+		crit.where(condition).select(root).distinct(true);
+		Query<UserDocument> query = getSession().createQuery(crit);
+		List<UserDocument> docList=null;
+		try {
+			docList=query.getResultList();
+		}catch(Exception e) {
+			LOG.error("Error while findAllByPermitNo():",e);
+		}
+		return docList;
 	}
 
 	public void deleteById(int id) {
@@ -49,13 +78,21 @@ public class UserDocumentDaoImpl extends AbstractDao<Integer, UserDocument> impl
 		delete(document);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<UserDocument> findAllByCaseId(String caseId) {
-//		Criteria crit = createEntityCriteria();
-//		crit.add(Restrictions.eq("caseId", caseId));
-//		return (List<UserDocument>)crit.list();
-		return null;
+		CriteriaQuery<UserDocument> crit = createEntityCriteria();
+		Root<UserDocument> root = crit.from(UserDocument.class);
+		CriteriaBuilder cbuilder=getCriteriaBuilder();
+		Predicate condition = cbuilder.equal(root.get("caseId"), caseId);
+		crit.where(condition).select(root).distinct(true);
+		Query<UserDocument> query = getSession().createQuery(crit);
+		List<UserDocument> docList=null;
+		try {
+			docList=query.getResultList();
+		}catch(Exception e) {
+			LOG.error("Error while findAllByPermitNo():",e);
+		}
+		return docList;
 	}
 
 }

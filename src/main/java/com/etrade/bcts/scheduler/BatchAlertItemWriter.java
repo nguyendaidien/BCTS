@@ -26,7 +26,7 @@ public class BatchAlertItemWriter implements ItemWriter<BctsRoute> {
 	public void write(List<? extends BctsRoute> list) throws Exception {
 		LOGGER.info("write() start");
 			System.out.println("\nReceipient= " + emailToRecipient + ", Subject= " + emailSubject + ", Message= " + emailMessage + "\n");
-			emailService.sendBatchAlertMail(recipientName, emailToRecipient, (List<BctsRoute>)list, null);
+			//emailService.sendBatchAlertMail(recipientName, emailToRecipient, (List<BctsRoute>)list, null);
 			System.out.println("\nMessage Send Successfully.... Hurrey!\n");
 			LOGGER.debug("write() end");
 	}

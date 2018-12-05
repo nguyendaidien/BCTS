@@ -11,13 +11,11 @@
 package com.etrade.bcts.dao;
 
 import java.io.Serializable;
-
 import java.lang.reflect.ParameterizedType;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
-//import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.search.FullTextSession;
@@ -26,7 +24,6 @@ import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.etrade.bcts.model.Product;
 
 public abstract class AbstractDao<PK extends Serializable, T> {
 	
@@ -71,18 +68,14 @@ public abstract class AbstractDao<PK extends Serializable, T> {
 	protected CriteriaBuilder getCriteriaBuilder(){
 		return getSession().getCriteriaBuilder();
 	}
-//	protected Criteria createEntityCriteria(){
-//		return getSession().createCriteria(persistentClass);
-//	}
 
 	public FullTextQuery getJpaQuery(org.apache.lucene.search.Query luceneQuery) {
         return getFullTextSession().createFullTextQuery(luceneQuery, persistentClass);
     }
 
 	public QueryBuilder getQueryBuilder() { 
-    	QueryBuilder qb = getFullTextSession().getSearchFactory()
-    	           .buildQueryBuilder().forEntity(persistentClass).get();
-    	return qb;
+    	return getFullTextSession().getSearchFactory()
+ 	           .buildQueryBuilder().forEntity(persistentClass).get();
     }
     
 	public FullTextSession getFullTextSession() {

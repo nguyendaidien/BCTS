@@ -13,7 +13,6 @@ import com.etrade.bcts.model.CaseComment;
 import com.etrade.bcts.model.CaseDetail;
 import com.etrade.bcts.model.Company;
 import com.etrade.bcts.model.LicenceValidity;
-import com.etrade.bcts.model.User;
 import com.etrade.bcts.util.BctsConstants;
 
 @Service(value="caseService")
@@ -52,10 +51,15 @@ public class CaseServiceImpl implements CaseService {
 			LicenceValidity lv = b.getLicence();
 			lv.setCaseId(bctsAlert.getCaseId());
 			bctsAlert.setLicence(lv);
-		} else {
+		} else { 
 			CaseDetail caseDetail = b.getCaseDetail();
+			/**In case of job permit reader case details will always be null
+			 * TODO need to check with Dien
+			 * */
+			if(null!=caseDetail) {
 			caseDetail.setCaseId(bctsAlert.getCaseId());
 			bctsAlert.setCaseDetail(caseDetail);
+			}
 		}
 	}
 

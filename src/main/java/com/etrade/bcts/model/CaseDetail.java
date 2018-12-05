@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table(name="BCTS_CASE_DEAIL")
 public class CaseDetail {
 	@Id
-	@Column(name="CASE_ID")
+	@Column(name="CASE_DEAIL_ID")
 	private Integer caseId;
 	
 	@Column(name="CASE_NAME")

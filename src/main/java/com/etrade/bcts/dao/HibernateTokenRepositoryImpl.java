@@ -12,8 +12,11 @@ package com.etrade.bcts.dao;
 
 import java.util.Date;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
@@ -21,7 +24,6 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.etrade.bcts.dao.AbstractDao;
 import com.etrade.bcts.model.PersistentLogin;
 
 @Repository("tokenRepositoryDao")
@@ -29,11 +31,11 @@ import com.etrade.bcts.model.PersistentLogin;
 public class HibernateTokenRepositoryImpl extends AbstractDao<String, PersistentLogin>
 		implements PersistentTokenRepository {
 
-	static final Logger logger = LoggerFactory.getLogger(HibernateTokenRepositoryImpl.class);
+	static final Logger LOG = LoggerFactory.getLogger(HibernateTokenRepositoryImpl.class);
 
 	@Override
 	public void createNewToken(PersistentRememberMeToken token) {
-		logger.info("Creating Token for user : {}", token.getUsername());
+		LOG.info("Creating Token for user : {}", token.getUsername());
 		PersistentLogin persistentLogin = new PersistentLogin();
 		persistentLogin.setUsername(token.getUsername());
 		persistentLogin.setSeries(token.getSeries());
@@ -45,37 +47,42 @@ public class HibernateTokenRepositoryImpl extends AbstractDao<String, Persistent
 
 	@Override
 	public PersistentRememberMeToken getTokenForSeries(String seriesId) {
-		logger.info("Fetch Token if any for seriesId : {}", seriesId);
+		LOG.info("Fetch Token if any for seriesId : {}", seriesId);
 		try {
-//			Criteria crit = createEntityCriteria();
-//			crit.add(Restrictions.eq("series", seriesId));
-//			PersistentLogin persistentLogin = (PersistentLogin) crit.uniqueResult();
-//
-//			return new PersistentRememberMeToken(persistentLogin.getUsername(), persistentLogin.getSeries(),
-//					persistentLogin.getToken(), persistentLogin.getLast_used());
-			return null;
+			CriteriaQuery<PersistentLogin> crit = createEntityCriteria();
+			Root<PersistentLogin> root = crit.from(PersistentLogin.class);
+			Predicate condition = getCriteriaBuilder().equal(root.get("series"), seriesId);
+			crit.where(condition);
+			Query<PersistentLogin> query = getSession().createQuery(crit);
+			PersistentLogin persistentLogin = (PersistentLogin) query.getSingleResult();
+			return new PersistentRememberMeToken(persistentLogin.getUsername(), persistentLogin.getSeries(),
+					persistentLogin.getToken(), persistentLogin.getLast_used());
 		} catch (Exception e) {
-			logger.info("Token not found...");
+			LOG.info("Token not found...");
 			return null;
 		}
 	}
 
 	@Override
 	public void removeUserTokens(String username) {
-//		logger.info("Removing Token if any for user : {}", username);
-//		Criteria crit = createEntityCriteria();
-//		crit.add(Restrictions.eq("username", username));
-//		PersistentLogin persistentLogin = (PersistentLogin) crit.uniqueResult();
-//		if (persistentLogin != null) {
-//			logger.info("rememberMe was selected");
-//			delete(persistentLogin);
-//		}
-
+		LOG.info("Removing Token if any for user : {}", username);
+		CriteriaQuery<PersistentLogin> crit = createEntityCriteria();
+		Root<PersistentLogin> root = crit.from(PersistentLogin.class);
+		Predicate condition = getCriteriaBuilder().equal(root.get("username"), username);
+		crit.where(condition);
+		Query<PersistentLogin> query = getSession().createQuery(crit);
+		PersistentLogin persistentLogin = null;
+		try {
+			persistentLogin = query.getSingleResult();
+			delete(persistentLogin);
+		} catch (Exception e) {
+			LOG.error("error while geting single result findByUserId(): ", e);
+		}
 	}
 
 	@Override
 	public void updateToken(String seriesId, String tokenValue, Date lastUsed) {
-		logger.info("Updating Token for seriesId : {}", seriesId);
+		LOG.info("Updating Token for seriesId : {}", seriesId);
 		PersistentLogin persistentLogin = getByKey(seriesId);
 		persistentLogin.setToken(tokenValue);
 		persistentLogin.setLast_used(lastUsed);

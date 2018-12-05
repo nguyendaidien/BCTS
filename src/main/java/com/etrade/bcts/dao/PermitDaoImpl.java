@@ -2,26 +2,36 @@ package com.etrade.bcts.dao;
 
 import java.util.List;
 
-import org.apache.lucene.search.Query;
-import org.hibernate.Criteria;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.etrade.bcts.model.Permit;
-import com.etrade.bcts.model.Product;
 
 @Repository("permitDao")
 public class PermitDaoImpl extends AbstractDao<Integer, Permit> implements PermitDao {
-	
-	@SuppressWarnings("unchecked")
+	static final Logger LOG = LoggerFactory.getLogger(PermitDaoImpl.class);
 	@Override
 	public List<Permit> search(String term) {
-//		Criteria criteria = createEntityCriteria();
-//		criteria.add(Restrictions.like("permitNo", term.toUpperCase(), MatchMode.START));
-//		List<Permit> permits = (List<Permit>) criteria.list();
-//		return permits;
-		return null;
+		CriteriaQuery<Permit> crit = createEntityCriteria();
+		Root<Permit> root = crit.from(Permit.class);
+		CriteriaBuilder cbuilder=getCriteriaBuilder();
+		Predicate condition = cbuilder.like(root.get("permitNo"), term.toUpperCase());
+		crit.where(condition).select(root).distinct(true).orderBy(cbuilder.asc(root.get("permitNo")));
+		Query<Permit> query = getSession().createQuery(crit);
+		List<Permit> permitList=null;
+		try {
+			permitList=query.getResultList();
+		}catch(Exception e) {
+			LOG.error("Error while getting permit list search():",e);
+		}
+		return permitList;
 	}
 	 
 }

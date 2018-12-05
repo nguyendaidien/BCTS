@@ -30,9 +30,6 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import com.etrade.bcts.converter.RoleToUserProfileConverter;
-import com.etrade.bcts.service.ProductService;
-import com.etrade.bcts.service.UserProfileService;
-import com.etrade.bcts.service.UserProfileServiceImpl;
 
 
 @Configuration

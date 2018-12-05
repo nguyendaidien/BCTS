@@ -11,7 +11,6 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.etrade.bcts.exception.BCTSException;
 import com.etrade.bcts.model.BCTSAlert;
 import com.etrade.bcts.model.BctsJobHeader;
 import com.etrade.bcts.model.CaaApprovalCondition;
@@ -171,7 +170,7 @@ public class BctsXMLWriter implements ItemWriter<BctsJobHeader> {
 		LOG.info("writepermitList size:{}", permitList.size());
 		BctsJobHeader jobH=null;
 		for (BctsJobHeader jobHeader : permitList) {
-			//LOG.info("jobHeader:{}", jobHeader.toString());
+			LOG.info("jobHeader:{}", jobHeader);
 			/* Insert in all permit related tables */
 				jobH=permitService.getJobHeaderInfo(jobHeader.getUenId(), jobHeader.getUrnSeq());
 				if(null==jobH) {
